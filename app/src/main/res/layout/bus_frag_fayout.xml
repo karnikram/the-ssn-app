@@ -1,0 +1,79 @@
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginTop="100dp"
+    android:layout_marginBottom="100dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Search by Bus Number"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            android:layout_marginBottom="5dp"
+            android:id="@+id/textView"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@color/category_buses"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/number"
+            android:inputType="number"
+            android:gravity="center"
+            android:hint="Enter your bus no."
+            android:layout_gravity="center"
+            android:textColor="@android:color/black"
+            android:layout_margin="10dp"
+            />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Go!"
+        android:id="@+id/num_submit"
+        android:layout_gravity="center"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_marginBottom="5dp"
+        android:layout_height="wrap_content"
+        android:text="Search by Area"
+        android:textSize="20sp"
+        android:textStyle="italic"
+        android:textColor="@android:color/black"
+        android:id="@+id/textView2"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/category_buses"/>
+
+    <AutoCompleteTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/area"
+        android:hint="Enter your area"
+        android:layout_margin="10dp"
+        android:textColor="@android:color/black"
+        android:layout_gravity="center"
+        android:imeOptions="actionGo"
+        android:gravity="center"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Go!"
+        android:id="@+id/area_submit"
+        android:layout_gravity="center"
+        />
+
+
+</LinearLayout>

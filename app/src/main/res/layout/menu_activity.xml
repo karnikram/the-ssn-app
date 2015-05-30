@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:id="@+id/container_main_category"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/category_dining"
+              android:orientation="vertical"
+              android:paddingBottom="8dp"
+              android:paddingLeft="8dp"
+              android:paddingRight="8dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/close_menu"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="16dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:src="@drawable/ico_back" />
+
+        <TextView
+            android:layout_width="158dp"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:gravity="center"
+            android:id="@+id/menu_name"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:layout_gravity="left|center_vertical"/>
+
+        <TextView
+            android:layout_width="147dp"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:id="@+id/pg_no"
+            android:textSize="20sp"
+            android:layout_gravity="right|center_vertical"/>
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/container_main_category_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_light_grey" >
+
+        <com.joanzapata.pdfview.PDFView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/pdfview"/>
+
+    </FrameLayout>
+</LinearLayout>

@@ -1,0 +1,37 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:orientation="horizontal"
+              android:paddingBottom="6.0dip"
+              android:paddingTop="4.0dip">
+
+    <TextView
+        android:id="@+id/stop"
+        android:layout_width="0dip"
+        android:layout_height="50dp"
+        android:layout_weight="1.7"
+        android:gravity="center"
+        android:text="text1"
+        android:textStyle="italic"
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:id="@+id/bus_no"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="text2"
+        android:gravity="center"
+        android:textStyle="italic"
+        android:textColor="@android:color/black"/>
+
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="0dip"
+        android:layout_height="50dp"
+        android:layout_weight="1.0"
+        android:gravity="center"
+        android:text="text3"
+        android:textStyle="italic"
+        android:textColor="@android:color/black"/>
+</LinearLayout>

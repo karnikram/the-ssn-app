@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:fab="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp">
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listview3"
+        android:divider="@color/category_tt"
+        android:dividerHeight="2dp"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Retry"
+        android:id="@+id/eretry"
+        android:visibility="gone"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"/>
+
+    <ProgressBar
+        style="@android:style/Widget.Holo.ProgressBar.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/eprogressBar"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"/>
+
+    <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        fab:fab_colorNormal="@color/category_tt"
+        fab:fab_colorPressed="@color/category_buses"
+        android:src="@drawable/ic_add_white"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="34dp"/>
+
+</RelativeLayout>
