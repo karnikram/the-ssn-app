@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="primaryColor">#2196F3</color>
+    <color name="primaryColorDark">#1976D2</color>
+    <color name ="accentColor">#2196F3</color>
+    <color name ="primaryTextColor">#212121</color>
+    <color name ="secondaryTextColor">#757575</color>
+    <color name="backColor">#EEEEEE</color>
+    <color name = "dividerColor">#E0E0E0</color>
+    <color name="hintText">#BDBDBD</color>
+    <color name = "open">#8BC34A</color>
+    <color name = "close">#F44336</color>
+
+</resources>

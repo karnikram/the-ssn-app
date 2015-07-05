@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">SSN Machan</string>
-
-    <color name="category_alerts">#f7ce5a</color>
-    <color name="category_dining">#f04a5a</color>
-    <color name="category_buses">#31c6ef</color>
-    <color name="category_tt">#7dcec6</color>
-    <color name="category_about">#eF6C00</color>
-    <color name="bg_light_grey">#f5f5f5</color>
+    <string name="app_name">The SSN App</string>
 
     <string name="temp">Karnix</string>
 
@@ -21,18 +14,16 @@
         <item>Stores/Canteen</item>
     </string-array>
 
-    <string name="aplication_id">pIrvCg3Kotk0Mp1AV7cp751DSm29L1NDbH9d3SS6</string>
-    <string name="client_key">zi7kl8kZq3tjKMo5tM9CLUAvqDCfUnYmskchjyRL</string>
+    <string name="application_id">FT5LiYFPZTttR7NKcp6EFYo6E5ht9HnuhimWlT84</string>
+    <string name="client_key">aWVS52GVM6RFAzuC1sr51BnByMq0J9mA5ZVV1Coe</string>
 
-    <string name="title_activity_bus">BusActivity</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
 
-    <string name="description">SSN Notice Boards - now in your pocket. \n\n An app for SSNites, by SSNites, SSN machan has three major tabs.
+    <string name="description">SSN Notice Boards - now in your pocket. \n\n An app for SSNites, by SSNites, the app has three major tabs.
     Updates on college events will be posted under \'Alerts\', with prompt notifications so you don\'t miss out on the news. You can also
     contribute to this section. If you get wind of what our college is up to, don\'t hesitate to send us the information! \n\n \'Dining\' lists
     all the menus in the college canteen and other eating joints. \n\n \'Buses\' gives you access to all the bus routes and the morning schedule.
     Be informed of changes on time instead of learning the hard way.</string>
 
+    <string name="shout_outs">Shout outs to Seshathiri for the bus routes database, Mira and Sreenivas for the desciptions, Karthiknathan for the app icon and Arun TS.</string>
 
 </resources>

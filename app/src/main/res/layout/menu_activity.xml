@@ -1,58 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
               xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:id="@+id/container_main_category"
+              xmlns:card_view="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@color/category_dining"
               android:orientation="vertical"
-              android:paddingBottom="8dp"
-              android:paddingLeft="8dp"
-              android:paddingRight="8dp">
+              android:fitsSystemWindows="true"
+              android:background="@color/backColor">
+
+    <include layout="@layout/toolbar"/>
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="vertical" >
-
-        <ImageView
-            android:id="@+id/close_menu"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:padding="16dp"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:src="@drawable/ico_back" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/backColor">
 
         <TextView
             android:layout_width="158dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="8dp"
             android:text="New Text"
-            android:gravity="center"
+            android:gravity="left"
+            android:textStyle="italic"
             android:id="@+id/menu_name"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="14sp"
             android:layout_gravity="left|center_vertical"/>
 
         <TextView
+            android:layout_marginTop="8dp"
             android:layout_width="147dp"
             android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
             android:text="New Text"
-            android:textColor="@android:color/white"
-            android:gravity="center"
+            android:textColor="@color/secondaryTextColor"
+            android:gravity="right"
             android:id="@+id/pg_no"
-            android:textSize="20sp"
+            android:textSize="14sp"
+            android:textStyle="italic"
             android:layout_gravity="right|center_vertical"/>
     </FrameLayout>
-    <FrameLayout
-        android:id="@+id/container_main_category_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/bg_light_grey" >
 
-        <com.joanzapata.pdfview.PDFView
+    <FrameLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/pdfview"/>
+            android:layout_margin="8dp"
+            android:elevation="50dp"
+            card_view:cardBackgroundColor="@android:color/white"
+            card_view:cardCornerRadius="8dp">
+
+            <FrameLayout
+                android:id="@+id/container_main_category_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#FFFFFF" >
+
+                <com.joanzapata.pdfview.PDFView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/pdfview"/>
+
+            </FrameLayout>
+        </android.support.v7.widget.CardView>
 
     </FrameLayout>
+
 </LinearLayout>
