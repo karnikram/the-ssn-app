@@ -1,51 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.Toolbar
-    android:id="@+id/toolbar"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/primaryColor"
-    android:minHeight="56dp"
-    >
+    android:id="@+id/toolbar" android:layout_width="match_parent"
+    android:layout_height="wrap_content" android:background="@color/primaryColor"
+    android:minHeight="56dp">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:src="@drawable/ssn_logo"/>
+    <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_gravity="center" android:src="@drawable/ssn_logo" />
 
-    <com.andexert.library.RippleView
-        android:id="@+id/rippleInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:layout_gravity="left"
-        app:rv_type="rectangle"
-        >
+    <com.andexert.library.RippleView android:id="@+id/rippleInfo"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_gravity="left" android:layout_margin="5dp" app:rv_type="rectangle">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/help"
-           />
+        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:src="@drawable/help" />
 
     </com.andexert.library.RippleView>
 
-    <com.andexert.library.RippleView
-        android:id="@+id/rippleMessage"
-        android:layout_gravity="right"
-        android:layout_width="wrap_content"
-        app:rv_type="rectangle"
-        android:layout_marginRight="16dp"
-        android:layout_height="wrap_content"
-        >
+    <com.andexert.library.RippleView android:id="@+id/rippleMessage" android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:layout_gravity="right"
+        android:layout_marginRight="16dp" app:rv_type="rectangle">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
 
-            android:src="@drawable/send"/>
+            android:src="@drawable/send" />
 
     </com.andexert.library.RippleView>
 

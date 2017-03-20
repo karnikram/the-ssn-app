@@ -1,36 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp"
-    android:layout_marginTop="8dp"
-    android:gravity="center"
-    android:minHeight="56dp"
-    android:orientation="vertical"
-    >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp" android:layout_marginTop="8dp" android:gravity="center"
+    android:minHeight="56dp" android:orientation="vertical">
 
 
-    <TextView
-        android:id="@+id/option"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Hello SSN!"
-        android:textColor="@android:color/black"
-        android:textStyle="italic"
-        android:textSize="24sp"/>
+    <TextView android:id="@+id/option" android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:gravity="center" android:text="Hello SSN!"
+        android:textColor="@android:color/black" android:textSize="24sp"
+        android:textStyle="italic" />
 
-    <TextView
-        android:id="@+id/open_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Open"
-        android:textColor="@color/open"
-        android:textSize="12sp"
-        android:textStyle="italic"/>
-
+    <TextView android:id="@+id/open_time" android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:text="Open" android:textColor="@color/open"
+        android:textSize="12sp" android:textStyle="italic" />
 
 
 </LinearLayout>
