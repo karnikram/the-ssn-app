@@ -2,10 +2,8 @@ package karnix.the.ssn.app.utils;
 
 import java.util.Calendar;
 
-public class Timings
-{
-    public static class ug
-    {
+public class Timings {
+    public static class ug {
         public static Calendar b1 = Calendar.getInstance();
         public static Calendar b2 = Calendar.getInstance();
         public static Calendar l1 = Calendar.getInstance();
@@ -15,8 +13,7 @@ public class Timings
         public static Calendar d1 = Calendar.getInstance();
         public static Calendar d2 = Calendar.getInstance();
 
-        public static void init()
-        {
+        public static void init() {
             b1.set(Calendar.HOUR_OF_DAY, 6);
             b1.set(Calendar.MINUTE, 45);
             b2.set(Calendar.HOUR_OF_DAY, 8);
@@ -38,8 +35,7 @@ public class Timings
         }
     }
 
-    public static class ugSun
-    {
+    public static class ugSun {
         public static Calendar b1 = Calendar.getInstance();
         public static Calendar b2 = Calendar.getInstance();
         public static Calendar l1 = Calendar.getInstance();
@@ -49,8 +45,7 @@ public class Timings
         public static Calendar d1 = Calendar.getInstance();
         public static Calendar d2 = Calendar.getInstance();
 
-        public static void init()
-        {
+        public static void init() {
             b1.set(Calendar.HOUR_OF_DAY, 7);
             b1.set(Calendar.MINUTE, 30);
             b2.set(Calendar.HOUR_OF_DAY, 9);
@@ -73,8 +68,7 @@ public class Timings
     }
 
 
-    public static class pg
-    {
+    public static class pg {
         public static Calendar b1 = Calendar.getInstance();
         public static Calendar b2 = Calendar.getInstance();
         public static Calendar l1 = Calendar.getInstance();
@@ -84,8 +78,7 @@ public class Timings
         public static Calendar d1 = Calendar.getInstance();
         public static Calendar d2 = Calendar.getInstance();
 
-        public static void init()
-        {
+        public static void init() {
             b1.set(Calendar.HOUR_OF_DAY, 6);
             b1.set(Calendar.MINUTE, 45);
             b2.set(Calendar.HOUR_OF_DAY, 7);
@@ -106,8 +99,7 @@ public class Timings
     }
 
 
-    public static class pgSun
-    {
+    public static class pgSun {
         public static Calendar b1 = Calendar.getInstance();
         public static Calendar b2 = Calendar.getInstance();
         public static Calendar l1 = Calendar.getInstance();
@@ -117,8 +109,7 @@ public class Timings
         public static Calendar d1 = Calendar.getInstance();
         public static Calendar d2 = Calendar.getInstance();
 
-        public static void init()
-        {
+        public static void init() {
             b1.set(Calendar.HOUR_OF_DAY, 7);
             b1.set(Calendar.MINUTE, 30);
             b2.set(Calendar.HOUR_OF_DAY, 9);
@@ -141,8 +132,7 @@ public class Timings
     }
 
 
-    public static class ladies
-    {
+    public static class ladies {
         public static Calendar b1 = Calendar.getInstance();
         public static Calendar b2 = Calendar.getInstance();
         public static Calendar l1 = Calendar.getInstance();
@@ -152,8 +142,7 @@ public class Timings
         public static Calendar d1 = Calendar.getInstance();
         public static Calendar d2 = Calendar.getInstance();
 
-        public static void init()
-        {
+        public static void init() {
             b1.set(Calendar.HOUR_OF_DAY, 6);
             b1.set(Calendar.MINUTE, 50);
             b2.set(Calendar.HOUR_OF_DAY, 7);
@@ -174,13 +163,11 @@ public class Timings
     }
 
 
-    public static class ccd
-    {
+    public static class ccd {
         public static Calendar start = Calendar.getInstance();
         public static Calendar end = Calendar.getInstance();
 
-        public static void init()
-        {
+        public static void init() {
             start.set(Calendar.HOUR_OF_DAY, 8);
             start.set(Calendar.MINUTE, 0);
             end.set(Calendar.HOUR_OF_DAY, 20);
@@ -188,12 +175,12 @@ public class Timings
 
         }
     }
-    public static class gurunath
-    {
+
+    public static class gurunath {
         public static Calendar start = Calendar.getInstance();
         public static Calendar end = Calendar.getInstance();
-        public static void init()
-        {
+
+        public static void init() {
             start.set(Calendar.HOUR_OF_DAY, 7);
             start.set(Calendar.MINUTE, 30);
             end.set(Calendar.HOUR_OF_DAY, 20);
@@ -203,27 +190,23 @@ public class Timings
 
     }
 
-    public static class gurunathSun
-    {
+    public static class gurunathSun {
         public static Calendar start = Calendar.getInstance();
         public static Calendar end = Calendar.getInstance();
 
-        public static void init()
-        {
-            start.set(Calendar.HOUR_OF_DAY,10);
-            start.set(Calendar.MINUTE,00);
-            end.set(Calendar.HOUR_OF_DAY,20);
-            end.set(Calendar.MINUTE,30);
+        public static void init() {
+            start.set(Calendar.HOUR_OF_DAY, 10);
+            start.set(Calendar.MINUTE, 00);
+            end.set(Calendar.HOUR_OF_DAY, 20);
+            end.set(Calendar.MINUTE, 30);
         }
     }
 
-    public static class canteen
-    {
+    public static class canteen {
         public static Calendar start = Calendar.getInstance();
         public static Calendar end = Calendar.getInstance();
 
-        public static void init()
-        {
+        public static void init() {
             start.set(Calendar.HOUR_OF_DAY, 7);
             start.set(Calendar.MINUTE, 30);
             end.set(Calendar.HOUR_OF_DAY, 20);
@@ -232,13 +215,11 @@ public class Timings
         }
     }
 
-    public static class canteenSun
-    {
+    public static class canteenSun {
         public static Calendar start = Calendar.getInstance();
         public static Calendar end = Calendar.getInstance();
 
-        public static void init()
-        {
+        public static void init() {
             start.set(Calendar.HOUR_OF_DAY, 15);
             start.set(Calendar.MINUTE, 30);
             end.set(Calendar.HOUR_OF_DAY, 20);

@@ -9,7 +9,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.util.TypedValue;
 
 import com.andexert.library.RippleView;
@@ -21,24 +20,17 @@ import karnix.the.ssn.app.Fragments.DiningFragment;
 import karnix.the.ssn.ssnmachan.R;
 
 
-import com.parse.internal.AsyncCallback;
+public class MainActivity extends ActionBarActivity {
 
 
-public class MainActivity extends ActionBarActivity
-{
-
-
+    RippleView rippleMessage, rippleInfo;
     private Toolbar toolbar;
     private MaterialTabs tabs;
     private ViewPager pager;
     private MyPagerAdapter adapter;
 
-
-    RippleView rippleMessage, rippleInfo;
-
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
 
 
         super.onCreate(savedInstanceState);
@@ -50,10 +42,6 @@ public class MainActivity extends ActionBarActivity
         rippleInfo = (RippleView) findViewById(R.id.rippleInfo);
 
 
-
-
-
-
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         adapter = new MyPagerAdapter(getSupportFragmentManager());
@@ -63,21 +51,17 @@ public class MainActivity extends ActionBarActivity
                 .getDisplayMetrics());
         pager.setPageMargin(pageMargin);
         pager.setCurrentItem(1);
-        rippleMessage.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener()
-        {
+        rippleMessage.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
             @Override
-            public void onComplete(RippleView rippleView)
-            {
+            public void onComplete(RippleView rippleView) {
 
                 startActivity(new Intent(MainActivity.this, MessageActivity.class));
 
             }
         });
-        rippleInfo.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener()
-        {
+        rippleInfo.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
             @Override
-            public void onComplete(RippleView rippleView)
-            {
+            public void onComplete(RippleView rippleView) {
 
                 startActivity(new Intent(MainActivity.this, AboutActivity.class));
             }
@@ -86,34 +70,28 @@ public class MainActivity extends ActionBarActivity
     }
 
 
-    public class MyPagerAdapter extends FragmentPagerAdapter
-    {
+    public class MyPagerAdapter extends FragmentPagerAdapter {
 
         private final String[] TITLES = {"Buses", "Alerts", "Dining"};
 
-        public MyPagerAdapter(FragmentManager fm)
-        {
+        public MyPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
         @Override
-        public CharSequence getPageTitle(int position)
-        {
+        public CharSequence getPageTitle(int position) {
             return TITLES[position];
         }
 
         @Override
-        public int getCount()
-        {
+        public int getCount() {
             return TITLES.length;
         }
 
         @Override
-        public Fragment getItem(int position)
-        {
+        public Fragment getItem(int position) {
             Fragment f = null;
-            switch (position)
-            {
+            switch (position) {
                 case 0:
                     f = BusFragment.newInstance();
                     break;
