@@ -100,9 +100,9 @@ public class GoogleSignInActivity extends AppCompatActivity implements GoogleApi
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users");
+                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users/"+user.getUid());
                     User user1 = new User(user.getUid(), user.getDisplayName(), user.getPhotoUrl().toString(), user.getEmail());
-                    databaseReference.push().setValue(user1);
+                    databaseReference.setValue(user1);
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 } else {
                     // User is signed out

@@ -41,7 +41,7 @@ public class NewsFeedFragment extends Fragment {
     private String mParam2;
 
     RecyclerView  recyclerView;
-    RecyclerView.LayoutManager layoutManager;
+    LinearLayoutManager layoutManager;
     FirebaseRecyclerAdapter firebaseRecyclerAdapter;
 
     Button postButton;
@@ -89,7 +89,7 @@ public class NewsFeedFragment extends Fragment {
         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("user_posts");
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Post, PostViewHolder>(Post.class,
                 R.layout.post_text,
-                PostViewHolder.class,databaseReference.orderByChild("postedDate")){
+                PostViewHolder.class,databaseReference.orderByChild("postedDate").getRef()){
             @Override
             protected void populateViewHolder(PostViewHolder viewHolder, Post model, int position) {
                 viewHolder.setName(model.userName);
@@ -99,6 +99,8 @@ public class NewsFeedFragment extends Fragment {
             }
         };
         layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setStackFromEnd(true);
+        layoutManager.setReverseLayout(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(firebaseRecyclerAdapter);
         postButton = (Button) rootView.findViewById(R.id.postButton);
