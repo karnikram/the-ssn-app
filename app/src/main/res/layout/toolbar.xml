@@ -47,6 +47,15 @@
 
             android:src="@drawable/send"/>
 
+
     </com.andexert.library.RippleView>
+    <Button
+        android:id="@+id/signOutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign Out"
+        android:background="@null"
+        android:layout_gravity="right"
+        />
 
 </android.support.v7.widget.Toolbar>

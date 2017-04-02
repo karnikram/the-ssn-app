@@ -26,4 +26,7 @@
 
     <string name="shout_outs">Shout outs to Seshathiri for the bus routes database, Mira and Sreenivas for the desciptions, Karthiknathan for the app icon and Arun TS.</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
