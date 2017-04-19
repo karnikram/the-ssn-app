@@ -50,13 +50,13 @@ public class MainActivity extends AppCompatActivity {
                 .withToolbar(toolbar)
                 .withTranslucentStatusBar(false)
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withIdentifier(1).withName(getString(R.string.drawer_home)),
+                        new PrimaryDrawerItem().withIdentifier(1).withName(getString(R.string.drawer_home)).withIcon(R.drawable.ic_home),
                         new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withIdentifier(2).withName(getString(R.string.drawer_buses)),
-                        new PrimaryDrawerItem().withIdentifier(3).withName(getString(R.string.drawer_dining)),
+                        new PrimaryDrawerItem().withIdentifier(2).withName(getString(R.string.drawer_buses)).withIcon(R.drawable.ic_bus),
+                        new PrimaryDrawerItem().withIdentifier(3).withName(getString(R.string.drawer_dining)).withIcon(R.drawable.ic_dining),
                         new DividerDrawerItem(),
-                        new SecondaryDrawerItem().withIdentifier(4).withName(getString(R.string.drawer_message)),
-                        new SecondaryDrawerItem().withIdentifier(5).withName(getString(R.string.drawer_about)))
+                        new SecondaryDrawerItem().withIdentifier(4).withName(getString(R.string.drawer_message)).withIcon(R.drawable.ic_post_message),
+                        new SecondaryDrawerItem().withIdentifier(5).withName(getString(R.string.drawer_about)).withIcon(R.drawable.ic_about))
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
