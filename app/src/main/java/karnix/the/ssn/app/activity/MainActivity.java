@@ -10,28 +10,16 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.andexert.library.RippleView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import io.karim.MaterialTabs;
 import karnix.the.ssn.app.Fragments.AlertsFragment;
-import karnix.the.ssn.app.Fragments.BusFragment;
-import karnix.the.ssn.app.Fragments.DiningFragment;
-import karnix.the.ssn.app.Fragments.NewsFeedFragment;
 import karnix.the.ssn.ssnmachan.R;
-
-
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
-import com.google.firebase.auth.FirebaseAuth;
-import com.parse.internal.AsyncCallback;
 
 
 public class MainActivity extends ActionBarActivity
@@ -120,7 +108,7 @@ public class MainActivity extends ActionBarActivity
     public class MyPagerAdapter extends FragmentPagerAdapter
     {
 
-        private final String[] TITLES = {"Buses", "Alerts", "Dining","Feed"};
+        private final String[] TITLES = {"ADMIN", "CLUBS", "DEPARTMENT"};
 
         public MyPagerAdapter(FragmentManager fm)
         {
@@ -146,16 +134,13 @@ public class MainActivity extends ActionBarActivity
             switch (position)
             {
                 case 0:
-                    f = BusFragment.newInstance();
+                    f = AlertsFragment.newInstance();
                     break;
                 case 1:
                     f = AlertsFragment.newInstance();
                     break;
                 case 2:
-                    f = DiningFragment.newInstance();
-                    break;
-                case 3:
-                    f = new NewsFeedFragment();
+                    f = AlertsFragment.newInstance();
                     break;
             }
             return f;
