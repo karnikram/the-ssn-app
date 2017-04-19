@@ -1,32 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="88dp"
-                android:orientation="vertical"
-                android:padding="8dp"
+    android:layout_width="match_parent"
+    android:layout_height="88dp"
+    android:orientation="vertical"
+    android:padding="8dp"
 
-                >
+    >
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Title"
-        android:singleLine="true"
         android:ellipsize="end"
-        android:textStyle="italic"
+        android:singleLine="true"
+        android:text="Title"
         android:textColor="@color/primaryTextColor"
         android:textSize="18sp"
-        />
+        android:textStyle="italic" />
 
     <TextView
+        android:id="@+id/content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/content"
-        android:maxLines="2"
-        android:textSize="14sp"
-        android:text="content"
         android:ellipsize="end"
-        android:textColor="@color/secondaryTextColor"/>
+        android:maxLines="2"
+        android:text="content"
+        android:textColor="@color/secondaryTextColor"
+        android:textSize="14sp" />
 
 </LinearLayout>

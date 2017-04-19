@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:card_view="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/backColor"
-              android:fitsSystemWindows="true"
-              android:orientation="vertical">
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backColor"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
 
-    <include layout="@layout/toolbar"/>
+    <include layout="@layout/toolbar" />
 
 
     <FrameLayout
@@ -25,8 +25,7 @@
             card_view:cardCornerRadius="8dp">
 
 
-            <ScrollView
-                xmlns:android="http://schemas.android.com/apk/res/android"
+            <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fillViewport="true">
@@ -45,18 +44,16 @@
                         android:text="Developer"
                         android:textColor="@color/primaryTextColor"
                         android:textSize="24sp"
-                        android:textStyle="italic"
-                        />
+                        android:textStyle="italic" />
 
                     <View
                         android:layout_width="105dp"
                         android:layout_height="1dp"
-                        android:background="@color/primaryColor"/>
+                        android:background="@color/primaryColor" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        >
+                        android:layout_height="wrap_content">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -64,21 +61,20 @@
                             android:text="Karnik Ram"
                             android:textColor="@color/primaryTextColor"
                             android:textSize="24sp"
-                            android:textStyle="italic"
-                            />
+                            android:textStyle="italic" />
 
                         <ImageView
                             android:id="@+id/fb1"
                             android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/fb"/>
+                            android:src="@drawable/fb" />
 
 
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content" />
 
                     </RelativeLayout>
 
@@ -89,14 +85,13 @@
                         android:text="Vectors"
                         android:textColor="@color/primaryTextColor"
                         android:textSize="24sp"
-                        android:textStyle="italic"
-                        />
+                        android:textStyle="italic" />
 
 
                     <View
                         android:layout_width="80dp"
                         android:layout_height="1dp"
-                        android:background="@color/primaryColor"/>
+                        android:background="@color/primaryColor" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -109,7 +104,7 @@
                             android:text="Krishna"
                             android:textColor="@color/primaryTextColor"
                             android:textSize="24sp"
-                            android:textStyle="italic"/>
+                            android:textStyle="italic" />
 
                         <ImageView
                             android:id="@+id/fb2"
@@ -117,7 +112,7 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:src="@drawable/fb"/>
+                            android:src="@drawable/fb" />
 
                     </RelativeLayout>
 
@@ -128,8 +123,7 @@
                         android:text="@string/shout_outs"
                         android:textColor="@color/secondaryTextColor"
                         android:textSize="16sp"
-                        android:textStyle="italic"
-                        />
+                        android:textStyle="italic" />
 
 
                     <TextView
@@ -141,24 +135,24 @@
                         android:text="@string/app_name"
                         android:textColor="@color/primaryColor"
                         android:textSize="32sp"
-                        android:textStyle="italic"/>
+                        android:textStyle="italic" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="VersionName"
                         android:layout_gravity="center"
-                        android:textSize="12sp"/>
+                        android:text="VersionName"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/smudge"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:textStyle="italic"
                         android:text="-Smudge-"
                         android:textColor="@color/secondaryTextColor"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp"
+                        android:textStyle="italic" />
 
 
                     <ImageView
@@ -166,16 +160,16 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="8dp"
-                        android:src="@drawable/ic_launcher"/>
+                        android:src="@drawable/ic_launcher" />
 
                     <TextView
+                        android:id="@+id/fb3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="8dp"
                         android:text="fb.com/ssnmachan"
-                        android:id="@+id/fb3"
-                        android:textColor="@color/primaryColor"/>
+                        android:textColor="@color/primaryColor" />
 
                     <TextView
                         android:id="@+id/about_3"
@@ -184,7 +178,7 @@
                         android:layout_marginTop="8dp"
                         android:text="@string/description"
                         android:textSize="16sp"
-                        android:textStyle="italic"/>
+                        android:textStyle="italic" />
 
 
                 </LinearLayout>

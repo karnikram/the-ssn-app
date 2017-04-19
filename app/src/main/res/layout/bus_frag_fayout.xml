@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:card_view="http://schemas.android.com/apk/res-auto"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardview"
@@ -19,8 +19,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"
             android:gravity="center"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textView"
@@ -31,12 +30,12 @@
                 android:text="Search by Bus Number"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="16sp"
-                android:textStyle="italic"/>
+                android:textStyle="italic" />
 
             <View
                 android:layout_width="200dp"
                 android:layout_height="1dp"
-                android:background="@color/primaryColor"/>
+                android:background="@color/primaryColor" />
 
             <EditText
                 android:id="@+id/number"
@@ -47,10 +46,9 @@
                 android:hint="Enter your bus no."
                 android:inputType="number"
                 android:maxLength="2"
-                android:textColor="@color/primaryTextColor"
-                >
+                android:textColor="@color/primaryTextColor">
 
-                <requestFocus/>
+                <requestFocus />
 
             </EditText>
 
@@ -58,15 +56,16 @@
                 android:id="@+id/num_submit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:rv_type="rectangle"
-                app:rv_color="@color/primaryColor">
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Go!"
-                android:textSize="14sp"
-                android:textColor="@color/primaryColor"
-                android:background="#ffffff"/>
+                app:rv_color="@color/primaryColor"
+                app:rv_type="rectangle">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    android:text="Go!"
+                    android:textColor="@color/primaryColor"
+                    android:textSize="14sp" />
 
             </com.andexert.library.RippleView>
 
@@ -80,13 +79,12 @@
                 android:text="Search by Area"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="16sp"
-                android:textStyle="italic"
-                />
+                android:textStyle="italic" />
 
             <View
                 android:layout_width="150dp"
                 android:layout_height="1dp"
-                android:background="@color/primaryColor"/>
+                android:background="@color/primaryColor" />
 
             <AutoCompleteTextView
                 android:id="@+id/area"
@@ -95,23 +93,22 @@
                 android:layout_margin="10dp"
                 android:gravity="center"
                 android:hint="Enter your area"
-                android:textColor="@android:color/black"
-                />
-            <com.andexert.library.RippleView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:rv_type="rectangle"
-                app:rv_color="@color/primaryColor"
-                android:id="@+id/area_submit">
+                android:textColor="@android:color/black" />
 
-            <Button
+            <com.andexert.library.RippleView
+                android:id="@+id/area_submit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/primaryColor"
-                android:text="Go!"
-                android:textSize="14sp"
-                android:background="#ffffff"
-                />
+                app:rv_color="@color/primaryColor"
+                app:rv_type="rectangle">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    android:text="Go!"
+                    android:textColor="@color/primaryColor"
+                    android:textSize="14sp" />
 
             </com.andexert.library.RippleView>
         </LinearLayout>

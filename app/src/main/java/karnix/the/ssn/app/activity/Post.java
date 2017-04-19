@@ -14,10 +14,12 @@ public class Post {
     public String imageURL;
 
     public int type;
-    public Post(){
+
+    public Post() {
 
     }
-    public Post(String postID, String userName, String userID, Long postDate, String profileImageURL, String postContent){
+
+    public Post(String postID, String userName, String userID, Long postDate, String profileImageURL, String postContent) {
         pid = postID;
         uid = userID;
         this.userName = userName;

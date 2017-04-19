@@ -13,41 +13,34 @@ import com.andexert.library.RippleView;
 
 import karnix.the.ssn.ssnmachan.R;
 
-public class AboutActivity extends Activity
-{
+public class AboutActivity extends Activity {
     RippleView rippleMessage;
-    ImageView fb1,fb2;
+    ImageView fb1, fb2;
     TextView fb3;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.about_activity);
 
-        rippleMessage = (RippleView)findViewById(R.id.rippleMessage);
+        rippleMessage = (RippleView) findViewById(R.id.rippleMessage);
         fb1 = (ImageView) findViewById(R.id.fb1);
-        fb2 = (ImageView)findViewById(R.id.fb2);
+        fb2 = (ImageView) findViewById(R.id.fb2);
         fb3 = (TextView) findViewById(R.id.fb3);
 
         rippleMessage.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
             @Override
-            public void onComplete(RippleView rippleView)
-            {
-                startActivity(new Intent(AboutActivity.this,MessageActivity.class));
+            public void onComplete(RippleView rippleView) {
+                startActivity(new Intent(AboutActivity.this, MessageActivity.class));
             }
         });
 
-        fb1.setOnClickListener(new View.OnClickListener()
-        {
+        fb1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                try
-                {
+            public void onClick(View v) {
+                try {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("fb://profile/678829498")));
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://m.facebook.com/karnik28")));
                 }
             }
@@ -55,30 +48,22 @@ public class AboutActivity extends Activity
 
         fb2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                try
-                {
+            public void onClick(View v) {
+                try {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("fb://profile/100006893923566")));
-                }
-                catch(Exception e)
-                {
-                    startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://m.facebook.com/krishna.gj.54")));
+                } catch (Exception e) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://m.facebook.com/krishna.gj.54")));
                 }
             }
         });
 
         fb3.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                try
-                {
+            public void onClick(View v) {
+                try {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/893173980726657")));
-                }
-                catch(Exception e)
-                {
-                    startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("http://m.facebook.com/ssnmachan")));
+                } catch (Exception e) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://m.facebook.com/ssnmachan")));
                 }
             }
         });

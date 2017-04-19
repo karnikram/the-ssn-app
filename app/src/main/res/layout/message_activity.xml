@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:card_view="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/backColor"
-              android:fitsSystemWindows="true"
-              android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backColor"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
 
-    <include layout="@layout/toolbar"/>
+    <include layout="@layout/toolbar" />
 
 
     <FrameLayout
@@ -33,43 +33,41 @@
                 android:padding="8dp">
 
                 <EditText
+                    android:id="@+id/message"
+                    style="@style/AppBaseTheme"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textMultiLine|textCapSentences"
                     android:layout_marginTop="20dp"
-                    android:hint = "Enter the message that you want to be posted"
                     android:gravity="top|left"
-                    android:textSize="16sp"
-                    android:scrollbars="vertical"
+                    android:hint="Enter the message that you want to be posted"
+                    android:inputType="textMultiLine|textCapSentences"
 
                     android:maxLength="350"
                     android:minLines="16"
-                    android:id="@+id/message"
-                    style="@style/AppBaseTheme"/>
+                    android:scrollbars="vertical"
+                    android:textSize="16sp" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="4dp"
-                    >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@+id/total_count"
-                    android:textSize="12sp"
-                    android:text="0"
-                    android:id="@+id/counter"/>
+                    android:layout_marginRight="4dp">
 
                     <TextView
+                        android:id="@+id/counter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/total_count"
+                        android:text="0"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/total_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:textSize="12sp"
                         android:text="/350"
-                        android:id="@+id/total_count"
                         android:textColor="@color/secondaryTextColor"
-                        />
+                        android:textSize="12sp" />
 
                 </RelativeLayout>
 
@@ -77,13 +75,13 @@
                     android:id="@+id/circularButton1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:textColor="@color/primaryColor"
                     android:textSize="16sp"
-                    android:layout_gravity="center_horizontal"
                     app:cpb_cornerRadius="48dp"
-                    app:cpb_textError="Error"
                     app:cpb_iconComplete="@drawable/ic_action_accept"
                     app:cpb_selectorIdle="@drawable/idle_state_selector"
+                    app:cpb_textError="Error"
                     app:cpb_textIdle="Send!" />
 
             </LinearLayout>

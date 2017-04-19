@@ -1,16 +1,13 @@
 package karnix.the.ssn.app.ViewHolder;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.daimajia.easing.Glider;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.TimeZone;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import karnix.the.ssn.ssnmachan.R;
@@ -41,13 +38,13 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
         mPostContent.setText(text);
     }
 
-    public void setPostDate(Long time){
+    public void setPostDate(Long time) {
         Date date = new Date(time);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm dd/MM/yyyy");
         mPostDate.setText(simpleDateFormat.format(date));
     }
 
-    public void setPostUserImageURL(String url){
+    public void setPostUserImageURL(String url) {
         Glide.with(mPostUserImageURL.getContext()).load(url).into(mPostUserImageURL);
     }
 }

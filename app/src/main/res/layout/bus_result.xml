@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:card_view="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/backColor"
-              android:fitsSystemWindows="true"
-              android:orientation="vertical">
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backColor"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
 
-    <include layout="@layout/toolbar"/>
+    <include layout="@layout/toolbar" />
 
 
     <FrameLayout
@@ -47,7 +45,7 @@
                         android:gravity="center"
                         android:text="Area"
                         android:textColor="@android:color/black"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/bus_no"
@@ -56,7 +54,7 @@
                         android:gravity="center"
                         android:text="BusNo"
                         android:textColor="@android:color/black"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
 
                     <TextView
@@ -67,24 +65,23 @@
                         android:gravity="center"
                         android:text="Time"
                         android:textColor="@android:color/black"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:layout_marginTop="45dp"
-                    android:background="@color/primaryColor"/>
+                    android:background="@color/primaryColor" />
 
                 <ListView
                     android:id="@+id/listView1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
-                    android:divider="@color/dividerColor"
                     android:background="#FFFFFF"
-                    android:dividerHeight="1dp"
-                    />
+                    android:divider="@color/dividerColor"
+                    android:dividerHeight="1dp" />
 
             </FrameLayout>
 

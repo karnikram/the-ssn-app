@@ -1,9 +1,7 @@
 package karnix.the.ssn.app.Fragments;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -35,18 +33,14 @@ public class NewsFeedFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    RecyclerView recyclerView;
+    LinearLayoutManager layoutManager;
+    FirebaseRecyclerAdapter firebaseRecyclerAdapter;
+    Button postButton;
+    EditText editText;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
-    RecyclerView  recyclerView;
-    LinearLayoutManager layoutManager;
-    FirebaseRecyclerAdapter firebaseRecyclerAdapter;
-
-    Button postButton;
-    EditText editText;
-
     private OnFragmentInteractionListener mListener;
 
     public NewsFeedFragment() {
@@ -89,7 +83,7 @@ public class NewsFeedFragment extends Fragment {
         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("user_posts");
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Post, PostViewHolder>(Post.class,
                 R.layout.post_text,
-                PostViewHolder.class,databaseReference.orderByChild("postedDate").getRef()){
+                PostViewHolder.class, databaseReference.orderByChild("postedDate").getRef()) {
             @Override
             protected void populateViewHolder(PostViewHolder viewHolder, Post model, int position) {
                 viewHolder.setName(model.userName);
@@ -109,11 +103,11 @@ public class NewsFeedFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Long timeStamp = System.currentTimeMillis();
-                if(editText.getEditableText().toString().equals("")) return;
-                Post post = new Post("1", FirebaseAuth.getInstance().getCurrentUser().getDisplayName(),FirebaseAuth.getInstance().getCurrentUser().getUid(),timeStamp,FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl().toString(),editText.getEditableText().toString());
+                if (editText.getEditableText().toString().equals("")) return;
+                Post post = new Post("1", FirebaseAuth.getInstance().getCurrentUser().getDisplayName(), FirebaseAuth.getInstance().getCurrentUser().getUid(), timeStamp, FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl().toString(), editText.getEditableText().toString());
                 String key = databaseReference.push().getKey();
                 post.pid = key;
-                FirebaseDatabase.getInstance().getReference("user_posts/"+key).setValue(post);
+                FirebaseDatabase.getInstance().getReference("user_posts/" + key).setValue(post);
                 editText.setText("");
             }
         });

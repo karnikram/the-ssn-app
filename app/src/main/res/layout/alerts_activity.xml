@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:card_view="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/backColor"
-              android:fitsSystemWindows="true"
-              android:orientation="vertical">
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backColor"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
 
-    <include layout="@layout/toolbar"/>
+    <include layout="@layout/toolbar" />
 
 
     <FrameLayout
@@ -45,13 +45,13 @@
                         android:text="title"
                         android:textColor="@color/primaryTextColor"
                         android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <View
                         android:layout_width="200dp"
                         android:layout_height="1dp"
                         android:layout_gravity="center"
-                        android:background="@color/primaryColor"/>
+                        android:background="@color/primaryColor" />
 
                     <TextView
                         android:id="@+id/content_activity"
@@ -61,9 +61,8 @@
                         android:layout_marginTop="8dp"
                         android:gravity="center"
                         android:text="content"
-                        android:textIsSelectable="true"
                         android:textColor="@color/primaryTextColor"
-                        />
+                        android:textIsSelectable="true" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -72,13 +71,13 @@
                         android:layout_marginTop="16dp"
                         android:text="Links"
                         android:textColor="@color/primaryTextColor"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <View
                         android:layout_width="80dp"
                         android:layout_height="1dp"
                         android:layout_gravity="center"
-                        android:background="@color/primaryColor"/>
+                        android:background="@color/primaryColor" />
 
                     <TextView
                         android:id="@+id/content_url1"
@@ -89,7 +88,7 @@
                         android:text="url"
                         android:textColor="@color/primaryColor"
                         android:textIsSelectable="true"
-                        android:textStyle="italic"/>
+                        android:textStyle="italic" />
 
                     <TextView
                         android:id="@+id/content_url2"
@@ -99,7 +98,7 @@
                         android:text="url"
                         android:textColor="@color/primaryColor"
                         android:textIsSelectable="true"
-                        android:textStyle="italic"/>
+                        android:textStyle="italic" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -108,13 +107,13 @@
                         android:layout_marginTop="8dp"
                         android:text="Phone"
                         android:textColor="@color/primaryTextColor"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <View
                         android:layout_width="80dp"
                         android:layout_height="1dp"
                         android:layout_gravity="center"
-                        android:background="@color/primaryColor"/>
+                        android:background="@color/primaryColor" />
 
                     <TextView
                         android:id="@+id/content_contact1"
@@ -124,8 +123,8 @@
                         android:layout_marginTop="8dp"
                         android:text="phone"
                         android:textColor="@color/primaryColor"
-                        android:textStyle="italic"
-                        android:textIsSelectable="true"/>
+                        android:textIsSelectable="true"
+                        android:textStyle="italic" />
 
                     <TextView
                         android:id="@+id/content_contact2"
@@ -134,8 +133,8 @@
                         android:layout_gravity="center"
                         android:text="phone"
                         android:textColor="@color/primaryColor"
-                        android:textStyle="italic"
-                        android:textIsSelectable="true"/>
+                        android:textIsSelectable="true"
+                        android:textStyle="italic" />
 
                 </LinearLayout>
             </ScrollView>

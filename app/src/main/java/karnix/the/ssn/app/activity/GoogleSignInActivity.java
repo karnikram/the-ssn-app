@@ -30,9 +30,6 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import karnix.the.ssn.ssnmachan.R;
 
 /**
@@ -55,16 +52,13 @@ import karnix.the.ssn.ssnmachan.R;
 public class GoogleSignInActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
     private static final String TAG = "GoogleActivity";
     private static final int RC_SIGN_IN = 9001;
-
+    public static GoogleApiClient mGoogleApiClient;
+    // [END declare_auth]
     // [START declare_auth]
     private FirebaseAuth mAuth;
-    // [END declare_auth]
-
+    // [END declare_auth_listener]
     // [START declare_auth_listener]
     private FirebaseAuth.AuthStateListener mAuthListener;
-    // [END declare_auth_listener]
-
-    public static GoogleApiClient mGoogleApiClient;
     private TextView mStatusTextView;
     private TextView mDetailTextView;
 
@@ -100,7 +94,7 @@ public class GoogleSignInActivity extends AppCompatActivity implements GoogleApi
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users/"+user.getUid());
+                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users/" + user.getUid());
                     User user1 = new User(user.getUid(), user.getDisplayName(), user.getPhotoUrl().toString(), user.getEmail());
                     databaseReference.setValue(user1);
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
