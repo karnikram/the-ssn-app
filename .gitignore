@@ -33,11 +33,7 @@ captures/
 
 # Intellij
 *.iml
-.idea/workspace.xml
-.idea/tasks.xml
-.idea/gradle.xml
-.idea/dictionaries
-.idea/libraries
+.idea/
 
 
 # =========================
@@ -86,3 +82,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+.idea/instapk.xml
+instapk.log*
