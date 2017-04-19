@@ -41,8 +41,6 @@ public class BusResultActivity extends Activity {
         Bundle localBundle = getIntent().getExtras();
         String checkValue = localBundle.getString("Value1").trim();
         String params = localBundle.getString("Value2").trim();
-        rippleInfo = (RippleView) findViewById(R.id.rippleInfo);
-        rippleMessage = (RippleView) findViewById(R.id.rippleMessage);
 
         if (Integer.parseInt(checkValue) == 1) {
             loadArea(params);

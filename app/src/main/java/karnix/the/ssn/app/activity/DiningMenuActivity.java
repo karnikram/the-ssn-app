@@ -28,8 +28,6 @@ public class DiningMenuActivity extends Activity implements OnPageChangeListener
         pdfView = (PDFView) findViewById(R.id.pdfview);
         menu = (TextView) findViewById(R.id.menu_name);
         pgNo = (TextView) findViewById(R.id.pg_no);
-        rippleInfo = (RippleView) findViewById(R.id.rippleInfo);
-        rippleMessage = (RippleView) findViewById(R.id.rippleMessage);
         position = getIntent().getIntExtra("position", 0);
         setMenu();
 

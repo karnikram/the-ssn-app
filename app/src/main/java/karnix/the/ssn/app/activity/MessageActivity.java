@@ -2,7 +2,6 @@ package karnix.the.ssn.app.activity;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -13,7 +12,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.andexert.library.RippleView;
 import com.dd.CircularProgressButton;
 import com.parse.ParseObject;
 
@@ -24,16 +22,16 @@ public class MessageActivity extends Activity {
     CircularProgressButton circularButton;
     TextView counter;
     String message;
-    RippleView rippleInfo;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.message_activity);
+
         messageField = (EditText) findViewById(R.id.message);
         counter = (TextView) findViewById(R.id.counter);
-        rippleInfo = (RippleView) findViewById(R.id.rippleInfo);
+
         messageField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -63,14 +61,6 @@ public class MessageActivity extends Activity {
                 }
             }
         });
-
-        rippleInfo.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
-            @Override
-            public void onComplete(RippleView rippleView) {
-                startActivity(new Intent(MessageActivity.this, AboutActivity.class));
-            }
-        });
-
     }
 
     private void checkConnectionExecute() {

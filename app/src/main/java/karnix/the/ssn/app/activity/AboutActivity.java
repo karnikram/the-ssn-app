@@ -9,12 +9,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.andexert.library.RippleView;
-
 import karnix.the.ssn.ssnmachan.R;
 
 public class AboutActivity extends Activity {
-    RippleView rippleMessage;
     ImageView fb1, fb2;
     TextView fb3;
 
@@ -23,17 +20,9 @@ public class AboutActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.about_activity);
 
-        rippleMessage = (RippleView) findViewById(R.id.rippleMessage);
         fb1 = (ImageView) findViewById(R.id.fb1);
         fb2 = (ImageView) findViewById(R.id.fb2);
         fb3 = (TextView) findViewById(R.id.fb3);
-
-        rippleMessage.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
-            @Override
-            public void onComplete(RippleView rippleView) {
-                startActivity(new Intent(AboutActivity.this, MessageActivity.class));
-            }
-        });
 
         fb1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +56,5 @@ public class AboutActivity extends Activity {
                 }
             }
         });
-
-
     }
 }

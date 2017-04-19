@@ -5,6 +5,12 @@
 
     <string name="temp">Karnix</string>
 
+    <string name="drawer_home">Home</string>
+    <string name="drawer_buses">Buses</string>
+    <string name="drawer_dining">Dining</string>
+    <string name="drawer_message">Post Message</string>
+    <string name="drawer_about">About</string>
+
     <string-array name="dining_options">
         <item>Cafe\' Coffee Day</item>
         <item>Gurunath Eateries</item>
@@ -17,7 +23,6 @@
     <string name="application_id">FT5LiYFPZTttR7NKcp6EFYo6E5ht9HnuhimWlT84</string>
     <string name="client_key">aWVS52GVM6RFAzuC1sr51BnByMq0J9mA5ZVV1Coe</string>
 
-
     <string name="description">SSN Notice Boards - now in your pocket. \n\n An app for SSNites, by SSNites, the app has three major tabs.
     Updates on college events will be posted under \'Alerts\', with prompt notifications so you don\'t miss out on the news. You can also
     contribute to this section. If you get wind of what our college is up to, don\'t hesitate to send us the information! \n\n \'Dining\' lists
@@ -25,8 +30,4 @@
     Be informed of changes on time instead of learning the hard way.</string>
 
     <string name="shout_outs">Shout outs to Seshathiri for the bus routes database, Mira and Sreenivas for the desciptions, Karthiknathan for the app icon and Arun TS.</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
 </resources>

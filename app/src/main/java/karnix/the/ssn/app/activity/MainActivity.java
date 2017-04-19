@@ -13,10 +13,13 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 
-import com.andexert.library.RippleView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 import io.karim.MaterialTabs;
 import karnix.the.ssn.app.Fragments.AlertsFragment;
@@ -25,7 +28,6 @@ import karnix.the.ssn.ssnmachan.R;
 
 public class MainActivity extends AppCompatActivity {
     private Button button;
-    private RippleView rippleMessage, rippleInfo;
     private Toolbar toolbar;
     private MaterialTabs tabs;
     private ViewPager pager;
@@ -39,17 +41,42 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tabs = (MaterialTabs) findViewById(R.id.material_tabs);
         pager = (ViewPager) findViewById(R.id.pager);
-        rippleMessage = (RippleView) findViewById(R.id.rippleMessage);
-        rippleInfo = (RippleView) findViewById(R.id.rippleInfo);
-
-        new DrawerBuilder()
-                .withActivity(this)
-                .withTranslucentStatusBar(false)
-                .addDrawerItems(new PrimaryDrawerItem().withIdentifier(1).withName("Home"))
-                .build();
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        new DrawerBuilder()
+                .withActivity(this)
+                .withToolbar(toolbar)
+                .withTranslucentStatusBar(false)
+                .addDrawerItems(
+                        new PrimaryDrawerItem().withIdentifier(1).withName(getString(R.string.drawer_home)),
+                        new DividerDrawerItem(),
+                        new PrimaryDrawerItem().withIdentifier(2).withName(getString(R.string.drawer_buses)),
+                        new PrimaryDrawerItem().withIdentifier(3).withName(getString(R.string.drawer_dining)),
+                        new DividerDrawerItem(),
+                        new SecondaryDrawerItem().withIdentifier(4).withName(getString(R.string.drawer_message)),
+                        new SecondaryDrawerItem().withIdentifier(5).withName(getString(R.string.drawer_about)))
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        boolean flag = false;
+                        if (drawerItem != null) {
+                            flag = true;
+                            switch ((int) drawerItem.getIdentifier()) {
+                                case 4:
+                                    startActivity(new Intent(MainActivity.this, MessageActivity.class));
+                                    break;
+                                case 5:
+                                    startActivity(new Intent(MainActivity.this, AboutActivity.class));
+                                    break;
+                            }
+                        }
+                        return flag;
+                    }
+                })
+                .build();
+
         FirebaseAuth.AuthStateListener authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -70,20 +97,6 @@ public class MainActivity extends AppCompatActivity {
                 .getDisplayMetrics());
         pager.setPageMargin(pageMargin);
         pager.setCurrentItem(1);
-        //To - Do
-        //Fix this
-        rippleMessage.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
-            @Override
-            public void onComplete(RippleView rippleView) {
-                startActivity(new Intent(MainActivity.this, MessageActivity.class));
-            }
-        });
-        rippleInfo.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
-            @Override
-            public void onComplete(RippleView rippleView) {
-                startActivity(new Intent(MainActivity.this, AboutActivity.class));
-            }
-        });
 
         button = (Button) toolbar.findViewById(R.id.signOutButton);
         button.setOnClickListener(new View.OnClickListener() {

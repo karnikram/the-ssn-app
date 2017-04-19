@@ -31,8 +31,6 @@ public class AlertsActivity extends Activity {
         dispNo2 = (TextView) findViewById(R.id.content_contact2);
         dispUrl2 = (TextView) findViewById(R.id.content_url2);
         dispUrl1 = (TextView) findViewById(R.id.content_url1);
-        rippleInfo = (RippleView) findViewById(R.id.rippleInfo);
-        rippleMessage = (RippleView) findViewById(R.id.rippleMessage);
 
         title = getIntent().getStringExtra("title");
         content = getIntent().getStringExtra("content");
