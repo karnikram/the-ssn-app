@@ -23,77 +23,71 @@ public class DiningMenuAdapter extends SectionedRecyclerViewAdapter<DiningMenuAd
     private Context context;
     private String place;
     private String day;
-    private List<List<String>> menuList, breakfastMenu, lunchMenu, snacksMenu, dinnerMenu;
-    private String[] sections = {"Breakfast", "Lunch", "Snacks", "Dinner"};
+    private boolean isMess;
+
+    private DatabaseHandler databaseHandler;
+
+    private String[] messSections = {"Breakfast", "Lunch", "Snacks", "Dinner"};
+    private String[] storesSections = {"Fresh Juice", "Milk Shakes", "Soda", "Tea", "Coffee",
+            "Others", "Noodles", "Puff", "Corn", "Kulfi", "Sandwich", "Omlette", "Rice",
+            "Chappathi", "Paratha", "Chat"};
+
+    private List<List<List<String>>> messMenuList;
+    private List<List<List<String>>> storesMenuList;
 
     public DiningMenuAdapter(Context context, String place, String day) {
         this.context = context;
         this.place = place;
         this.day = day;
+        this.isMess = place.contains("Mess");
 
-        DatabaseHandler databaseHandler = new DatabaseHandler(context);
-        menuList = new ArrayList<>();
+        databaseHandler = new DatabaseHandler(context);
+        messMenuList = new ArrayList<>();
+        storesMenuList = new ArrayList<>();
 
-        breakfastMenu = databaseHandler.getMessMenu(place, day, "Breakfast");
-        lunchMenu = databaseHandler.getMessMenu(place, day, "Lunch");
-        snacksMenu = databaseHandler.getMessMenu(place, day, "Snacks");
-        dinnerMenu = databaseHandler.getMessMenu(place, day, "Dinner");
-
-        menuList.addAll(breakfastMenu);
-        menuList.addAll(lunchMenu);
-        menuList.addAll(snacksMenu);
-        menuList.addAll(dinnerMenu);
+        if (isMess)
+            for (String messSection : messSections)
+                messMenuList.add(databaseHandler.getMessMenu(place, day, messSection));
+        else
+            for (String storesSection : storesSections)
+                storesMenuList.add(databaseHandler.getStoresMenu(place, storesSection));
     }
 
     @Override
     public int getSectionCount() {
-        return 4;
+        if (isMess) return messSections.length;
+        else return storesSections.length;
     }
 
     @Override
     public int getItemCount(int section) {
-        switch (section) {
-            case 0:
-                return breakfastMenu.size();
-            case 1:
-                return lunchMenu.size();
-            case 2:
-                return snacksMenu.size();
-            case 3:
-                return dinnerMenu.size();
-            default:
-                return 0;
-        }
+        if (isMess) return messMenuList.get(section).size();
+        else return storesMenuList.get(section).size();
     }
 
     @Override
     public void onBindHeaderViewHolder(DiningMenuViewHolder holder, int section, boolean expanded) {
-        holder.title.setText(sections[section]);
+        if (isMess) holder.title.setText(messSections[section]);
+        else holder.title.setText(storesSections[section]);
         holder.caret.setImageResource(expanded ? R.drawable.ic_collapse : R.drawable.ic_expand);
     }
 
     @Override
     public void onBindViewHolder(DiningMenuViewHolder holder, int section,
                                  int relativePosition, int absolutePosition) {
-        List<List<String>> menuList = new ArrayList();
-        switch (section) {
-            case 0:
-                menuList.addAll(breakfastMenu);
-                break;
-            case 1:
-                menuList.addAll(lunchMenu);
-                break;
-            case 2:
-                menuList.addAll(snacksMenu);
-                break;
-            case 3:
-                menuList.addAll(dinnerMenu);
-                break;
-        }
+        List<List<String>> menuList;
+        if (isMess) {
+            menuList = messMenuList.get(section);
+
+            if (menuList.get(relativePosition).get(1).equals("Veg"))
+                holder.title.setTextColor(context.getResources().getColor(R.color.open));
+            else holder.title.setTextColor(context.getResources().getColor(R.color.close));
+
+            holder.price.setVisibility(View.GONE);
+        } else menuList = storesMenuList.get(section);
+
         holder.title.setText(menuList.get(relativePosition).get(0));
-        if (menuList.get(relativePosition).get(1).equals("Veg"))
-            holder.title.setTextColor(context.getResources().getColor(R.color.open));
-        else holder.title.setTextColor(context.getResources().getColor(R.color.close));
+        holder.price.setText(menuList.get(relativePosition).get(1));
     }
 
     @Override
@@ -127,12 +121,14 @@ public class DiningMenuAdapter extends SectionedRecyclerViewAdapter<DiningMenuAd
     static class DiningMenuViewHolder extends SectionedViewHolder implements View.OnClickListener {
 
         final TextView title;
+        final TextView price;
         final ImageView caret;
         final DiningMenuAdapter adapter;
 
         DiningMenuViewHolder(View itemView, DiningMenuAdapter adapter) {
             super(itemView);
             this.title = (TextView) itemView.findViewById(R.id.title);
+            this.price = (TextView) itemView.findViewById(R.id.textView_itemDining_price);
             this.caret = (ImageView) itemView.findViewById(R.id.caret);
             this.adapter = adapter;
             itemView.setOnClickListener(this);

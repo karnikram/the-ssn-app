@@ -165,7 +165,28 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
             itemDetails.add(cursor.getString(1));
             itemDetails.add(cursor.getString(2));
-            itemDetails.add(cursor.getString(3));
+
+            menuList.add(itemDetails);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        getReadableDatabase().close();
+
+        return menuList;
+    }
+
+    public List<List<String>> getStoresMenu(String place, String category) {
+        List<List<String>> menuList = new ArrayList<>();
+
+        Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM '" + place +
+                "' WHERE category = '" + category + "'", null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            List<String> itemDetails = new ArrayList<>();
+
+            itemDetails.add(cursor.getString(1));
+            itemDetails.add(cursor.getString(2));
 
             menuList.add(itemDetails);
             cursor.moveToNext();

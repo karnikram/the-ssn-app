@@ -44,6 +44,13 @@ public class DiningMenuActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
+        if (!place.contains("Mess")) {
+            cardViewDiningMenuSpinner.setVisibility(View.GONE);
+            setRecyclerViewAdapter(null);
+            return;
+        }
+
         spinnerDiningMenuCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

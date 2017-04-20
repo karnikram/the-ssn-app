@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?selectableItemBackground"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:paddingBottom="8dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
@@ -14,5 +15,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="?android:textColorPrimary"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        tools:text="Android" />
+
+    <TextView
+        android:id="@+id/textView_itemDining_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:textColor="@color/open"
+        android:textSize="18sp"
+        tools:text="100" />
 </LinearLayout>
