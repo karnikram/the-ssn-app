@@ -1,4 +1,4 @@
-package karnix.the.ssn.app.activity;
+package karnix.the.ssn.app.model;
 
 /**
  * Created by vvvro on 4/2/2017.
@@ -21,11 +21,11 @@ public class User {
         this.userEmail = userEmail;
     }
 
-    public String getUID() {
+    public String getUid() {
         return uid;
     }
 
-    public void setUID(String uid) {
+    public void setUid(String uid) {
         this.uid = uid;
     }
 
@@ -51,5 +51,15 @@ public class User {
 
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "uid='" + uid + '\'' +
+                ", userName='" + userName + '\'' +
+                ", userImage='" + userImage + '\'' +
+                ", userEmail='" + userEmail + '\'' +
+                '}';
     }
 }
