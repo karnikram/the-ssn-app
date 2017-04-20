@@ -1,20 +1,15 @@
 package karnix.the.ssn.app.activity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-
-import com.andexert.library.RippleView;
 
 import karnix.the.ssn.app.Fragments.DatabaseHandler;
 import karnix.the.ssn.ssnmachan.R;
 
 public class BusResultActivity extends Activity {
-    private static final String DB_NAME = "seshadb3.sqlite3";
-    private static DatabaseHandler localDatabaseHandler;
-    private static RippleView rippleMessage, rippleInfo;
+    private DatabaseHandler localDatabaseHandler;
     private ListView localListView;
 
     private void loadBusNo(String paramString) {
@@ -37,7 +32,7 @@ public class BusResultActivity extends Activity {
     public void onCreate(Bundle paramBundle) {
         super.onCreate(paramBundle);
         requestWindowFeature(1);
-        setContentView(R.layout.bus_result);
+        setContentView(R.layout.activity_bus_result);
         Bundle localBundle = getIntent().getExtras();
         String checkValue = localBundle.getString("Value1").trim();
         String params = localBundle.getString("Value2").trim();
@@ -47,21 +42,5 @@ public class BusResultActivity extends Activity {
             return;
         }
         loadBusNo(params);
-
-        rippleMessage.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
-            @Override
-            public void onComplete(RippleView rippleView) {
-                startActivity(new Intent(BusResultActivity.this, MessageActivity.class));
-            }
-        });
-
-        rippleInfo.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
-            @Override
-            public void onComplete(RippleView rippleView) {
-                startActivity(new Intent(BusResultActivity.this, AboutActivity.class));
-            }
-        });
-
     }
-
 }

@@ -64,6 +64,13 @@ public class MainActivity extends AppCompatActivity {
                         if (drawerItem != null) {
                             flag = true;
                             switch ((int) drawerItem.getIdentifier()) {
+                                case 1:
+                                    break;
+                                case 2:
+                                    startActivity(new Intent(MainActivity.this, BusActivity.class));
+                                    break;
+                                case 3:
+                                    break;
                                 case 4:
                                     startActivity(new Intent(MainActivity.this, MessageActivity.class));
                                     break;
