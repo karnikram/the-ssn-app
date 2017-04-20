@@ -12,8 +12,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
+import karnix.the.ssn.app.utils.LogHelper;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
+    private static final String TAG = LogHelper.makeLogTag(DatabaseHandler.class);
+
     public static String DB_PATH;
     public final Context context;
     public SQLiteDatabase sqLiteDatabase;
@@ -146,6 +151,29 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         localCursor.close();
         localSQLiteDatabase.close();
         return this.mylistData1;
+    }
+
+    public List<List<String>> getMessMenu(String place, String day, String category) {
+        List<List<String>> menuList = new ArrayList<>();
+
+        Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM '" + place +
+                "' WHERE Day = '" + day + "' AND category = '" + category + "'", null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            List<String> itemDetails = new ArrayList<>();
+
+            itemDetails.add(cursor.getString(1));
+            itemDetails.add(cursor.getString(2));
+            itemDetails.add(cursor.getString(3));
+
+            menuList.add(itemDetails);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        getReadableDatabase().close();
+
+        return menuList;
     }
 }
 

@@ -1,5 +1,6 @@
 package karnix.the.ssn.app.activity.dining;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,14 +10,39 @@ import android.widget.TextView;
 import com.afollestad.sectionedrecyclerview.SectionedRecyclerViewAdapter;
 import com.afollestad.sectionedrecyclerview.SectionedViewHolder;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import karnix.the.ssn.app.model.DatabaseHandler;
+import karnix.the.ssn.app.utils.LogHelper;
 import karnix.the.ssn.ssnmachan.R;
 
 public class DiningMenuAdapter extends SectionedRecyclerViewAdapter<DiningMenuAdapter.DiningMenuViewHolder> {
+    private static final String TAG = LogHelper.makeLogTag(DiningMenuAdapter.class);
 
-    private String[] sections;
+    private Context context;
+    private String place;
+    private String day;
+    private List<List<String>> menuList, breakfastMenu, lunchMenu, snacksMenu, dinnerMenu;
+    private String[] sections = {"Breakfast", "Lunch", "Snacks", "Dinner"};
 
-    public DiningMenuAdapter(String[] sections) {
-        this.sections = sections;
+    public DiningMenuAdapter(Context context, String place, String day) {
+        this.context = context;
+        this.place = place;
+        this.day = day;
+
+        DatabaseHandler databaseHandler = new DatabaseHandler(context);
+        menuList = new ArrayList<>();
+
+        breakfastMenu = databaseHandler.getMessMenu(place, day, "Breakfast");
+        lunchMenu = databaseHandler.getMessMenu(place, day, "Lunch");
+        snacksMenu = databaseHandler.getMessMenu(place, day, "Snacks");
+        dinnerMenu = databaseHandler.getMessMenu(place, day, "Dinner");
+
+        menuList.addAll(breakfastMenu);
+        menuList.addAll(lunchMenu);
+        menuList.addAll(snacksMenu);
+        menuList.addAll(dinnerMenu);
     }
 
     @Override
@@ -27,8 +53,16 @@ public class DiningMenuAdapter extends SectionedRecyclerViewAdapter<DiningMenuAd
     @Override
     public int getItemCount(int section) {
         switch (section) {
+            case 0:
+                return breakfastMenu.size();
+            case 1:
+                return lunchMenu.size();
+            case 2:
+                return snacksMenu.size();
+            case 3:
+                return dinnerMenu.size();
             default:
-                return 4;
+                return 0;
         }
     }
 
@@ -41,7 +75,25 @@ public class DiningMenuAdapter extends SectionedRecyclerViewAdapter<DiningMenuAd
     @Override
     public void onBindViewHolder(DiningMenuViewHolder holder, int section,
                                  int relativePosition, int absolutePosition) {
-        holder.title.setText("Item " + absolutePosition);
+        List<List<String>> menuList = new ArrayList();
+        switch (section) {
+            case 0:
+                menuList.addAll(breakfastMenu);
+                break;
+            case 1:
+                menuList.addAll(lunchMenu);
+                break;
+            case 2:
+                menuList.addAll(snacksMenu);
+                break;
+            case 3:
+                menuList.addAll(dinnerMenu);
+                break;
+        }
+        holder.title.setText(menuList.get(relativePosition).get(0));
+        if (menuList.get(relativePosition).get(1).equals("Veg"))
+            holder.title.setTextColor(context.getResources().getColor(R.color.open));
+        else holder.title.setTextColor(context.getResources().getColor(R.color.close));
     }
 
     @Override

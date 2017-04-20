@@ -9,6 +9,7 @@
     <include layout="@layout/toolbar" />
 
     <android.support.v7.widget.CardView
+        android:id="@+id/cardView_diningMenu_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -17,6 +18,7 @@
         card_view:cardCornerRadius="8dp">
 
         <Spinner
+            android:id="@+id/spinner_diningMenu_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:entries="@array/dining_mess_categories"
@@ -25,7 +27,6 @@
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
-        android:id="@+id/cardview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="8dp"
@@ -39,7 +40,7 @@
             android:padding="10dp">
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/list"
+                android:id="@+id/recyclerView_diningMenu_items"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scrollbars="vertical" />
