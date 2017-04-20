@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import karnix.the.ssn.app.Fragments.DatabaseHandler;
+import karnix.the.ssn.app.model.DatabaseHandler;
 import karnix.the.ssn.ssnmachan.R;
 
 public class BusActivity extends AppCompatActivity {
@@ -25,7 +25,7 @@ public class BusActivity extends AppCompatActivity {
         Button areaSubmit = (Button) findViewById(R.id.area_submit);
         final EditText number = (EditText) findViewById(R.id.number);
         ArrayAdapter localAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,
-                new DatabaseHandler(this, "seshadb3.sqlite3").getAllLabels());
+                new DatabaseHandler(this).getAllLabels());
 
         final AutoCompleteTextView localAutoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.area);
         localAutoCompleteTextView.setThreshold(1);

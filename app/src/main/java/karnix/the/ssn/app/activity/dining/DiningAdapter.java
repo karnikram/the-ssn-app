@@ -1,4 +1,4 @@
-package karnix.the.ssn.app.Fragments;
+package karnix.the.ssn.app.activity.dining;
 
 import android.app.Activity;
 import android.content.Context;

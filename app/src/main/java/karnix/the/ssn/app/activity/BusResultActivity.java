@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-import karnix.the.ssn.app.Fragments.DatabaseHandler;
+import karnix.the.ssn.app.model.DatabaseHandler;
 import karnix.the.ssn.ssnmachan.R;
 
 public class BusResultActivity extends Activity {
@@ -16,7 +16,7 @@ public class BusResultActivity extends Activity {
         localListView = (ListView) findViewById(R.id.listView1);
         String[] arrayOfString = {"stop", "busno", "time"};
         int[] arrayOfInt = {R.id.stop, R.id.bus_no, R.id.time};
-        localDatabaseHandler = new DatabaseHandler(getApplicationContext(), "seshadb3.sqlite3");
+        localDatabaseHandler = new DatabaseHandler(getApplicationContext());
         localListView.setAdapter(new SimpleAdapter(this, localDatabaseHandler.searareaResu(paramString), R.layout.bus_list_item, arrayOfString, arrayOfInt));
     }
 
@@ -25,7 +25,7 @@ public class BusResultActivity extends Activity {
         int i = Integer.parseInt(paramString);
         String[] arrayOfString = {"stop", "busno", "time"};
         int[] arrayOfInt = {R.id.stop, R.id.bus_no, R.id.time};
-        localDatabaseHandler = new DatabaseHandler(getApplicationContext(), "seshadb3.sqlite3");
+        localDatabaseHandler = new DatabaseHandler(getApplicationContext());
         localListView.setAdapter(new SimpleAdapter(this, localDatabaseHandler.searResu(i), R.layout.bus_list_item, arrayOfString, arrayOfInt));
     }
 

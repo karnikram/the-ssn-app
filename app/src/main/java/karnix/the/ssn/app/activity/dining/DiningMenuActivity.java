@@ -1,17 +1,18 @@
 package karnix.the.ssn.app.activity.dining;
 
-import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import karnix.the.ssn.ssnmachan.R;
 
-public class DiningMenuActivity extends Activity {
+public class DiningMenuActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -28,6 +29,8 @@ public class DiningMenuActivity extends Activity {
 
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setTitle(place);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         String[] sections = {"Breakfast", "Lunch", "Snacks", "Dinner"};
 
@@ -36,5 +39,13 @@ public class DiningMenuActivity extends Activity {
         list.setLayoutManager(linearLayoutManager);
         diningMenuAdapter.shouldShowHeadersForEmptySections(false);
         list.setAdapter(diningMenuAdapter);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home)
+            onBackPressed();
+
+        return super.onOptionsItemSelected(item);
     }
 }

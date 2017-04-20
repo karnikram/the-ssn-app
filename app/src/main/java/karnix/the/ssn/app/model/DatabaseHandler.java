@@ -1,4 +1,4 @@
-package karnix.the.ssn.app.Fragments;
+package karnix.the.ssn.app.model;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -16,36 +16,28 @@ import java.util.HashMap;
 public class DatabaseHandler extends SQLiteOpenHelper {
     public static String DB_PATH;
     public final Context context;
-    public SQLiteDatabase database, localSQLiteDatabase1;
+    public SQLiteDatabase sqLiteDatabase;
     ArrayList<HashMap<String, String>> mylistData1 = new ArrayList();
-    int p = 0;
 
-    public DatabaseHandler(Context paramContext, String paramString) {
-        super(paramContext, paramString, null, 1);
-        this.context = paramContext;
-        DB_PATH = paramContext.getDatabasePath("seshadb3.sqlite3").toString();
+    public DatabaseHandler(Context context) {
+        super(context, "database", null, 1);
+        this.context = context;
+        DB_PATH = context.getDatabasePath("database").toString();
         openDataBase();
     }
 
     private boolean checkDataBase() {
         try {
-            SQLiteDatabase localSQLiteDatabase2 = SQLiteDatabase.openDatabase(DB_PATH, null, 1);
-            localSQLiteDatabase1 = localSQLiteDatabase2;
+            sqLiteDatabase = SQLiteDatabase.openDatabase(DB_PATH, null, 1);
         } catch (SQLException localSQLException) {
-
             Log.e(getClass().toString(), "Error while checking db");
-            SQLiteDatabase localSQLiteDatabase1 = null;
-
         }
-        if (localSQLiteDatabase1 != null) {
-            localSQLiteDatabase1.close();
-        }
-        return localSQLiteDatabase1 != null;
+        if (sqLiteDatabase != null) sqLiteDatabase.close();
+        return sqLiteDatabase != null;
     }
 
-    private void copyDataBase()
-            throws IOException {
-        InputStream localInputStream = this.context.getAssets().open("seshadb3.sqlite3");
+    private void copyDataBase() throws IOException {
+        InputStream localInputStream = this.context.getAssets().open("database");
         FileOutputStream localFileOutputStream = new FileOutputStream(DB_PATH);
         byte[] arrayOfByte = new byte[1024];
         for (; ; ) {
@@ -61,11 +53,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public void close() {
         try {
-            if (this.database != null) {
-                this.database.close();
-            }
+            if (this.sqLiteDatabase != null) this.sqLiteDatabase.close();
             super.close();
-            return;
         } finally {
         }
     }
@@ -78,14 +67,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 return;
             } catch (IOException localIOException) {
                 Log.e(getClass().toString(), "Copying error");
-                throw new Error("Error copying database!");
+                throw new Error("Error copying sqLiteDatabase!");
             }
         }
         Log.i(getClass().toString(), "Database already exists");
     }
 
     public String[] getAllLabels() {
-        Cursor localCursor = getReadableDatabase().rawQuery("SELECT  * FROM ssnbus", null);
+        Cursor localCursor = getReadableDatabase().rawQuery("SELECT  * FROM Bus", null);
         if (localCursor.getCount() > 0) {
             String[] arrayOfString = new String[localCursor.getCount()];
             for (int i = 0; ; i++) {
@@ -98,38 +87,30 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return new String[0];
     }
 
-    public SQLiteDatabase getDb() {
-        return this.database;
-    }
-
     public void onCreate(SQLiteDatabase paramSQLiteDatabase) {
     }
 
     public void onUpgrade(SQLiteDatabase paramSQLiteDatabase, int paramInt1, int paramInt2) {
     }
 
-    public SQLiteDatabase openDataBase()
-            throws SQLException {
-        String str = DB_PATH;
-        if (this.database == null) {
+    public void openDataBase() throws SQLException {
+        if (this.sqLiteDatabase == null) {
             createDataBase();
-            this.database = SQLiteDatabase.openDatabase(str, null, 0);
+            this.sqLiteDatabase = SQLiteDatabase.openDatabase(DB_PATH, null, 0);
         }
-        return this.database;
     }
 
     public ArrayList<HashMap<String, String>> searResu(int paramInt) {
-        String str = "SELECT  *from ssnbus where busno=" + paramInt;
+        String str = "SELECT  *from Bus where No=" + paramInt;
         SQLiteDatabase localSQLiteDatabase = getReadableDatabase();
         Cursor localCursor = localSQLiteDatabase.rawQuery(str, null);
         localCursor.moveToFirst();
-        HashMap localHashMap2 = null;
+        HashMap localHashMap2;
         while (!localCursor.isAfterLast()) {
             localHashMap2 = new HashMap();
             localHashMap2.put("stop", localCursor.getString(1));
             localHashMap2.put("busno", localCursor.getString(2));
-            this.p = localCursor.getString(3).length();
-            if (this.p != 3) {
+            if (localCursor.getString(3).length() != 3) {
                 localHashMap2.put("time", localCursor.getString(3) + "am");
             } else {
                 localHashMap2.put("time", localCursor.getString(3) + "0am");
@@ -146,15 +127,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public ArrayList<HashMap<String, String>> searareaResu(String paramString) {
         SQLiteDatabase localSQLiteDatabase = getReadableDatabase();
         String str = "'%" + paramString + "%'";
-        Cursor localCursor = localSQLiteDatabase.rawQuery("SELECT  *from ssnbus where stopname like" + str, null);
+        Cursor localCursor = localSQLiteDatabase.rawQuery("SELECT * from Bus where Stop like" + str, null);
         localCursor.moveToFirst();
-        HashMap localHashMap2 = null;
+        HashMap localHashMap2;
         while (!localCursor.isAfterLast()) {
             localHashMap2 = new HashMap();
             localHashMap2.put("stop", localCursor.getString(1));
             localHashMap2.put("busno", localCursor.getString(2));
-            this.p = localCursor.getString(3).length();
-            if (this.p != 3) {
+            if (localCursor.getString(3).length() != 3) {
                 localHashMap2.put("time", localCursor.getString(3) + "am");
             } else {
                 localHashMap2.put("time", localCursor.getString(3) + "0am");
@@ -166,8 +146,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         localCursor.close();
         localSQLiteDatabase.close();
         return this.mylistData1;
-
-
     }
 }
 
