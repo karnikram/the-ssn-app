@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
                                     startActivity(new Intent(MainActivity.this, BusActivity.class));
                                     break;
                                 case 3:
+                                    startActivity(new Intent(MainActivity.this, DiningActivity.class));
                                     break;
                                 case 4:
                                     startActivity(new Intent(MainActivity.this, MessageActivity.class));

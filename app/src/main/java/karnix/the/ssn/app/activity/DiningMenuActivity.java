@@ -1,12 +1,9 @@
 package karnix.the.ssn.app.activity;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.andexert.library.RippleView;
 import com.joanzapata.pdfview.PDFView;
 import com.joanzapata.pdfview.listener.OnPageChangeListener;
 
@@ -15,11 +12,9 @@ import java.util.Calendar;
 import karnix.the.ssn.ssnmachan.R;
 
 public class DiningMenuActivity extends Activity implements OnPageChangeListener {
-    private static int position;
-    private static TextView menu, pgNo;
-    private static PDFView pdfView;
-    private static Typeface advFont;
-    private static RippleView rippleInfo, rippleMessage;
+    private int position;
+    private TextView menu, pgNo;
+    private PDFView pdfView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,22 +25,7 @@ public class DiningMenuActivity extends Activity implements OnPageChangeListener
         pgNo = (TextView) findViewById(R.id.pg_no);
         position = getIntent().getIntExtra("position", 0);
         setMenu();
-
-        rippleMessage.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
-            @Override
-            public void onComplete(RippleView rippleView) {
-                startActivity(new Intent(DiningMenuActivity.this, MessageActivity.class));
-            }
-        });
-
-        rippleInfo.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
-            @Override
-            public void onComplete(RippleView rippleView) {
-                startActivity(new Intent(DiningMenuActivity.this, AboutActivity.class));
-            }
-        });
     }
-
 
     public void setMenu() {
         switch (position) {
@@ -102,9 +82,7 @@ public class DiningMenuActivity extends Activity implements OnPageChangeListener
                 menu.setText("Stores Menu");
                 break;
         }
-
     }
-
 
     public int dayPage() {
         switch (Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
