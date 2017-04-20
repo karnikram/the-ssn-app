@@ -24,7 +24,7 @@ public class DiningActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(new Intent(DiningActivity.this, DiningCategoryActivity.class)
+                startActivity(new Intent(DiningActivity.this, DiningMenuActivity.class)
                         .putExtra("place", options[position]));
             }
         });

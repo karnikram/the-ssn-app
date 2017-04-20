@@ -25,10 +25,9 @@ public class DiningMenuActivity extends Activity {
         ButterKnife.bind(this);
 
         String place = getIntent().getStringExtra("place");
-        String category = getIntent().getStringExtra("category");
 
         toolbar.setTitleTextColor(Color.WHITE);
-        toolbar.setTitle(place + " ->" + category);
+        toolbar.setTitle(place);
 
         String[] sections = {"Breakfast", "Lunch", "Snacks", "Dinner"};
 

@@ -11,7 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.View;
-import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -22,7 +21,6 @@ import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
-import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 import io.karim.MaterialTabs;
@@ -32,7 +30,6 @@ import karnix.the.ssn.app.activity.dining.DiningActivity;
 import karnix.the.ssn.ssnmachan.R;
 
 public class MainActivity extends AppCompatActivity {
-    private Button button;
     private Toolbar toolbar;
     private MaterialTabs tabs;
     private ViewPager pager;
@@ -67,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         AccountHeader accountHeader = new AccountHeaderBuilder().withActivity(this)
+                .withSelectionListEnabledForSingleProfile(false)
                 .withHeaderBackground(R.drawable.drawer_header)
                 .addProfiles(
                         new ProfileDrawerItem().withName(firebaseUser.getDisplayName())
@@ -75,20 +73,21 @@ public class MainActivity extends AppCompatActivity {
                 )
                 .build();
 
-        new DrawerBuilder()
+        Drawer drawer = new DrawerBuilder()
                 .withActivity(this)
                 .withToolbar(toolbar)
                 .withTranslucentStatusBar(false)
                 .withActionBarDrawerToggleAnimated(true)
                 .withAccountHeader(accountHeader)
+                .withTranslucentNavigationBar(true)
                 .addDrawerItems(
                         new PrimaryDrawerItem().withIdentifier(1).withName(getString(R.string.drawer_home)).withIcon(R.drawable.ic_home),
                         new DividerDrawerItem(),
                         new PrimaryDrawerItem().withIdentifier(2).withName(getString(R.string.drawer_buses)).withIcon(R.drawable.ic_bus),
                         new PrimaryDrawerItem().withIdentifier(3).withName(getString(R.string.drawer_dining)).withIcon(R.drawable.ic_dining),
                         new DividerDrawerItem(),
-                        new SecondaryDrawerItem().withIdentifier(4).withName(getString(R.string.drawer_message)).withIcon(R.drawable.ic_post_message),
-                        new SecondaryDrawerItem().withIdentifier(5).withName(getString(R.string.drawer_about)).withIcon(R.drawable.ic_about))
+                        new PrimaryDrawerItem().withIdentifier(4).withName(getString(R.string.drawer_message)).withIcon(R.drawable.ic_post_message),
+                        new PrimaryDrawerItem().withIdentifier(5).withName(getString(R.string.drawer_about)).withIcon(R.drawable.ic_about))
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
@@ -110,12 +109,19 @@ public class MainActivity extends AppCompatActivity {
                                 case 5:
                                     startActivity(new Intent(MainActivity.this, AboutActivity.class));
                                     break;
+                                case 6:
+                                    FirebaseAuth.getInstance().signOut();
+                                    startActivity(new Intent(MainActivity.this, MainActivity.class));
+                                    break;
                             }
                         }
                         return flag;
                     }
                 })
                 .build();
+
+        drawer.addStickyFooterItem(new PrimaryDrawerItem().withIdentifier(6)
+                .withName(getString(R.string.drawer_sign_out)).withIcon(R.drawable.ic_sign_out));
 
         adapter = new MyPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(adapter);
@@ -124,14 +130,6 @@ public class MainActivity extends AppCompatActivity {
                 .getDisplayMetrics());
         pager.setPageMargin(pageMargin);
         pager.setCurrentItem(1);
-
-        button = (Button) toolbar.findViewById(R.id.signOutButton);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-            }
-        });
     }
 
 
