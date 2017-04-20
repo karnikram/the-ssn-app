@@ -18,6 +18,16 @@
         <item>Stores/Canteen</item>
     </string-array>
 
+    <string-array name="dining_mess_categories">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
+
     <string name="application_id">FT5LiYFPZTttR7NKcp6EFYo6E5ht9HnuhimWlT84</string>
     <string name="client_key">aWVS52GVM6RFAzuC1sr51BnByMq0J9mA5ZVV1Coe</string>
 

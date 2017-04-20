@@ -18,12 +18,14 @@ public class DiningAdapter extends BaseAdapter {
     private String[] options;
     private Activity context;
     private Calendar calendar;
+    private boolean isCategory;
 
-    public DiningAdapter(Activity context, String[] options) {
+    public DiningAdapter(Activity context, String[] options, boolean isCategory) {
         super();
         this.options = options;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.context = context;
+        this.isCategory = isCategory;
         calendar = Calendar.getInstance();
     }
 
@@ -44,10 +46,15 @@ public class DiningAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View v = inflater.inflate(R.layout.dining_list_tem, parent, false);
+        View v = inflater.inflate(R.layout.item_dining, parent, false);
         TextView option = (TextView) v.findViewById(R.id.option);
         TextView open = (TextView) v.findViewById(R.id.open_time);
         option.setText(options[position]);
+
+        if (isCategory) {
+            open.setVisibility(View.GONE);
+            return v;
+        }
         if (!getImage(position)) {
             open.setText("Closed");
             open.setTextColor(context.getResources().getColor(R.color.close));

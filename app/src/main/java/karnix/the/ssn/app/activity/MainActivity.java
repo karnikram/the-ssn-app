@@ -28,6 +28,7 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import io.karim.MaterialTabs;
 import karnix.the.ssn.app.Fragments.AlertsFragment;
 import karnix.the.ssn.app.Fragments.NewsFeedFragment;
+import karnix.the.ssn.app.activity.dining.DiningActivity;
 import karnix.the.ssn.ssnmachan.R;
 
 public class MainActivity extends AppCompatActivity {
