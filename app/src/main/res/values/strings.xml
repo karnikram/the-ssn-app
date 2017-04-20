@@ -12,8 +12,6 @@
     <string name="drawer_about">About</string>
 
     <string-array name="dining_options">
-        <item>Cafe\' Coffee Day</item>
-        <item>Gurunath Eateries</item>
         <item>Ladies Mess</item>
         <item>PG Gents Mess</item>
         <item>UG Gents Mess</item>

@@ -8,8 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.andexert.library.RippleView;
-
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,7 +17,6 @@ import karnix.the.ssn.ssnmachan.R;
 public class AlertsActivity extends Activity {
     String title, content;
     TextView dispContent, dispNo1, dispNo2, dispUrl1, dispUrl2, dispTitle;
-    RippleView rippleMessage, rippleInfo;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,19 +36,6 @@ public class AlertsActivity extends Activity {
         dispUrls();
         dispNos();
         dispContent.setText(content);
-
-        rippleInfo.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
-            public void onComplete(RippleView rippleView) {
-                startActivity(new Intent(AlertsActivity.this, AboutActivity.class));
-            }
-        });
-
-        rippleMessage.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
-            @Override
-            public void onComplete(RippleView rippleView) {
-                startActivity(new Intent(AlertsActivity.this, MessageActivity.class));
-            }
-        });
 
         if (dispUrl1.getText() != "None") {
             dispUrl1.setOnClickListener(new View.OnClickListener() {
@@ -95,11 +79,9 @@ public class AlertsActivity extends Activity {
                 });
             }
         }
-
     }
 
     public void dispUrls() {
-
         ArrayList<String> urls = new FindUrls().extractUrls();
         if (urls.size() == 2) {
             dispUrl1.setText(urls.get(0));
@@ -112,7 +94,6 @@ public class AlertsActivity extends Activity {
             dispUrl1.setTextColor(this.getResources().getColor(R.color.secondaryTextColor));
             dispUrl2.setVisibility(View.INVISIBLE);
         }
-
     }
 
     public void dispNos() {
@@ -128,7 +109,6 @@ public class AlertsActivity extends Activity {
             dispNo1.setTextColor(this.getResources().getColor(R.color.secondaryTextColor));
             dispNo2.setVisibility(View.INVISIBLE);
         }
-
     }
 
     class FindUrls {
@@ -173,5 +153,4 @@ public class AlertsActivity extends Activity {
             return result;
         }
     }
-
 }

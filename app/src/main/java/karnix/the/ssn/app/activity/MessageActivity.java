@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dd.CircularProgressButton;
-import com.parse.ParseObject;
 
 import karnix.the.ssn.ssnmachan.R;
 
@@ -76,9 +75,6 @@ public class MessageActivity extends Activity {
                 circularButton.setProgress(-1);
             } else {
                 circularButton.setProgress(50);
-                ParseObject testObject = new ParseObject("Messages");
-                testObject.put("message", message);
-                testObject.saveInBackground();
                 Toast.makeText(this, "Message sent.", Toast.LENGTH_LONG).show();
                 circularButton.setProgress(100);
                 messageField.setText("");

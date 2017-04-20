@@ -30,8 +30,6 @@ public class Timings {
             d1.set(Calendar.MINUTE, 0);
             d2.set(Calendar.HOUR_OF_DAY, 20);
             d2.set(Calendar.MINUTE, 30);
-
-
         }
     }
 
@@ -62,8 +60,6 @@ public class Timings {
             d1.set(Calendar.MINUTE, 0);
             d2.set(Calendar.HOUR_OF_DAY, 20);
             d2.set(Calendar.MINUTE, 30);
-
-
         }
     }
 
@@ -126,8 +122,6 @@ public class Timings {
             d1.set(Calendar.MINUTE, 0);
             d2.set(Calendar.HOUR_OF_DAY, 20);
             d2.set(Calendar.MINUTE, 30);
-
-
         }
     }
 
@@ -162,46 +156,6 @@ public class Timings {
         }
     }
 
-
-    public static class ccd {
-        public static Calendar start = Calendar.getInstance();
-        public static Calendar end = Calendar.getInstance();
-
-        public static void init() {
-            start.set(Calendar.HOUR_OF_DAY, 8);
-            start.set(Calendar.MINUTE, 0);
-            end.set(Calendar.HOUR_OF_DAY, 20);
-            end.set(Calendar.MINUTE, 0);
-
-        }
-    }
-
-    public static class gurunath {
-        public static Calendar start = Calendar.getInstance();
-        public static Calendar end = Calendar.getInstance();
-
-        public static void init() {
-            start.set(Calendar.HOUR_OF_DAY, 7);
-            start.set(Calendar.MINUTE, 30);
-            end.set(Calendar.HOUR_OF_DAY, 20);
-            end.set(Calendar.MINUTE, 30);
-
-        }
-
-    }
-
-    public static class gurunathSun {
-        public static Calendar start = Calendar.getInstance();
-        public static Calendar end = Calendar.getInstance();
-
-        public static void init() {
-            start.set(Calendar.HOUR_OF_DAY, 10);
-            start.set(Calendar.MINUTE, 00);
-            end.set(Calendar.HOUR_OF_DAY, 20);
-            end.set(Calendar.MINUTE, 30);
-        }
-    }
-
     public static class canteen {
         public static Calendar start = Calendar.getInstance();
         public static Calendar end = Calendar.getInstance();
@@ -211,7 +165,6 @@ public class Timings {
             start.set(Calendar.MINUTE, 30);
             end.set(Calendar.HOUR_OF_DAY, 20);
             end.set(Calendar.MINUTE, 30);
-
         }
     }
 
@@ -224,7 +177,6 @@ public class Timings {
             start.set(Calendar.MINUTE, 30);
             end.set(Calendar.HOUR_OF_DAY, 20);
             end.set(Calendar.MINUTE, 30);
-
         }
     }
 }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backColor"
@@ -41,34 +40,4 @@
             android:textSize="14sp"
             android:textStyle="italic" />
     </FrameLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/cardview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="8dp"
-            android:elevation="50dp"
-            card_view:cardBackgroundColor="@android:color/white"
-            card_view:cardCornerRadius="8dp">
-
-            <FrameLayout
-                android:id="@+id/container_main_category_content"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#FFFFFF">
-
-                <com.joanzapata.pdfview.PDFView
-                    android:id="@+id/pdfview"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-            </FrameLayout>
-        </android.support.v7.widget.CardView>
-
-    </FrameLayout>
-
 </LinearLayout>
