@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -34,9 +33,12 @@ import io.karim.MaterialTabs;
 import karnix.the.ssn.app.Fragments.AlertsFragment;
 import karnix.the.ssn.app.Fragments.NewsFeedFragment;
 import karnix.the.ssn.app.activity.dining.DiningActivity;
+import karnix.the.ssn.app.utils.LogHelper;
 import karnix.the.ssn.ssnmachan.R;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = LogHelper.makeLogTag(MainActivity.class);
+
     private Toolbar toolbar;
     private MaterialTabs tabs;
     private ViewPager pager;
@@ -45,21 +47,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        FirebaseAuth.AuthStateListener authStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if (firebaseAuth.getCurrentUser() == null) {
-                    startActivity(new Intent(getApplicationContext(), GoogleSignInActivity.class));
-                }
-            }
-        };
-        FirebaseAuth.getInstance().addAuthStateListener(authStateListener);
-        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
-            startActivity(new Intent(getApplicationContext(), GoogleSignInActivity.class));
-            return;
-        }
-
         setContentView(R.layout.activity_main);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);

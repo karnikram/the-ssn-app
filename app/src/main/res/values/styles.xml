@@ -1,7 +1,13 @@
 <resources>
 
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryColorDark</item>
+        <item name="colorAccent">@color/accentColor</item>
+        <item name="android:windowBackground">@drawable/splashscreen</item>
+    </style>
+
     <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- ...and here we setting appcompat’s color theming attrs -->
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryColorDark</item>
         <item name="colorAccent">@color/accentColor</item>
