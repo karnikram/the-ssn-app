@@ -1,4 +1,4 @@
-package karnix.the.ssn.app.Fragments;
+package karnix.the.ssn.app.fragments;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,7 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import karnix.the.ssn.app.ViewHolder.PostViewHolder;
+import karnix.the.ssn.app.viewholder.PostViewHolder;
 import karnix.the.ssn.app.model.Post;
 import karnix.the.ssn.ssnmachan.R;
 

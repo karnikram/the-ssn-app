@@ -50,13 +50,13 @@
             android:layout_marginRight="10dp"
             android:text="Dec 9 at 15:34"
             android:textSize="13sp" />
+
         <Button
             android:id="@+id/postExamCellPDFButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="PDF"
             android:layout_below="@id/postExamCellDescription"
             android:background="@android:color/transparent"
-            />
+            android:text="PDF" />
     </RelativeLayout>
 </android.support.v7.widget.CardView>

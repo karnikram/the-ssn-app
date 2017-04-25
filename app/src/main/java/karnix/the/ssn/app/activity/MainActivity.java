@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -30,8 +31,8 @@ import com.mikepenz.materialdrawer.util.AbstractDrawerImageLoader;
 import com.mikepenz.materialdrawer.util.DrawerImageLoader;
 
 import io.karim.MaterialTabs;
-import karnix.the.ssn.app.Fragments.AlertsFragment;
-import karnix.the.ssn.app.Fragments.NewsFeedFragment;
+import karnix.the.ssn.app.fragments.AlertsFragment;
+import karnix.the.ssn.app.fragments.NewsFeedFragment;
 import karnix.the.ssn.app.activity.dining.DiningActivity;
 import karnix.the.ssn.app.utils.LogHelper;
 import karnix.the.ssn.ssnmachan.R;
@@ -92,14 +93,14 @@ public class MainActivity extends AppCompatActivity {
                 .withAccountHeader(accountHeader)
                 .withTranslucentNavigationBar(true)
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withIdentifier(1).withName(getString(R.string.drawer_home)).withIcon(R.drawable.ic_home),
+                        new PrimaryDrawerItem().withIdentifier(1).withName(getString(R.string.drawer_home)).withIcon(GoogleMaterial.Icon.gmd_home),
                         new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withIdentifier(2).withName(getString(R.string.drawer_buses)).withIcon(R.drawable.ic_bus),
-                        new PrimaryDrawerItem().withIdentifier(3).withName(getString(R.string.drawer_dining)).withIcon(R.drawable.ic_dining),
-                        new PrimaryDrawerItem().withIdentifier(4).withName(getString(R.string.drawer_exam_cell)).withIcon(R.drawable.ic_assignment_black_24dp),
+                        new PrimaryDrawerItem().withIdentifier(2).withName(getString(R.string.drawer_buses)).withIcon(GoogleMaterial.Icon.gmd_directions_bus),
+                        new PrimaryDrawerItem().withIdentifier(3).withName(getString(R.string.drawer_dining)).withIcon(GoogleMaterial.Icon.gmd_local_dining),
+                        new PrimaryDrawerItem().withIdentifier(4).withName(getString(R.string.drawer_exam_cell)).withIcon(GoogleMaterial.Icon.gmd_assignment),
                         new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withIdentifier(5).withName(getString(R.string.drawer_message)).withIcon(R.drawable.ic_post_message),
-                        new PrimaryDrawerItem().withIdentifier(6).withName(getString(R.string.drawer_about)).withIcon(R.drawable.ic_about))
+                        new PrimaryDrawerItem().withIdentifier(5).withName(getString(R.string.drawer_message)).withIcon(GoogleMaterial.Icon.gmd_message),
+                        new PrimaryDrawerItem().withIdentifier(6).withName(getString(R.string.drawer_about)).withIcon(GoogleMaterial.Icon.gmd_info))
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
@@ -136,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         drawer.addStickyFooterItem(new PrimaryDrawerItem().withIdentifier(7)
-                .withName(getString(R.string.drawer_sign_out)).withIcon(R.drawable.ic_sign_out));
+                .withName(getString(R.string.drawer_sign_out)).withIcon(GoogleMaterial.Icon.gmd_exit_to_app));
 
         adapter = new MyPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(adapter);

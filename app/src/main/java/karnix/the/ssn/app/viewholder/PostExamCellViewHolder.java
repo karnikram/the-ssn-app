@@ -1,7 +1,5 @@
-package karnix.the.ssn.app.ViewHolder;
+package karnix.the.ssn.app.viewholder;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -20,10 +18,10 @@ import karnix.the.ssn.ssnmachan.R;
  */
 
 public class PostExamCellViewHolder extends RecyclerView.ViewHolder {
+    public final Button mPDFButton;
     private final TextView mNameField;
     private final TextView mPostDate;
     private final TextView mPostContent;
-    public final Button mPDFButton;
     private final CircleImageView mPostUserImageURL;
 
     public PostExamCellViewHolder(View itemView) {

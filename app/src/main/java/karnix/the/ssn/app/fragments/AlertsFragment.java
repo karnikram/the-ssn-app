@@ -1,4 +1,4 @@
-package karnix.the.ssn.app.Fragments;
+package karnix.the.ssn.app.fragments;
 
 import android.content.Context;
 import android.content.Intent;

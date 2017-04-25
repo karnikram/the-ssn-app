@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="karnix.the.ssn.app.Fragments.NewsFeedFragment">
+    tools:context="karnix.the.ssn.app.fragments.NewsFeedFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
