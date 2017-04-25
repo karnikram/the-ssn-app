@@ -1,14 +1,20 @@
 package karnix.the.ssn.app.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import karnix.the.ssn.app.model.DatabaseHandler;
 import karnix.the.ssn.ssnmachan.R;
 
-public class BusResultActivity extends Activity {
+public class BusResultActivity extends BaseActivity {
+
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
     private DatabaseHandler localDatabaseHandler;
     private ListView localListView;
 
@@ -33,6 +39,12 @@ public class BusResultActivity extends Activity {
         super.onCreate(paramBundle);
         requestWindowFeature(1);
         setContentView(R.layout.activity_bus_result);
+        ButterKnife.bind(this);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         Bundle localBundle = getIntent().getExtras();
         String checkValue = localBundle.getString("Value1").trim();
         String params = localBundle.getString("Value2").trim();

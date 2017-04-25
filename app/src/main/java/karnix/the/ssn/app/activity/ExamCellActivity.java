@@ -3,11 +3,9 @@ package karnix.the.ssn.app.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,12 +17,12 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import karnix.the.ssn.app.viewholder.PostExamCellViewHolder;
 import karnix.the.ssn.app.model.ExamCellPost;
 import karnix.the.ssn.app.model.Post;
+import karnix.the.ssn.app.viewholder.PostExamCellViewHolder;
 import karnix.the.ssn.ssnmachan.R;
 
-public class ExamCellActivity extends AppCompatActivity {
+public class ExamCellActivity extends BaseActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -89,13 +87,5 @@ public class ExamCellActivity extends AppCompatActivity {
                 editText.setText("");
             }
         });
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home)
-            onBackPressed();
-
-        return super.onOptionsItemSelected(item);
     }
 }

@@ -1,10 +1,10 @@
 package karnix.the.ssn.app.activity;
 
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
@@ -12,16 +12,27 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import karnix.the.ssn.ssnmachan.R;
 
-public class AlertsActivity extends Activity {
+public class AlertsActivity extends BaseActivity {
     String title, content;
     TextView dispContent, dispNo1, dispNo2, dispUrl1, dispUrl2, dispTitle;
+
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.alerts_activity);
+        ButterKnife.bind(this);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         dispTitle = (TextView) findViewById(R.id.alert_title);
         dispContent = (TextView) findViewById(R.id.content_activity);
         dispNo1 = (TextView) findViewById(R.id.content_contact1);
