@@ -5,9 +5,6 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -31,9 +28,8 @@ import com.mikepenz.materialdrawer.util.AbstractDrawerImageLoader;
 import com.mikepenz.materialdrawer.util.DrawerImageLoader;
 
 import io.karim.MaterialTabs;
-import karnix.the.ssn.app.fragments.AlertsFragment;
-import karnix.the.ssn.app.fragments.NewsFeedFragment;
 import karnix.the.ssn.app.activity.dining.DiningActivity;
+import karnix.the.ssn.app.adapters.MainActivityPagerAdapter;
 import karnix.the.ssn.app.utils.LogHelper;
 import karnix.the.ssn.ssnmachan.R;
 
@@ -43,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private MaterialTabs tabs;
     private ViewPager pager;
-    private MyPagerAdapter adapter;
+    private MainActivityPagerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,49 +135,12 @@ public class MainActivity extends AppCompatActivity {
         drawer.addStickyFooterItem(new PrimaryDrawerItem().withIdentifier(7)
                 .withName(getString(R.string.drawer_sign_out)).withIcon(GoogleMaterial.Icon.gmd_exit_to_app));
 
-        adapter = new MyPagerAdapter(getSupportFragmentManager());
+        adapter = new MainActivityPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(adapter);
         tabs.setViewPager(pager);
         final int pageMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources()
                 .getDisplayMetrics());
         pager.setPageMargin(pageMargin);
         pager.setCurrentItem(1);
-    }
-
-
-    public class MyPagerAdapter extends FragmentPagerAdapter {
-
-        private final String[] TITLES = {"ADMIN", "CLUBS", "DEPARTMENT"};
-
-        public MyPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return TITLES[position];
-        }
-
-        @Override
-        public int getCount() {
-            return TITLES.length;
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            Fragment f = null;
-            switch (position) {
-                case 0:
-                    f = AlertsFragment.newInstance();
-                    break;
-                case 1:
-                    f = AlertsFragment.newInstance();
-                    break;
-                case 2:
-                    f = new NewsFeedFragment();
-                    break;
-            }
-            return f;
-        }
     }
 }
