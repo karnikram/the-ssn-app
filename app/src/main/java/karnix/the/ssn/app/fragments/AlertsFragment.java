@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -33,8 +34,10 @@ public class AlertsFragment extends Fragment {
 
     @BindView(R.id.postsRecyclerView)
     RecyclerView postsRecyclerView;
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
 
-    Unbinder unbinder;
+    private Unbinder unbinder;
 
     public AlertsFragment() {
         // Required empty public constructor
@@ -47,7 +50,7 @@ public class AlertsFragment extends Fragment {
 
         final String type = getArguments().getString("type");
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setStackFromEnd(true);
         layoutManager.setReverseLayout(true);
 
@@ -65,6 +68,8 @@ public class AlertsFragment extends Fragment {
                 WebConsolePost post = dataSnapshot.getValue(WebConsolePost.class);
                 postList.add(post);
                 postAdapter.notifyDataSetChanged();
+                layoutManager.scrollToPositionWithOffset(postList.size() - 1, 0);
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override

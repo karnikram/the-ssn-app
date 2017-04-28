@@ -44,7 +44,7 @@
         <activity android:name="karnix.the.ssn.app.activity.BusActivity" />
         <activity android:name="karnix.the.ssn.app.activity.BusResultActivity" />
 
-        <activity android:name="karnix.the.ssn.app.activity.AlertsActivity">
+        <activity android:name="karnix.the.ssn.app.activity.AlertDetailActivity">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

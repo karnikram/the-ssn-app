@@ -26,11 +26,13 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import karnix.the.ssn.app.activity.AlertsActivity;
+import karnix.the.ssn.app.activity.AlertDetailActivity;
 import karnix.the.ssn.app.model.WebConsolePost;
 import karnix.the.ssn.ssnmachan.R;
 
@@ -71,9 +73,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         viewHolder.postLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, AlertsActivity.class);
-                intent.putExtra("title", post.getTitle());
-                intent.putExtra("content", post.getDescription());
+                Intent intent = new Intent(context, AlertDetailActivity.class);
+                intent.putExtra("post", new Gson().toJson(post));
                 context.startActivity(intent);
             }
         });

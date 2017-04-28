@@ -8,25 +8,28 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import karnix.the.ssn.app.model.WebConsolePost;
 import karnix.the.ssn.ssnmachan.R;
 
-public class AlertsActivity extends BaseActivity {
-    String title, content;
-    TextView dispContent, dispNo1, dispNo2, dispUrl1, dispUrl2, dispTitle;
-
+public class AlertDetailActivity extends BaseActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    private String title, content;
+    private TextView dispContent, dispNo1, dispNo2, dispUrl1, dispUrl2, dispTitle;
+    private WebConsolePost post;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.alerts_activity);
+        setContentView(R.layout.activity_alert_details);
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
@@ -40,8 +43,9 @@ public class AlertsActivity extends BaseActivity {
         dispUrl2 = (TextView) findViewById(R.id.content_url2);
         dispUrl1 = (TextView) findViewById(R.id.content_url1);
 
-        title = getIntent().getStringExtra("title");
-        content = getIntent().getStringExtra("content");
+        post = new Gson().fromJson(getIntent().getStringExtra("post"), WebConsolePost.class);
+        title = post.getTitle();
+        content = post.getDescription();
 
         dispTitle.setText(title);
         dispUrls();
@@ -94,6 +98,7 @@ public class AlertsActivity extends BaseActivity {
 
     public void dispUrls() {
         ArrayList<String> urls = new FindUrls().extractUrls();
+        urls.add(post.getFileURL());
         if (urls.size() == 2) {
             dispUrl1.setText(urls.get(0));
             dispUrl2.setText(urls.get(1));
@@ -109,6 +114,7 @@ public class AlertsActivity extends BaseActivity {
 
     public void dispNos() {
         ArrayList<String> nos = new FindContactNos().extractNo();
+        nos.add(post.getContactno());
         if (nos.size() == 2) {
             dispNo1.setText(nos.get(0));
             dispNo2.setText(nos.get(1));
