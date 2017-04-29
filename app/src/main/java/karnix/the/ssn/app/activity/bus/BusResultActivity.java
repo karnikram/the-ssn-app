@@ -1,4 +1,4 @@
-package karnix.the.ssn.app.activity;
+package karnix.the.ssn.app.activity.bus;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -7,6 +7,7 @@ import android.widget.SimpleAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import karnix.the.ssn.app.activity.BaseActivity;
 import karnix.the.ssn.app.model.DatabaseHandler;
 import karnix.the.ssn.ssnmachan.R;
 

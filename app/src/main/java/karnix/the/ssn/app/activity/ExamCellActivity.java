@@ -17,8 +17,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import karnix.the.ssn.app.model.ExamCellPost;
-import karnix.the.ssn.app.model.Post;
+import karnix.the.ssn.app.model.posts.ExamCellPost;
+import karnix.the.ssn.app.model.posts.Post;
 import karnix.the.ssn.app.viewholder.PostExamCellViewHolder;
 import karnix.the.ssn.ssnmachan.R;
 

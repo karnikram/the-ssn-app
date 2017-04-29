@@ -1,4 +1,4 @@
-package karnix.the.ssn.app.activity;
+package karnix.the.ssn.app.activity.alerts;
 
 
 import android.content.Intent;
@@ -19,7 +19,8 @@ import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import karnix.the.ssn.app.model.WebConsolePost;
+import karnix.the.ssn.app.activity.BaseActivity;
+import karnix.the.ssn.app.model.posts.WebConsolePost;
 import karnix.the.ssn.app.utils.LogHelper;
 import karnix.the.ssn.ssnmachan.R;
 

@@ -1,4 +1,4 @@
-package karnix.the.ssn.app.fragments;
+package karnix.the.ssn.app.activity.alerts;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import karnix.the.ssn.app.adapters.PostAdapter;
 import karnix.the.ssn.app.model.Node;
-import karnix.the.ssn.app.model.WebConsolePost;
+import karnix.the.ssn.app.model.posts.WebConsolePost;
 import karnix.the.ssn.app.utils.LogHelper;
 import karnix.the.ssn.ssnmachan.R;
 

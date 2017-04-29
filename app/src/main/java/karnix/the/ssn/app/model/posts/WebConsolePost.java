@@ -1,4 +1,4 @@
-package karnix.the.ssn.app.model;
+package karnix.the.ssn.app.model.posts;
 
 public class WebConsolePost {
 

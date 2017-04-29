@@ -32,8 +32,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import karnix.the.ssn.app.activity.AlertDetailActivity;
-import karnix.the.ssn.app.model.WebConsolePost;
+import karnix.the.ssn.app.activity.alerts.AlertDetailActivity;
+import karnix.the.ssn.app.model.posts.WebConsolePost;
 import karnix.the.ssn.ssnmachan.R;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {

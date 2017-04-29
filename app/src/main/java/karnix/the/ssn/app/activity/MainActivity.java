@@ -28,6 +28,7 @@ import com.mikepenz.materialdrawer.util.AbstractDrawerImageLoader;
 import com.mikepenz.materialdrawer.util.DrawerImageLoader;
 
 import io.karim.MaterialTabs;
+import karnix.the.ssn.app.activity.bus.BusActivity;
 import karnix.the.ssn.app.activity.dining.DiningActivity;
 import karnix.the.ssn.app.adapters.MainActivityPagerAdapter;
 import karnix.the.ssn.app.utils.LogHelper;
@@ -89,7 +90,8 @@ public class MainActivity extends AppCompatActivity {
                 .withAccountHeader(accountHeader)
                 .withTranslucentNavigationBar(true)
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withIdentifier(1).withName(getString(R.string.drawer_home)).withIcon(GoogleMaterial.Icon.gmd_home),
+                        new PrimaryDrawerItem().withIdentifier(0).withName(getString(R.string.drawer_home)).withIcon(GoogleMaterial.Icon.gmd_home),
+                        new PrimaryDrawerItem().withIdentifier(1).withName(getString(R.string.drawer_feed)).withIcon(GoogleMaterial.Icon.gmd_rss_feed),
                         new DividerDrawerItem(),
                         new PrimaryDrawerItem().withIdentifier(2).withName(getString(R.string.drawer_buses)).withIcon(GoogleMaterial.Icon.gmd_directions_bus),
                         new PrimaryDrawerItem().withIdentifier(3).withName(getString(R.string.drawer_dining)).withIcon(GoogleMaterial.Icon.gmd_local_dining),
@@ -105,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
                             flag = true;
                             switch ((int) drawerItem.getIdentifier()) {
                                 case 1:
+                                    startActivity(new Intent(MainActivity.this, NewsFeedActivity.class));
                                     break;
                                 case 2:
                                     startActivity(new Intent(MainActivity.this, BusActivity.class));

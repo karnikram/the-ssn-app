@@ -4,6 +4,7 @@
     <string name="temp">Karnix</string>
 
     <string name="drawer_home">Home</string>
+    <string name="drawer_feed">News Feed</string>
     <string name="drawer_buses">Buses</string>
     <string name="drawer_dining">Dining</string>
     <string name="drawer_exam_cell">Exam Cell</string>

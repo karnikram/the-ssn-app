@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import karnix.the.ssn.app.fragments.AlertsFragment;
+import karnix.the.ssn.app.activity.alerts.AlertsFragment;
 
 public class MainActivityPagerAdapter extends FragmentPagerAdapter {
 
