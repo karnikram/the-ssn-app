@@ -4,13 +4,14 @@
     <string name="temp">Karnix</string>
 
     <string name="drawer_home">Home</string>
-    <string name="drawer_feed">News Feed</string>
     <string name="drawer_buses">Buses</string>
     <string name="drawer_dining">Dining</string>
     <string name="drawer_exam_cell">Exam Cell</string>
     <string name="drawer_message">Post Message</string>
     <string name="drawer_about">About</string>
     <string name="drawer_sign_out">Sign Out</string>
+
+    <string name="action_feed">News Feed</string>
 
     <string-array name="dining_options">
         <item>Ladies Mess</item>

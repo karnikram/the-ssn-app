@@ -9,6 +9,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -91,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
                 .withTranslucentNavigationBar(true)
                 .addDrawerItems(
                         new PrimaryDrawerItem().withIdentifier(0).withName(getString(R.string.drawer_home)).withIcon(GoogleMaterial.Icon.gmd_home),
-                        new PrimaryDrawerItem().withIdentifier(1).withName(getString(R.string.drawer_feed)).withIcon(GoogleMaterial.Icon.gmd_rss_feed),
                         new DividerDrawerItem(),
                         new PrimaryDrawerItem().withIdentifier(2).withName(getString(R.string.drawer_buses)).withIcon(GoogleMaterial.Icon.gmd_directions_bus),
                         new PrimaryDrawerItem().withIdentifier(3).withName(getString(R.string.drawer_dining)).withIcon(GoogleMaterial.Icon.gmd_local_dining),
@@ -106,8 +107,7 @@ public class MainActivity extends AppCompatActivity {
                         if (drawerItem != null) {
                             flag = true;
                             switch ((int) drawerItem.getIdentifier()) {
-                                case 1:
-                                    startActivity(new Intent(MainActivity.this, NewsFeedActivity.class));
+                                case 0:
                                     break;
                                 case 2:
                                     startActivity(new Intent(MainActivity.this, BusActivity.class));
@@ -145,5 +145,20 @@ public class MainActivity extends AppCompatActivity {
                 .getDisplayMetrics());
         pager.setPageMargin(pageMargin);
         pager.setCurrentItem(1);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_feed) {
+            startActivity(new Intent(MainActivity.this, NewsFeedActivity.class));
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
