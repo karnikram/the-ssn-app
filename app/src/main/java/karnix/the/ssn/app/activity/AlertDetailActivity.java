@@ -20,9 +20,11 @@ import java.util.regex.Pattern;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import karnix.the.ssn.app.model.WebConsolePost;
+import karnix.the.ssn.app.utils.LogHelper;
 import karnix.the.ssn.ssnmachan.R;
 
 public class AlertDetailActivity extends BaseActivity {
+    private static final String TAG = LogHelper.makeLogTag(AlertDetailActivity.class);
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -32,7 +34,7 @@ public class AlertDetailActivity extends BaseActivity {
     @BindView(R.id.post_imageView)
     ImageView postImageView;
 
-    private String title, content;
+    private String title, content, fileName;
     private TextView dispContent, dispNo1, dispNo2, dispUrl1, dispUrl2, dispTitle;
     private WebConsolePost post;
 
@@ -68,27 +70,30 @@ public class AlertDetailActivity extends BaseActivity {
 
         dispContent.setText(content);
 
+        if (!post.getFileURL().equals("")) {
+            Glide.with(this).load(post.getFileURL()).into(postImageView);
+
+            fileName = URLUtil.guessFileName(post.getFileURL(), null, null);
+            if (fileName.equals("downloadfile.bin")) {
+                links.add(post.getFileURL());
+            } else {
+                links.add(fileName);
+            }
+            dispUrls();
+        }
+
         if (dispUrl1.getText() != "None") {
             dispUrl1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (!dispUrl1.getText().toString().startsWith("http://") && !dispUrl1.getText().toString().startsWith("https://")) {
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://" + dispUrl1.getText().toString().trim())));
-                    } else {
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(dispUrl1.getText().toString().trim())));
-                    }
-
+                    startUrlIntent(dispUrl1.getText().toString());
                 }
             });
             if (dispUrl2.getVisibility() != View.INVISIBLE) {
                 dispUrl2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (!dispUrl2.getText().toString().startsWith("http://") && !dispUrl2.getText().toString().startsWith("https://")) {
-                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://" + dispUrl2.getText().toString().trim())));
-                        } else {
-                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(dispUrl1.getText().toString().trim())));
-                        }
+                        startUrlIntent(dispUrl2.getText().toString());
                     }
                 });
             }
@@ -121,18 +126,6 @@ public class AlertDetailActivity extends BaseActivity {
                     startActivity(Intent.createChooser(emailIntent, "Send Email"));
                 }
             });
-        }
-
-        if (!post.getFileURL().equals("")) {
-            Glide.with(this).load(post.getFileURL()).into(postImageView);
-            
-            String fileName = URLUtil.guessFileName(post.getFileURL(), null, null);
-            if (fileName.equals("downloadfile.bin")) {
-                links.add(post.getFileURL());
-            } else {
-                links.add(fileName);
-            }
-            dispUrls();
         }
     }
 
@@ -202,5 +195,18 @@ public class AlertDetailActivity extends BaseActivity {
         }
 
         return result;
+    }
+
+    private void startUrlIntent(String textViewString) {
+        if (textViewString.equals(fileName)) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(post.getFileURL())));
+            return;
+        }
+
+        if (!textViewString.startsWith("http://") && !textViewString.startsWith("https://")) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://" + textViewString.trim())));
+        } else {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(textViewString.trim())));
+        }
     }
 }
