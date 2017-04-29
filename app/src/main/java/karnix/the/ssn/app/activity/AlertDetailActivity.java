@@ -6,8 +6,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.webkit.URLUtil;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -20,11 +23,20 @@ import karnix.the.ssn.app.model.WebConsolePost;
 import karnix.the.ssn.ssnmachan.R;
 
 public class AlertDetailActivity extends BaseActivity {
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+
+    @BindView(R.id.content_email1)
+    TextView contentEmail1;
+    @BindView(R.id.post_imageView)
+    ImageView postImageView;
+
     private String title, content;
     private TextView dispContent, dispNo1, dispNo2, dispUrl1, dispUrl2, dispTitle;
     private WebConsolePost post;
+
+    private ArrayList<String> links, contactNumberList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,8 +60,12 @@ public class AlertDetailActivity extends BaseActivity {
         content = post.getDescription();
 
         dispTitle.setText(title);
+
+        links = extractUrls();
+        contactNumberList = extractNumbers();
         dispUrls();
         dispNos();
+
         dispContent.setText(content);
 
         if (dispUrl1.getText() != "None") {
@@ -94,32 +110,54 @@ public class AlertDetailActivity extends BaseActivity {
                 });
             }
         }
+
+        if (!post.getEmail().equals("")) {
+            contentEmail1.setText(post.getEmail());
+            contentEmail1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent emailIntent = new Intent(Intent.ACTION_SENDTO,
+                            Uri.parse("mailto:" + post.getEmail()));
+                    startActivity(Intent.createChooser(emailIntent, "Send Email"));
+                }
+            });
+        }
+
+        if (!post.getFileURL().equals("")) {
+            Glide.with(this).load(post.getFileURL()).into(postImageView);
+            
+            String fileName = URLUtil.guessFileName(post.getFileURL(), null, null);
+            if (fileName.equals("downloadfile.bin")) {
+                links.add(post.getFileURL());
+            } else {
+                links.add(fileName);
+            }
+            dispUrls();
+        }
     }
 
-    public void dispUrls() {
-        ArrayList<String> urls = new FindUrls().extractUrls();
-        urls.add(post.getFileURL());
-        if (urls.size() == 2) {
-            dispUrl1.setText(urls.get(0));
-            dispUrl2.setText(urls.get(1));
-        } else if (urls.size() == 1) {
-            dispUrl1.setText(urls.get(0));
+    private void dispUrls() {
+        if (links.size() == 2) {
+            dispUrl1.setText(links.get(0));
+            dispUrl2.setText(links.get(1));
+        } else if (links.size() == 1) {
+            dispUrl1.setText(links.get(0));
             dispUrl2.setVisibility(View.INVISIBLE);
         } else {
             dispUrl1.setText("None");
-            dispUrl1.setTextColor(this.getResources().getColor(R.color.secondaryTextColor));
             dispUrl2.setVisibility(View.INVISIBLE);
         }
     }
 
-    public void dispNos() {
-        ArrayList<String> nos = new FindContactNos().extractNo();
-        nos.add(post.getContactno());
-        if (nos.size() == 2) {
-            dispNo1.setText(nos.get(0));
-            dispNo2.setText(nos.get(1));
-        } else if (nos.size() == 1) {
-            dispNo1.setText(nos.get(0));
+    private void dispNos() {
+        if (!post.getContactno().equals("")) {
+            contactNumberList.add(post.getContactno());
+        }
+        if (contactNumberList.size() == 2) {
+            dispNo1.setText(contactNumberList.get(0));
+            dispNo2.setText(contactNumberList.get(1));
+        } else if (contactNumberList.size() == 1) {
+            dispNo1.setText(contactNumberList.get(0));
             dispNo2.setVisibility(View.INVISIBLE);
         } else {
             dispNo1.setText("None");
@@ -128,46 +166,41 @@ public class AlertDetailActivity extends BaseActivity {
         }
     }
 
-    class FindUrls {
-        public ArrayList<String> extractUrls() {
-            ArrayList<String> result = new ArrayList<String>();
+    private ArrayList<String> extractUrls() {
+        ArrayList<String> result = new ArrayList<String>();
 
-            Pattern pattern = Pattern.compile(
-                    "\\b(((ht|f)tp(s?)\\:\\/\\/|~\\/|\\/)|www.)" +
-                            "(\\w+:\\w+@)?(([-\\w]+\\.)+(com|org|net|gov|co|in" +
-                            "|mil|biz|info|mobi|name|aero|jobs|museum" +
-                            "|travel|[a-z]{2}))(:[\\d]{1,5})?" +
-                            "(((\\/([-\\w~!$+|.,=]|%[a-f\\d]{2})+)+|\\/)+|\\?|#)?" +
-                            "((\\?([-\\w~!$+|.,*:]|%[a-f\\d{2}])+=?" +
-                            "([-\\w~!$+|.,*:=]|%[a-f\\d]{2})*)" +
-                            "(&(?:[-\\w~!$+|.,*:]|%[a-f\\d{2}])+=?" +
-                            "([-\\w~!$+|.,*:=]|%[a-f\\d]{2})*)*)*" +
-                            "(#([-\\w~!$+|.,*:=]|%[a-f\\d]{2})*)?\\b");
+        Pattern pattern = Pattern.compile(
+                "\\b(((ht|f)tp(s?)\\:\\/\\/|~\\/|\\/)|www.)" +
+                        "(\\w+:\\w+@)?(([-\\w]+\\.)+(com|org|net|gov|co|in" +
+                        "|mil|biz|info|mobi|name|aero|jobs|museum" +
+                        "|travel|[a-z]{2}))(:[\\d]{1,5})?" +
+                        "(((\\/([-\\w~!$+|.,=]|%[a-f\\d]{2})+)+|\\/)+|\\?|#)?" +
+                        "((\\?([-\\w~!$+|.,*:]|%[a-f\\d{2}])+=?" +
+                        "([-\\w~!$+|.,*:=]|%[a-f\\d]{2})*)" +
+                        "(&(?:[-\\w~!$+|.,*:]|%[a-f\\d{2}])+=?" +
+                        "([-\\w~!$+|.,*:=]|%[a-f\\d]{2})*)*)*" +
+                        "(#([-\\w~!$+|.,*:=]|%[a-f\\d]{2})*)?\\b");
 
-            Matcher matcher = pattern.matcher(content);
-            while (matcher.find()) {
-                result.add(matcher.group());
-                content = content.replace(matcher.group(), "");
-            }
-            return result;
+        Matcher matcher = pattern.matcher(content);
+        while (matcher.find()) {
+            result.add(matcher.group());
+            content = content.replace(matcher.group(), "");
         }
+        return result;
     }
 
-    class FindContactNos {
+    private ArrayList<String> extractNumbers() {
         ArrayList<String> result = new ArrayList<>();
-
-        public ArrayList<String> extractNo() {
-            Pattern pattern = Pattern.compile("[0-9]+");
-            Matcher matcher = pattern.matcher(content);
-            while (matcher.find()) {
-                String no = matcher.group();
-                if (no.length() >= 10) {
-                    result.add(no);
-                    content = content.replace(matcher.group(), "");
-                }
+        Pattern pattern = Pattern.compile("[0-9]+");
+        Matcher matcher = pattern.matcher(content);
+        while (matcher.find()) {
+            String no = matcher.group();
+            if (no.length() >= 10) {
+                result.add(no);
+                content = content.replace(matcher.group(), "");
             }
-
-            return result;
         }
+
+        return result;
     }
 }

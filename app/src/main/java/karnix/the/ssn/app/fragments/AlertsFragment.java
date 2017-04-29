@@ -69,7 +69,9 @@ public class AlertsFragment extends Fragment {
                 postList.add(post);
                 postAdapter.notifyDataSetChanged();
                 layoutManager.scrollToPositionWithOffset(postList.size() - 1, 0);
-                progressBar.setVisibility(View.GONE);
+                if (progressBar != null) {
+                    progressBar.setVisibility(View.GONE);
+                }
             }
 
             @Override
