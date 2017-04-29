@@ -5,13 +5,12 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -31,9 +30,9 @@ import com.mikepenz.materialdrawer.util.AbstractDrawerImageLoader;
 import com.mikepenz.materialdrawer.util.DrawerImageLoader;
 
 import io.karim.MaterialTabs;
-import karnix.the.ssn.app.fragments.AlertsFragment;
-import karnix.the.ssn.app.fragments.NewsFeedFragment;
+import karnix.the.ssn.app.activity.bus.BusActivity;
 import karnix.the.ssn.app.activity.dining.DiningActivity;
+import karnix.the.ssn.app.adapters.MainActivityPagerAdapter;
 import karnix.the.ssn.app.utils.LogHelper;
 import karnix.the.ssn.ssnmachan.R;
 
@@ -43,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private MaterialTabs tabs;
     private ViewPager pager;
-    private MyPagerAdapter adapter;
+    private MainActivityPagerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                 .withAccountHeader(accountHeader)
                 .withTranslucentNavigationBar(true)
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withIdentifier(1).withName(getString(R.string.drawer_home)).withIcon(GoogleMaterial.Icon.gmd_home),
+                        new PrimaryDrawerItem().withIdentifier(0).withName(getString(R.string.drawer_home)).withIcon(GoogleMaterial.Icon.gmd_home),
                         new DividerDrawerItem(),
                         new PrimaryDrawerItem().withIdentifier(2).withName(getString(R.string.drawer_buses)).withIcon(GoogleMaterial.Icon.gmd_directions_bus),
                         new PrimaryDrawerItem().withIdentifier(3).withName(getString(R.string.drawer_dining)).withIcon(GoogleMaterial.Icon.gmd_local_dining),
@@ -108,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                         if (drawerItem != null) {
                             flag = true;
                             switch ((int) drawerItem.getIdentifier()) {
-                                case 1:
+                                case 0:
                                     break;
                                 case 2:
                                     startActivity(new Intent(MainActivity.this, BusActivity.class));
@@ -139,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
         drawer.addStickyFooterItem(new PrimaryDrawerItem().withIdentifier(7)
                 .withName(getString(R.string.drawer_sign_out)).withIcon(GoogleMaterial.Icon.gmd_exit_to_app));
 
-        adapter = new MyPagerAdapter(getSupportFragmentManager());
+        adapter = new MainActivityPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(adapter);
         tabs.setViewPager(pager);
         final int pageMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources()
@@ -148,40 +147,18 @@ public class MainActivity extends AppCompatActivity {
         pager.setCurrentItem(1);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
 
-    public class MyPagerAdapter extends FragmentPagerAdapter {
-
-        private final String[] TITLES = {"ADMIN", "CLUBS", "DEPARTMENT"};
-
-        public MyPagerAdapter(FragmentManager fm) {
-            super(fm);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_feed) {
+            startActivity(new Intent(MainActivity.this, NewsFeedActivity.class));
         }
 
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return TITLES[position];
-        }
-
-        @Override
-        public int getCount() {
-            return TITLES.length;
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            Fragment f = null;
-            switch (position) {
-                case 0:
-                    f = AlertsFragment.newInstance();
-                    break;
-                case 1:
-                    f = AlertsFragment.newInstance();
-                    break;
-                case 2:
-                    f = new NewsFeedFragment();
-                    break;
-            }
-            return f;
-        }
+        return super.onOptionsItemSelected(item);
     }
 }

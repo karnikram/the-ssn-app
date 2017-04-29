@@ -1,4 +1,4 @@
-package karnix.the.ssn.app.model;
+package karnix.the.ssn.app.model.posts;
 
 /**
  * Created by vvvro on 4/2/2017.
