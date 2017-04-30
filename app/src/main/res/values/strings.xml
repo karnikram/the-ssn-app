@@ -42,4 +42,20 @@
     <string name="shout_outs">Shout outs to Seshathiri for the bus routes database, Mira and Sreenivas for the desciptions, Karthiknathan for the app icon and Arun TS.</string>
 
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, his consul verear torquatos ne. Magna graecis eam no. Mel eu inani ludus, pro bonorum habemus no, ius copiosae convenire te. Usu at illud probatus, no pri fabulas pertinax. In putent voluptaria ius, vix augue noluisse verterem an. Cum inani persius theophrastus at, vel ad tempor cotidieque.</string>
+
+    <string-array name="admin_category_keys">
+        <item>admin</item>
+        <item>busdept</item>
+    </string-array>
+
+    <string-array name="department_category_keys">
+        <item>Computer Science and Engineering</item>
+        <item>Electronics and Communication Engineering</item>
+        <item>Electrical and Electronics Engineering</item>
+        <item>Mechanical Engineering</item>
+        <item>Information Technology</item>
+        <item>Chemical Engineering</item>
+        <item>Bio-Medical Engineering</item>
+        <item>Civil Engineering</item>
+    </string-array>
 </resources>

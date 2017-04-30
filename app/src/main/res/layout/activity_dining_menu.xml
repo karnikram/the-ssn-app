@@ -21,6 +21,7 @@
             android:id="@+id/spinner_diningMenu_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/black"
             android:entries="@array/dining_mess_categories"
             android:padding="10dp"
             android:spinnerMode="dropdown" />

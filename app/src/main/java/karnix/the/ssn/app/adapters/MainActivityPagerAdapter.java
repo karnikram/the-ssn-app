@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import karnix.the.ssn.app.activity.alerts.AlertsFragment;
+import karnix.the.ssn.app.activity.alerts.DepartmentAlertsFragment;
 
 public class MainActivityPagerAdapter extends FragmentPagerAdapter {
 
@@ -44,11 +45,7 @@ public class MainActivityPagerAdapter extends FragmentPagerAdapter {
                 return fragment;
             default:
             case 2:
-                fragment = new AlertsFragment();
-                bundle = new Bundle();
-                bundle.putString("type", "cse");
-                fragment.setArguments(bundle);
-                return fragment;
+                return new DepartmentAlertsFragment();
         }
     }
 }
