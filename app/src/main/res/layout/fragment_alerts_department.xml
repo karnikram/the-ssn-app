@@ -7,8 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        android:backgroundTint="@color/black"
-        android:entries="@array/department_category_keys" />
+        android:backgroundTint="@color/black" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/postsRecyclerView"

@@ -99,7 +99,9 @@ public class MainActivity extends AppCompatActivity {
                         new PrimaryDrawerItem().withIdentifier(4).withName(getString(R.string.drawer_exam_cell)).withIcon(GoogleMaterial.Icon.gmd_assignment),
                         new DividerDrawerItem(),
                         new PrimaryDrawerItem().withIdentifier(5).withName(getString(R.string.drawer_message)).withIcon(GoogleMaterial.Icon.gmd_message),
-                        new PrimaryDrawerItem().withIdentifier(6).withName(getString(R.string.drawer_about)).withIcon(GoogleMaterial.Icon.gmd_info))
+                        new PrimaryDrawerItem().withIdentifier(6).withName(getString(R.string.drawer_about)).withIcon(GoogleMaterial.Icon.gmd_info),
+                        new DividerDrawerItem(),
+                        new PrimaryDrawerItem().withIdentifier(7).withName(getString(R.string.drawer_settings)).withIcon(GoogleMaterial.Icon.gmd_settings))
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
@@ -125,6 +127,9 @@ public class MainActivity extends AppCompatActivity {
                                     startActivity(new Intent(MainActivity.this, AboutActivity.class));
                                     break;
                                 case 7:
+                                    startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                                    break;
+                                case 8:
                                     FirebaseAuth.getInstance().signOut();
                                     startActivity(new Intent(MainActivity.this, MainActivity.class));
                                     break;
@@ -135,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .build();
 
-        drawer.addStickyFooterItem(new PrimaryDrawerItem().withIdentifier(7)
+        drawer.addStickyFooterItem(new PrimaryDrawerItem().withIdentifier(8)
                 .withName(getString(R.string.drawer_sign_out)).withIcon(GoogleMaterial.Icon.gmd_exit_to_app));
 
         adapter = new MainActivityPagerAdapter(getSupportFragmentManager());

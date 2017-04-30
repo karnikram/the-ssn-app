@@ -118,7 +118,7 @@ public class DepartmentAlertsFragment extends Fragment {
         });
 
         ArrayAdapter arrayAdapter = ArrayAdapter.createFromResource(getActivity(),
-                R.array.department_category_keys, android.R.layout.simple_spinner_dropdown_item);
+                R.array.department_categories, android.R.layout.simple_spinner_dropdown_item);
         spinnerDepartment.setAdapter(arrayAdapter);
 
         return rootView;
