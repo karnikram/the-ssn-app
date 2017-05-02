@@ -18,30 +18,31 @@
 </head>
 
 <body id="body" onload="managePosts();">
-<div id="page">
-    <div id="toolsPanel">
-        <div>
-            <center><img src="img/ssn-logo.png" class="img-responsive" alt="SSN Logo Image"></center>
+    <div id="page">
+        <div id="toolsPanel">
+            <div>
+                <center><img src="img/ssn-logo.png" class="img-responsive" alt="SSN Logo Image"></center>
+            </div>
+            <div>
+                <center><img src="img/theSsnAppLogo.png" class="img-responsive"></center>
+            </div>
+            <div class="toolsPanelIcon">
+                <center><a href="createPost.html" data-toggle="tooltip" title="Create New Post"><i class="fa fa-plus-square" aria-hidden="true"></i></a></center>
+            </div>
+            <div class="toolsPanelIcon active">
+                <center><a href="#" data-toggle="tooltip" title="Manage Posts"><i class="fa fa-pencil-square" aria-hidden="true"></i></a></center>
+            </div>
+            <div class="toolsPanelIcon" id="signOut-btn">
+                <center><a href="#" data-toggle="tooltip" title="Sign Out" onclick="signOutWithGoogle()"><i class="fa fa-power-off" aria-hidden="true"></i></a></center>
+            </div>
         </div>
-        <div>
-            <center><img src="img/theSsnAppLogo.png" class="img-responsive"></center>
-        </div>
-        <div class="toolsPanelIcon">
-            <center><a href="createPost.html" data-toggle="tooltip" title="Create New Post"><i class="fa fa-plus-square" aria-hidden="true"></i></a></center>
-        </div>
-        <div class="toolsPanelIcon active">
-            <center><a href="#" data-toggle="tooltip" title="Manage Posts"><i class="fa fa-pencil-square" aria-hidden="true"></i></a></center>
-        </div>
-        <div class="toolsPanelIcon" id="signOut-btn">
-            <center><a href="#" data-toggle="tooltip" title="Sign Out" onclick="signOutWithGoogle()"><i class="fa fa-power-off" aria-hidden="true"></i></a></center>
-        </div>
-    </div>
-    <div id="mainConsoleArea">
-        <div id="consoleTitle" class="text-center">
-            <h2>Manage Posts</h2>
-            <span id="userInfoText"><i class="fa fa-user" aria-hidden="true"></i> Signed In as : <strong><span id="signedInUser"></span></strong></span>
-        </div>
-        <div id="subConsoleArea">
+        <div id="mainConsoleArea">
+            <div id="consoleTitle" class="text-center">
+                <h2>Manage Posts</h2>
+                <span id="userInfoText"><i class="fa fa-user" aria-hidden="true"></i> Signed In as : <strong><span id="signedInUser"></span></strong>
+                </span>
+            </div>
+            <div id="subConsoleArea">
                 <img src="img/hourglass.svg" style="display: block;" id="loader">
                 <!--<div class="post">
                     <span class="postTitle"></span>
@@ -51,26 +52,68 @@
                     <span class="contactEmail"></span>
                     <span class="postDate"></span>
                 </div>-->
-        </div>
-        <div class="modal fade" id="deletePostModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header text-center" id="deleteModalHeaderText">
-                        <strong>Are you sure you want to delete this post?</strong>
+            </div>
+            <div class="modal fade" id="deletePostModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center" id="deleteModalHeaderText">
+                            <h3><strong>Are you sure you want to delete this post?</strong></h3>
+                        </div>
+                        <div class="modal-body text-center">
+                            <h4 id="deleteModalBodyText"></h4>
+                        </div>
+                        <div class="modal-footer text-center" id="deleteModalFooter">
+                            <center>
+                                <button type="button" class="btn btn-danger" id="deletePostButton">Delete</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            </center>
+                        </div>
                     </div>
-                    <div class="modal-body text-center">
-                        <h4 id="deleteModalBodyText"></h4>
-                    </div>
-                    <div class="modal-footer text-center" id="deleteModalFooter">
-                        <center>
-                            <button type="button" class="btn btn-danger" id="deletePostButton">Delete</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        </center>
+                </div>
+            </div>
+            <div class="modal fade" id="editPostModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center" id="editModalHeaderText">
+                            <strong>Edit Post</strong>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="title">Title* :</label>
+                                <input type="text" class="form-control" id="title" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description* :</label>
+                                <textarea rows="5" cols="100" id="description" class="form-control" required></textarea>
+                            </div>
+                            <div class="form-group">
+                            <strong>Previously Uploaded File : </strong>
+                            <span id="prevUploadedFile"><a href="" target="_blank" id="oldFileLink"><button type="button" class="btn btn-default"> View File </button></a></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Upload New File to Replace :</label>
+                                <progress value="0" max="100" id="uploader">0%</progress>
+                                <input type="file" value="upload" id="fileButton" />
+                            </div>
+                            <div class="form-group">
+                                <label for="contactno">Contact No :</label>
+                                <input type="tel" class="form-control" id="contactno">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Contact Email :</label>
+                                <input type="email" class="form-control" id="email">
+                            </div>
+                        </div>
+                        <div class="modal-footer text-center" id="editModalFooter">
+                            <center>
+                                <button type="button" class="btn btn-default" id="editPostButton">Save</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            </center>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

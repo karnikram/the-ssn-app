@@ -1,4 +1,4 @@
-   var fileURL,fileName;
+ var fileURL,fileName;
    var uploader = document.getElementById('uploader');
    var fileButton = document.getElementById('fileButton');
 
