@@ -1,4 +1,4 @@
-package karnix.the.ssn.app.viewholder;
+package karnix.the.ssn.app.ViewHolder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

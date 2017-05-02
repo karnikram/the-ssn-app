@@ -19,7 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import karnix.the.ssn.app.model.posts.ExamCellPost;
 import karnix.the.ssn.app.model.posts.Post;
-import karnix.the.ssn.app.viewholder.PostExamCellViewHolder;
+import karnix.the.ssn.app.ViewHolder.PostExamCellViewHolder;
 import karnix.the.ssn.ssnmachan.R;
 
 public class ExamCellActivity extends BaseActivity {
@@ -48,10 +48,9 @@ public class ExamCellActivity extends BaseActivity {
                 PostExamCellViewHolder.class, databaseReference.orderByChild("postedDate").getRef()) {
             @Override
             protected void populateViewHolder(PostExamCellViewHolder viewHolder, final ExamCellPost model, int position) {
-                viewHolder.setName(model.post.getUserName());
+                viewHolder.setTitle(model.getTitle());
                 viewHolder.setPostDate(model.post.getPostedDate());
                 viewHolder.setText(model.post.getContent());
-                viewHolder.setPostUserImageURL(model.post.getUserProfileURL());
                 if (model.pdfLink != null && !model.pdfLink.equals("")) {
                     viewHolder.mPDFButton.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -70,21 +69,23 @@ public class ExamCellActivity extends BaseActivity {
         layoutManager.setReverseLayout(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(firebaseRecyclerAdapter);
-
+        final EditText examCellTitleEditText = (EditText) findViewById(R.id.postExamCellTitle);
         postButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Long timeStamp = System.currentTimeMillis();
                 if (editText.getEditableText().toString().equals("")) return;
+                if(examCellTitleEditText.getEditableText().toString().equals("")) return;
                 Post post = new Post("1", FirebaseAuth.getInstance().getCurrentUser().getDisplayName(),
                         FirebaseAuth.getInstance().getCurrentUser().getUid(), timeStamp,
                         FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl().toString(),
                         editText.getEditableText().toString());
                 String key = databaseReference.push().getKey();
                 post.pid = key;
-                ExamCellPost examCellPost = new ExamCellPost(post, "");
+                ExamCellPost examCellPost = new ExamCellPost(post,examCellTitleEditText.getEditableText().toString(), "");
                 FirebaseDatabase.getInstance().getReference("exam_cell_posts/" + key).setValue(examCellPost);
                 editText.setText("");
+                examCellTitleEditText.setText("");
             }
         });
     }

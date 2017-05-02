@@ -2,7 +2,6 @@ package karnix.the.ssn.app.ViewHolder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -11,27 +10,26 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import karnix.the.ssn.app.model.BusAnnouncement;
 import karnix.the.ssn.ssnmachan.R;
 
 /**
- * Created by vvvro on 4/25/2017.
+ * Created by vvvro on 5/2/2017.
  */
 
-public class PostExamCellViewHolder extends RecyclerView.ViewHolder {
-    public final Button mPDFButton;
+public class BusAnnouncementViewHolder extends RecyclerView.ViewHolder{
     private final TextView mTitle;
     private final TextView mPostDate;
     private final TextView mPostContent;
 
-    public PostExamCellViewHolder(View itemView) {
+    public BusAnnouncementViewHolder(View itemView) {
         super(itemView);
-        mTitle = (TextView) itemView.findViewById(R.id.postExamCellTitle);
-        mPostDate = (TextView) itemView.findViewById(R.id.postExamCellDate);
-        mPostContent = (TextView) itemView.findViewById(R.id.postExamCellDescription);
-        mPDFButton = (Button) itemView.findViewById(R.id.postExamCellPDFButton);
+        mTitle = (TextView) itemView.findViewById(R.id.bus_announcement_title);
+        mPostDate = (TextView) itemView.findViewById(R.id.bus_announcement_date);
+        mPostContent = (TextView) itemView.findViewById(R.id.bus_announcement_description);
     }
 
-    public void setTitle(String name) {
+    public void setmTitle(String name) {
         mTitle.setText(name);
     }
 
@@ -44,4 +42,5 @@ public class PostExamCellViewHolder extends RecyclerView.ViewHolder {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm dd/MM/yyyy");
         mPostDate.setText(simpleDateFormat.format(date));
     }
+
 }

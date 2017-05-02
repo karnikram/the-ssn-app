@@ -14,7 +14,6 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-
         <activity
             android:name="karnix.the.ssn.app.activity.SplashActivity"
             android:label="@string/app_name"
@@ -25,15 +24,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="karnix.the.ssn.app.activity.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-
         <activity android:name="karnix.the.ssn.app.activity.NewsFeedActivity" />
-
         <activity android:name="karnix.the.ssn.app.activity.dining.DiningActivity" />
         <activity
             android:name="karnix.the.ssn.app.activity.dining.DiningMenuActivity"
@@ -42,18 +38,14 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity android:name="karnix.the.ssn.app.activity.bus.BusActivity" />
         <activity android:name="karnix.the.ssn.app.activity.bus.BusResultActivity" />
-
         <activity android:name="karnix.the.ssn.app.activity.alerts.AlertDetailActivity">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity android:name="karnix.the.ssn.app.activity.ExamCellActivity" />
-
         <activity
             android:name="karnix.the.ssn.app.activity.MessageActivity"
             android:windowSoftInputMode="stateHidden">
@@ -61,21 +53,19 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity android:name="karnix.the.ssn.app.activity.GoogleSignInActivity" />
-
         <activity android:name="karnix.the.ssn.app.activity.AboutActivity">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name="karnix.the.ssn.app.activity.SettingsActivity" />
 
         <service android:name="karnix.the.ssn.app.utils.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
         <service android:name="karnix.the.ssn.app.utils.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
@@ -85,9 +75,11 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_launcher" />
-
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/primaryColor" />
+
+        <activity android:name="karnix.the.ssn.app.activity.BusAnnouncementActivity"></activity>
     </application>
+
 </manifest>

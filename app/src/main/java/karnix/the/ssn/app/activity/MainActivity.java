@@ -95,11 +95,14 @@ public class MainActivity extends AppCompatActivity {
                         new PrimaryDrawerItem().withIdentifier(0).withName(getString(R.string.drawer_home)).withIcon(GoogleMaterial.Icon.gmd_home),
                         new DividerDrawerItem(),
                         new PrimaryDrawerItem().withIdentifier(2).withName(getString(R.string.drawer_buses)).withIcon(GoogleMaterial.Icon.gmd_directions_bus),
-                        new PrimaryDrawerItem().withIdentifier(3).withName(getString(R.string.drawer_dining)).withIcon(GoogleMaterial.Icon.gmd_local_dining),
-                        new PrimaryDrawerItem().withIdentifier(4).withName(getString(R.string.drawer_exam_cell)).withIcon(GoogleMaterial.Icon.gmd_assignment),
+                        new PrimaryDrawerItem().withIdentifier(3).withName(getString(R.string.drawer_bus_announcements)).withIcon(GoogleMaterial.Icon.gmd_announcement),
+                        new PrimaryDrawerItem().withIdentifier(4).withName(getString(R.string.drawer_dining)).withIcon(GoogleMaterial.Icon.gmd_local_dining),
+                        new PrimaryDrawerItem().withIdentifier(5).withName(getString(R.string.drawer_exam_cell)).withIcon(GoogleMaterial.Icon.gmd_assignment),
                         new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withIdentifier(5).withName(getString(R.string.drawer_message)).withIcon(GoogleMaterial.Icon.gmd_message),
-                        new PrimaryDrawerItem().withIdentifier(6).withName(getString(R.string.drawer_about)).withIcon(GoogleMaterial.Icon.gmd_info))
+                        new PrimaryDrawerItem().withIdentifier(6).withName(getString(R.string.drawer_message)).withIcon(GoogleMaterial.Icon.gmd_message),
+                        new PrimaryDrawerItem().withIdentifier(7).withName(getString(R.string.drawer_about)).withIcon(GoogleMaterial.Icon.gmd_info),
+                        new DividerDrawerItem(),
+                        new PrimaryDrawerItem().withIdentifier(8).withName(getString(R.string.drawer_settings)).withIcon(GoogleMaterial.Icon.gmd_settings))
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
@@ -113,18 +116,24 @@ public class MainActivity extends AppCompatActivity {
                                     startActivity(new Intent(MainActivity.this, BusActivity.class));
                                     break;
                                 case 3:
-                                    startActivity(new Intent(MainActivity.this, DiningActivity.class));
+                                    startActivity(new Intent(MainActivity.this, BusAnnouncementActivity.class));
                                     break;
                                 case 4:
-                                    startActivity(new Intent(getApplicationContext(), ExamCellActivity.class));
+                                    startActivity(new Intent(MainActivity.this, DiningActivity.class));
                                     break;
                                 case 5:
-                                    startActivity(new Intent(MainActivity.this, MessageActivity.class));
+                                    startActivity(new Intent(getApplicationContext(), ExamCellActivity.class));
                                     break;
                                 case 6:
-                                    startActivity(new Intent(MainActivity.this, AboutActivity.class));
+                                    startActivity(new Intent(MainActivity.this, MessageActivity.class));
                                     break;
                                 case 7:
+                                    startActivity(new Intent(MainActivity.this, AboutActivity.class));
+                                    break;
+                                case 8:
+                                    startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                                    break;
+                                case 9:
                                     FirebaseAuth.getInstance().signOut();
                                     startActivity(new Intent(MainActivity.this, MainActivity.class));
                                     break;
@@ -135,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .build();
 
-        drawer.addStickyFooterItem(new PrimaryDrawerItem().withIdentifier(7)
+        drawer.addStickyFooterItem(new PrimaryDrawerItem().withIdentifier(9)
                 .withName(getString(R.string.drawer_sign_out)).withIcon(GoogleMaterial.Icon.gmd_exit_to_app));
 
         adapter = new MainActivityPagerAdapter(getSupportFragmentManager());

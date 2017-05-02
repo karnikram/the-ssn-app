@@ -6,14 +6,16 @@ package karnix.the.ssn.app.model.posts;
 
 public class ExamCellPost {
     public Post post;
+    public String title;
     public String pdfLink;
 
     public ExamCellPost() {
 
     }
 
-    public ExamCellPost(Post post, String pdfLink) {
+    public ExamCellPost(Post post,String title, String pdfLink) {
         this.post = post;
+        this.title = title;
         this.pdfLink = pdfLink;
     }
 
@@ -23,5 +25,13 @@ public class ExamCellPost {
 
     public void setPdfLink(String pdfLink) {
         this.pdfLink = pdfLink;
+    }
+
+    public void setTitle(String title){
+        this.title = title;
+    }
+
+    public String getTitle(){
+        return title;
     }
 }
