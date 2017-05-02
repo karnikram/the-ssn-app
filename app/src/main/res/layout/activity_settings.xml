@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/settings_notifications"
+        android:textColor="@color/primaryColor"
+        android:textStyle="bold" />
+
+    <Switch
+        android:id="@+id/switch_notifications_admin"
+        style="@style/SettingsSwitchStyle"
+        android:text="@string/settings_notifications_admin" />
+
+    <View style="@style/DividerStyle" />
+
+    <Switch
+        android:id="@+id/switch_notifications_clubs"
+        style="@style/SettingsSwitchStyle"
+        android:text="@string/settings_notifications_clubs" />
+
+    <View style="@style/DividerStyle" />
+
+    <Switch
+        android:id="@+id/switch_notifications_departments"
+        style="@style/SettingsSwitchStyle"
+        android:text="@string/settings_notifications_department" />
+
+    <View style="@style/DividerStyle" />
+
+    <Switch
+        android:id="@+id/switch_notifications_exam_cell"
+        style="@style/SettingsSwitchStyle"
+        android:text="@string/settings_notifications_exam_cell" />
+
+    <View style="@style/DividerStyle" />
+
+    <Switch
+        android:id="@+id/switch_notifications_bus"
+        style="@style/SettingsSwitchStyle"
+        android:text="@string/settings_notifications_bus" />
+
+    <View style="@style/DividerStyle" />
+
+    <Switch
+        android:id="@+id/switch_notifications_feed"
+        style="@style/SettingsSwitchStyle"
+        android:text="@string/settings_notifications_feed" />
+
+    <View style="@style/DividerStyle" />
+</LinearLayout>

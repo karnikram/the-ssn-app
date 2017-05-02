@@ -3,18 +3,17 @@ package karnix.the.ssn.app.activity.dining;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import karnix.the.ssn.app.activity.BaseActivity;
 import karnix.the.ssn.ssnmachan.R;
 
-public class DiningActivity extends AppCompatActivity {
+public class DiningActivity extends BaseActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -39,13 +38,5 @@ public class DiningActivity extends AppCompatActivity {
                         .putExtra("place", options[position]));
             }
         });
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home)
-            onBackPressed();
-
-        return super.onOptionsItemSelected(item);
     }
 }

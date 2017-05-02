@@ -1,0 +1,54 @@
+<html>
+	<head>
+		<title>Add New Users</title>
+	</head>
+	<body>
+		<div id="mainContent">
+		<label>Enter emailID</label>
+		<input type="email" id="emailid">
+		<label>Choose Permission</label>
+		<select name="selectPermission" id="permission">
+		   <option>--Select--</option>
+		   <option value="admin">Admin</option>
+		   <option value="busdept">Bus Dept</option>
+		   <option value="examcell">Exam Cell</option>
+		   <option value="clubs">Clubs</option>
+		   <option value="cse">CSE</option>
+		   <option value="ece">ECE</option>
+		   <option value="eee">EEE</option>
+		   <option value="mech">MECH</option>
+		   <option value="it">IT</option>
+		   <option value="chem">CHEM</option>
+		   <option value="biomed">BIOMED</option>
+		   <option value="civil">CIVIL</option>
+		</select>
+		</div>
+		<button class="btn-default" id="adduser">Add user</button>
+		</div>
+		<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+    		<script src="js/firebaseConnection.js"></script>
+
+		
+		<script>
+			var database = firebase.database();
+			function writeUserData(emailid,permission) {
+				console.log("inside writing function");
+				console.log(emailid);
+				  database.ref('webconsole_users/').push().set({
+				    emailid: emailid ,
+				    permission: permission ,
+				  });
+				}
+		</script>
+		<script>
+		adduser.onclick = function (){
+			var adduser= document.getElementById("adduser");
+		var permission= document.getElementById("permission");
+		var selectedPermission=permission.options[permission.selectedIndex].value;
+		var email= document.getElementById("emailid").value;
+			writeUserData(email,selectedPermission);
+		}
+		</script>
+	</body>
+
+</html>

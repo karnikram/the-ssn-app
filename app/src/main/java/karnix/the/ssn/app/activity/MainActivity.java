@@ -5,19 +5,19 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -30,9 +30,9 @@ import com.mikepenz.materialdrawer.util.AbstractDrawerImageLoader;
 import com.mikepenz.materialdrawer.util.DrawerImageLoader;
 
 import io.karim.MaterialTabs;
-import karnix.the.ssn.app.Fragments.AlertsFragment;
-import karnix.the.ssn.app.Fragments.NewsFeedFragment;
+import karnix.the.ssn.app.activity.bus.BusActivity;
 import karnix.the.ssn.app.activity.dining.DiningActivity;
+import karnix.the.ssn.app.adapters.MainActivityPagerAdapter;
 import karnix.the.ssn.app.utils.LogHelper;
 import karnix.the.ssn.ssnmachan.R;
 
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private MaterialTabs tabs;
     private ViewPager pager;
-    private MyPagerAdapter adapter;
+    private MainActivityPagerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,14 +92,17 @@ public class MainActivity extends AppCompatActivity {
                 .withAccountHeader(accountHeader)
                 .withTranslucentNavigationBar(true)
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withIdentifier(1).withName(getString(R.string.drawer_home)).withIcon(R.drawable.ic_home),
+                        new PrimaryDrawerItem().withIdentifier(0).withName(getString(R.string.drawer_home)).withIcon(GoogleMaterial.Icon.gmd_home),
                         new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withIdentifier(2).withName(getString(R.string.drawer_buses)).withIcon(R.drawable.ic_bus),
-                        new PrimaryDrawerItem().withIdentifier(3).withName(getString(R.string.drawer_dining)).withIcon(R.drawable.ic_dining),
-                        new PrimaryDrawerItem().withIdentifier(4).withName(getString(R.string.drawer_exam_cell)).withIcon(R.drawable.ic_assignment_black_24dp),
+                        new PrimaryDrawerItem().withIdentifier(2).withName(getString(R.string.drawer_buses)).withIcon(GoogleMaterial.Icon.gmd_directions_bus),
+                        new PrimaryDrawerItem().withIdentifier(3).withName(getString(R.string.drawer_bus_announcements)).withIcon(GoogleMaterial.Icon.gmd_announcement),
+                        new PrimaryDrawerItem().withIdentifier(4).withName(getString(R.string.drawer_dining)).withIcon(GoogleMaterial.Icon.gmd_local_dining),
+                        new PrimaryDrawerItem().withIdentifier(5).withName(getString(R.string.drawer_exam_cell)).withIcon(GoogleMaterial.Icon.gmd_assignment),
                         new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withIdentifier(5).withName(getString(R.string.drawer_message)).withIcon(R.drawable.ic_post_message),
-                        new PrimaryDrawerItem().withIdentifier(6).withName(getString(R.string.drawer_about)).withIcon(R.drawable.ic_about))
+                        new PrimaryDrawerItem().withIdentifier(6).withName(getString(R.string.drawer_message)).withIcon(GoogleMaterial.Icon.gmd_message),
+                        new PrimaryDrawerItem().withIdentifier(7).withName(getString(R.string.drawer_about)).withIcon(GoogleMaterial.Icon.gmd_info),
+                        new DividerDrawerItem(),
+                        new PrimaryDrawerItem().withIdentifier(8).withName(getString(R.string.drawer_settings)).withIcon(GoogleMaterial.Icon.gmd_settings))
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
@@ -107,21 +110,30 @@ public class MainActivity extends AppCompatActivity {
                         if (drawerItem != null) {
                             flag = true;
                             switch ((int) drawerItem.getIdentifier()) {
-                                case 1:
+                                case 0:
                                     break;
                                 case 2:
                                     startActivity(new Intent(MainActivity.this, BusActivity.class));
                                     break;
                                 case 3:
-                                    startActivity(new Intent(MainActivity.this, DiningActivity.class));
+                                    startActivity(new Intent(MainActivity.this, BusAnnouncementActivity.class));
                                     break;
                                 case 4:
-                                    startActivity(new Intent(MainActivity.this, MessageActivity.class));
+                                    startActivity(new Intent(MainActivity.this, DiningActivity.class));
                                     break;
                                 case 5:
-                                    startActivity(new Intent(MainActivity.this, AboutActivity.class));
+                                    startActivity(new Intent(getApplicationContext(), ExamCellActivity.class));
                                     break;
                                 case 6:
+                                    startActivity(new Intent(MainActivity.this, MessageActivity.class));
+                                    break;
+                                case 7:
+                                    startActivity(new Intent(MainActivity.this, AboutActivity.class));
+                                    break;
+                                case 8:
+                                    startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                                    break;
+                                case 9:
                                     FirebaseAuth.getInstance().signOut();
                                     startActivity(new Intent(MainActivity.this, MainActivity.class));
                                     break;
@@ -132,10 +144,10 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .build();
 
-        drawer.addStickyFooterItem(new PrimaryDrawerItem().withIdentifier(6)
-                .withName(getString(R.string.drawer_sign_out)).withIcon(R.drawable.ic_sign_out));
+        drawer.addStickyFooterItem(new PrimaryDrawerItem().withIdentifier(9)
+                .withName(getString(R.string.drawer_sign_out)).withIcon(GoogleMaterial.Icon.gmd_exit_to_app));
 
-        adapter = new MyPagerAdapter(getSupportFragmentManager());
+        adapter = new MainActivityPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(adapter);
         tabs.setViewPager(pager);
         final int pageMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources()
@@ -144,40 +156,18 @@ public class MainActivity extends AppCompatActivity {
         pager.setCurrentItem(1);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
 
-    public class MyPagerAdapter extends FragmentPagerAdapter {
-
-        private final String[] TITLES = {"ADMIN", "CLUBS", "DEPARTMENT"};
-
-        public MyPagerAdapter(FragmentManager fm) {
-            super(fm);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_feed) {
+            startActivity(new Intent(MainActivity.this, NewsFeedActivity.class));
         }
 
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return TITLES[position];
-        }
-
-        @Override
-        public int getCount() {
-            return TITLES.length;
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            Fragment f = null;
-            switch (position) {
-                case 0:
-                    f = AlertsFragment.newInstance();
-                    break;
-                case 1:
-                    f = AlertsFragment.newInstance();
-                    break;
-                case 2:
-                    f = new NewsFeedFragment();
-                    break;
-            }
-            return f;
-        }
+        return super.onOptionsItemSelected(item);
     }
 }

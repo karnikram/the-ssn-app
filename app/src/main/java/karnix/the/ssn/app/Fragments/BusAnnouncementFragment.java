@@ -4,10 +4,24 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import karnix.the.ssn.app.ViewHolder.BusAnnouncementViewHolder;
+import karnix.the.ssn.app.ViewHolder.PostViewHolder;
+import karnix.the.ssn.app.model.BusAnnouncement;
+import karnix.the.ssn.app.model.posts.Post;
 import karnix.the.ssn.ssnmachan.R;
 
 /**
@@ -65,7 +79,52 @@ public class BusAnnouncementFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_bus_announcement, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_bus_announcement, container, false);
+        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.bus_announcement_recycler_view);
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("bus_announcements");
+
+        FirebaseRecyclerAdapter firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<BusAnnouncement, BusAnnouncementViewHolder>(BusAnnouncement.class,
+                R.layout.bus_announcement,
+                BusAnnouncementViewHolder.class, databaseReference.orderByChild("postedDate").getRef()) {
+            @Override
+            protected void populateViewHolder(BusAnnouncementViewHolder viewHolder, BusAnnouncement model, int position) {
+                viewHolder.setmTitle(model.title);
+                viewHolder.setPostDate(model.postedDate);
+                viewHolder.setText(model.content);
+            }
+        };
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setStackFromEnd(true);
+        layoutManager.setReverseLayout(true);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(firebaseRecyclerAdapter);
+
+        Button postButton = (Button) rootView.findViewById(R.id.bus_announcement_post_button);
+        final EditText editText = (EditText)rootView.findViewById(R.id.bus_announcement_text);
+        final EditText titleEditText = (EditText) rootView.findViewById(R.id.bus_announcement_title_editText);
+        postButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(editText.getEditableText().toString().equals("")){
+                    Toast.makeText(getContext(), "Please Enter Title", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(titleEditText.getEditableText().toString().equals("")){
+                    Toast.makeText(getContext(), "Please Enter Description", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Long timeStamp = System.currentTimeMillis();
+                if (editText.getEditableText().toString().equals("")) return;
+                BusAnnouncement post = new BusAnnouncement("1", FirebaseAuth.getInstance().getCurrentUser().getDisplayName(), FirebaseAuth.getInstance().getCurrentUser().getUid(), timeStamp, FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl().toString(), editText.getEditableText().toString(),titleEditText.getEditableText().toString());
+                String key = databaseReference.push().getKey();
+                post.pid = key;
+                FirebaseDatabase.getInstance().getReference("bus_announcements/" + key).setValue(post);
+                editText.setText("");
+                titleEditText.setText("");
+            }
+        });
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -73,23 +132,6 @@ public class BusAnnouncementFragment extends Fragment {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
     }
 
     /**

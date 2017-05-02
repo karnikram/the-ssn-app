@@ -1,32 +1,40 @@
 package karnix.the.ssn.app.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dd.CircularProgressButton;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import karnix.the.ssn.ssnmachan.R;
 
-public class MessageActivity extends Activity {
+public class MessageActivity extends BaseActivity {
     EditText messageField;
-    CircularProgressButton circularButton;
+    Button button;
     TextView counter;
     String message;
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.message_activity);
+        ButterKnife.bind(this);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         messageField = (EditText) findViewById(R.id.message);
         counter = (TextView) findViewById(R.id.counter);
@@ -34,7 +42,6 @@ public class MessageActivity extends Activity {
         messageField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
@@ -44,20 +51,14 @@ public class MessageActivity extends Activity {
 
             @Override
             public void afterTextChanged(Editable s) {
-
             }
         });
 
-        circularButton = (CircularProgressButton) findViewById(R.id.circularButton1);
-        circularButton.setIndeterminateProgressMode(true);
-        circularButton.setOnClickListener(new View.OnClickListener() {
+        button = (Button) findViewById(R.id.send_button);
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (circularButton.getProgress() == 0) {
-                    checkConnectionExecute();
-                } else if (circularButton.getProgress() == 100 || circularButton.getProgress() == -1) {
-                    circularButton.setProgress(0);
-                }
+                checkConnectionExecute();
             }
         });
     }
@@ -69,19 +70,15 @@ public class MessageActivity extends Activity {
             message = messageField.getText().toString();
             if (message.isEmpty()) {
                 Toast.makeText(this, "Invalid input", Toast.LENGTH_SHORT).show();
-                circularButton.setProgress(-1);
             } else if (Integer.parseInt(counter.getText().toString()) > 350) {
-                Toast.makeText(this, "Exceeds character limit. We don't have our own server.", Toast.LENGTH_LONG).show();
-                circularButton.setProgress(-1);
+                Toast.makeText(this, "Exceeds character limit. We don't have our own server.",
+                        Toast.LENGTH_LONG).show();
             } else {
-                circularButton.setProgress(50);
                 Toast.makeText(this, "Message sent.", Toast.LENGTH_LONG).show();
-                circularButton.setProgress(100);
                 messageField.setText("");
             }
         } else {
             Toast.makeText(this, "Connect to the internet!", Toast.LENGTH_LONG).show();
-            circularButton.setProgress(-1);
         }
     }
 }

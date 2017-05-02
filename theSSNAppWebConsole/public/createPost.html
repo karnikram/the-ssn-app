@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="img/theSsnAppLogo.png" />
+    <title>Create New Post</title>
+    <!-- FontAwesome CDN -->
+    <script src="https://use.fontawesome.com/8fd1dc0516.js"></script>
+    <!-- Google Fonts Link - Roboto|Open Sans -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- Custom Stylesheet-->
+    <link rel="stylesheet" href="css/consoleStyles.css">
+</head>
+
+<body id="body">
+<div id="page">
+    <div id="toolsPanel">
+        <div>
+            <center><img src="img/ssn-logo.png" class="img-responsive" alt="SSN Logo Image"></center>
+        </div>
+        <div>
+            <center><img src="img/theSsnAppLogo.png" class="img-responsive"></center>
+        </div>
+        <div class="toolsPanelIcon active">
+            <center><a href="#" data-toggle="tooltip" title="Create New Post"><i class="fa fa-plus-square" aria-hidden="true"></i></a></center>
+        </div>
+        <div class="toolsPanelIcon">
+            <center><a href="managePosts.html" data-toggle="tooltip" title="Manage Posts"><i class="fa fa-pencil-square" aria-hidden="true"></i></a></center>
+        </div>
+        <div class="toolsPanelIcon" id="signOut-btn">
+            <center><a href="#" data-toggle="tooltip" title="Sign Out" onclick="signOutWithGoogle()"><i class="fa fa-power-off" aria-hidden="true"></i></a></center>
+        </div>
+    </div>
+    <div id="mainConsoleArea">
+        <div id="consoleTitle" class="text-center">
+            <h2>Create a New Post</h2>
+            <span id="userInfoText"><i class="fa fa-user" aria-hidden="true"></i> Signed In as : <strong><span id="signedInUser"></span></strong></span>
+        </div>
+        <div id="subConsoleArea">
+                <div class="form-group">
+                    <label for="title">Title* :</label>
+                    <input type="text" class="form-control" id="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description* :</label>
+                    <textarea rows="5" cols="100" id="description" class="form-control" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Upload File** :</label>
+                    <progress value="0" max="100" id="uploader">0%</progress>
+                    <input type="file" value="upload" id="fileButton" />
+                </div>
+                <div class="form-group">
+                    <label for="contactno">Contact No :</label>
+                    <input type="tel" class="form-control" id="contactno">
+                </div>
+                <div class="form-group">
+                    <label for="email">Contact Email :</label>
+                    <input type="email" class="form-control" id="email">
+                </div>
+                <div>*required fields</div>
+                <div>**Only PDF or image less than 5 MB allowed</div>
+                <center>
+                    <button type="submit" class="btn btn-default" onclick="createPost()">Create New Post</button>
+                </center>
+        </div>
+        <img src="img/hourglass.svg" style="display: none;" id="loader">
+        <div class="modal fade" id="templateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <center>
+                        <h4 id="modalText"></h4>
+                        </center>
+                    </div>
+                    <div class="modal-footer">
+                        <center>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+    <script src="js/firebaseConnection.js"></script>
+    <script src="js/commonFunctions.js"></script>
+    <script src="js/createPost.js"></script>
+</body>
+
+</html>
