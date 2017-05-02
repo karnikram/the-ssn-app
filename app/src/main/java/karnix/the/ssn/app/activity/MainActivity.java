@@ -96,9 +96,10 @@ public class MainActivity extends AppCompatActivity {
                         new DividerDrawerItem(),
                         new PrimaryDrawerItem().withIdentifier(2).withName(getString(R.string.drawer_buses)).withIcon(R.drawable.ic_bus),
                         new PrimaryDrawerItem().withIdentifier(3).withName(getString(R.string.drawer_dining)).withIcon(R.drawable.ic_dining),
+                        new PrimaryDrawerItem().withIdentifier(4).withName(getString(R.string.drawer_exam_cell)).withIcon(R.drawable.ic_assignment_black_24dp),
                         new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withIdentifier(4).withName(getString(R.string.drawer_message)).withIcon(R.drawable.ic_post_message),
-                        new PrimaryDrawerItem().withIdentifier(5).withName(getString(R.string.drawer_about)).withIcon(R.drawable.ic_about))
+                        new PrimaryDrawerItem().withIdentifier(5).withName(getString(R.string.drawer_message)).withIcon(R.drawable.ic_post_message),
+                        new PrimaryDrawerItem().withIdentifier(6).withName(getString(R.string.drawer_about)).withIcon(R.drawable.ic_about))
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
