@@ -81,6 +81,7 @@
                            }
                            if (fileURL === undefined) {
                                fileURL = "";
+                               fileName = "";
                            }
                            pid.set({
                                title: title,

@@ -52,15 +52,19 @@
                     <span class="postDate"></span>
                 </div>-->
         </div>
-        <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal fade" id="deletePostModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-body">
-                        <h4 id="modalText"></h4>
+                    <div class="modal-header text-center" id="deleteModalHeaderText">
+                        <strong>Are you sure you want to delete this post?</strong>
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-body text-center">
+                        <h4 id="deleteModalBodyText"></h4>
+                    </div>
+                    <div class="modal-footer text-center" id="deleteModalFooter">
                         <center>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                            <button type="button" class="btn btn-danger" id="deletePostButton">Delete</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                         </center>
                     </div>
                 </div>
