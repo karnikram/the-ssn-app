@@ -13,7 +13,7 @@ public class ExamCellPost {
 
     }
 
-    public ExamCellPost(Post post,String title, String pdfLink) {
+    public ExamCellPost(Post post, String title, String pdfLink) {
         this.post = post;
         this.title = title;
         this.pdfLink = pdfLink;
@@ -27,11 +27,11 @@ public class ExamCellPost {
         this.pdfLink = pdfLink;
     }
 
-    public void setTitle(String title){
-        this.title = title;
+    public String getTitle() {
+        return title;
     }
 
-    public String getTitle(){
-        return title;
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

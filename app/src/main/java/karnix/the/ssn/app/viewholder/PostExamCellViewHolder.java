@@ -1,16 +1,13 @@
-package karnix.the.ssn.app.ViewHolder;
+package karnix.the.ssn.app.viewholder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import karnix.the.ssn.ssnmachan.R;
 
 /**
