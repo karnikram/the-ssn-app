@@ -4,9 +4,11 @@ package karnix.the.ssn.app.activity;
  * Created by vvvro on 4/2/2017.
  */
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +20,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -63,11 +67,32 @@ public class GoogleSignInActivity extends AppCompatActivity implements GoogleApi
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users/" + user.getUid());
-                    User user1 = new User(user.getUid(), user.getDisplayName(), user.getPhotoUrl().toString(), user.getEmail());
-                    databaseReference.setValue(user1);
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    finish();
+                    if (user.getEmail().contains("ssn.edu")) {
+                        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users/" + user.getUid());
+                        User user1 = new User(user.getUid(), user.getDisplayName(), user.getPhotoUrl().toString(), user.getEmail());
+                        databaseReference.setValue(user1);
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        finish();
+                    } else {
+                        FirebaseAuth.getInstance().signOut();
+                        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(new ResultCallback<Status>() {
+                            @Override
+                            public void onResult(@NonNull Status status) {
+                                new AlertDialog.Builder(GoogleSignInActivity.this)
+                                        .setMessage(R.string.sign_in_email_error)
+                                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                startActivity(new Intent(GoogleSignInActivity.this,
+                                                        GoogleSignInActivity.class));
+                                                finish();
+                                            }
+                                        })
+                                        .setCancelable(false)
+                                        .show();
+                            }
+                        });
+                    }
                 } else {
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
