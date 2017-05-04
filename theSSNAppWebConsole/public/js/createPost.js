@@ -96,14 +96,15 @@
                            }, function(error) {
                                if (error) {
                                    document.getElementById('loader').style.display = "none";
-                                   alert("Data could not be saved." + error);
+                                   document.getElementById('modalText').innerHTML = "Error in posting!" + error;
+                                   $('#templateModal').modal('toggle');
                                } else {
                                    document.getElementById('loader').style.display = "none";
                                    title.value = "";
                                    description.value = "";
                                    contactno.value = "";
                                    email.value = "";
-                                   document.getElementById('modalText').innerHTML = "Success! Your Post was successful";
+                                   document.getElementById('modalText').innerHTML = "<img id='successTick' src='img/success.png'> <span>Success! Your Post was successful</span>";
                                    $('#templateModal').modal('toggle');
                                }
                            });
@@ -118,14 +119,14 @@
 
                    });
                    if (!found) {
-                       console.log("inside first if");
+                       console.log("Unauthorized User Signed In");
                        var page = document.getElementById('page');
                        page.innerHTML = "  <div id='mainContent'><center><img src='img/theSsnAppLogo.png' id='theSsnAppLogo'><h3 id='main-txt'>The SSN App Web Console</h3><h4>You are not authorized to view this page. Please login with registered emailid.</h4><div id='mainbutton'><a href='index.html'><button class='btn btn-default'><span class='signin-txt'>Go to HomePage</span></button></a></div></center><div>";
                    }
 
                });
        } else {
-           console.log("inside second if");
+           console.log("No User Signed In");
            var page = document.getElementById('page');
            page.innerHTML = "  <div id='mainContent'><center><img src='img/theSsnAppLogo.png' id='theSsnAppLogo'><h3 id='main-txt'>The SSN App Web Console</h3><h4>You are not authorized to view this page. Please login with registered emailid.</h4><div id='mainbutton'><a href='index.html'><button class='btn btn-default'><span class='signin-txt'>Go to HomePage</span></button></a></div></center><div>";
        }

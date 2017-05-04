@@ -56,7 +56,7 @@ function signInWithGoogle() {
         var email = error.email;
         // The firebase.auth.AuthCredential type that was used.
         var credential = error.credential;
-        // ...
+        mainbutton.innerHTML = "<h4>" + errorCode +" " + errorMessage + "</h4><br/><h4>Please refresh page.</h4>";
     });
 
 }

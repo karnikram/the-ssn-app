@@ -7,7 +7,7 @@ var oldFileURL;
 
 function deletePost(postRef, postFileName) {
     console.log("Inside delete post function");
-    document.getElementById('deleteModalHeaderText').innerHTML = "<h3>Deleting Post...Page will automatically reload once the post is deleted succesfully.</h3>";
+    document.getElementById('deleteModalHeaderText').innerHTML = "<strong><h3>Deleting Post...Page will automatically reload once the post is deleted succesfully.</h3></strong>";
     document.getElementById('deleteModalFooter').innerHTML = "<center><img src='img/hourglass.svg'  id='smallLoader'></center>";
     var categorywisePostRef = firebase.database().ref("categorywise_posts/" + category + "/" + postRef);
     var PostRef = firebase.database().ref("posts/" + postRef);
@@ -89,10 +89,12 @@ function constructPostView(postChildSnapshot) {
                                                                 <span class="uploadedFile"><strong>Uploaded File : </strong>` + fileViewContent + `</span>
                                                                 <span class="contactNo"><strong>Contact No : </strong> ` + postData.contactno + `</span>
                                                                 <span class="contactEmail"><strong>Contact Email : </strong>` + postData.email + `</span>
+                                                                <div id="buttonSection">
                                                                 <center>
                                                                 <button class="btn btn-default editButton" onclick="createEditPostModal('` + postID + `','` + postData.title + `','` + postData.description + `','` + postData.contactno + `','` + postData.email + `','` + postData.fileURL + `','` + postData.fileName + `');">Edit</button>
                                                                 <button class="btn btn-danger deleteButton" onclick="createDeletePostModal('` + postData.title + `','` + postID + `','` + postData.fileName + `');">Delete</button>
                                                                 </center>
+                                                                </div>
                                                             </div>`;
                 $("#subConsoleArea").append(postHTML);
                 ++postCount;
@@ -155,13 +157,13 @@ function managePosts() {
 
                     });
                     if (!found) {
-                        console.log("inside first if");
+                        console.log("Unauthorized User Signed In");
                         var page = document.getElementById('page');
                         page.innerHTML = "  <div id='mainContent'><center><img src='img/theSsnAppLogo.png' id='theSsnAppLogo'><h3 id='main-txt'>The SSN App Web Console</h3><h4>You are not authorized to view this page. Please login with registered emailid.</h4><div id='mainbutton'><a href='index.html'><button class='btn btn-default'><span class='signin-txt'>Go to HomePage</span></button></a></div></center><div>";
                     }
                 });
         } else {
-            console.log("inside second if");
+            console.log("No User Signed In");
             window.location.replace("../signedout.html");
         }
     });
@@ -220,7 +222,7 @@ fileButton.addEventListener('change', function(e) {
 
 /***Edit post function***/
 function editPost(postRef) {
-    document.getElementById('editModalHeaderText').innerHTML = "<h3>Saving Post...Page will automatically reload once the post is saved succesfully.</h3>";
+    document.getElementById('editModalHeaderText').innerHTML = "<strong>Saving Post...Page will automatically reload once the post is saved succesfully.</strong>";
     document.getElementById('editModalFooter').innerHTML = "<center><img src='img/hourglass.svg'  id='smallLoader'></center>";
     var title = document.getElementById('title').value;
     var description = document.getElementById('description').value;
