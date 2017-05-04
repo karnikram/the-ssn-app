@@ -50,11 +50,6 @@ exports.sendWebConsoleNotification = functions.database.ref('/posts/{pushId}').o
         timeToLive: 60 * 60 * 24 * 7 * 4
    };
 
-  var departments = ["cse", "ece", "eee", "mech", "it", "chem", "biomed", "civil"];
   const category = snapshot.val().category;
-  if (departments.indexOf(category) > -1) {
-        return admin.messaging().sendToTopic("departments", payload, options);
-  } else {
-        return admin.messaging().sendToTopic(category, payload, options);
-  }
+  return admin.messaging().sendToTopic(category, payload, options);
 });
