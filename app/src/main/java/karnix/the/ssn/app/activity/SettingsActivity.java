@@ -2,7 +2,6 @@ package karnix.the.ssn.app.activity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Switch;
 
@@ -17,8 +16,6 @@ import karnix.the.ssn.ssnmachan.R;
 public class SettingsActivity extends BaseActivity {
     private static final String TAG = LogHelper.makeLogTag(SettingsActivity.class);
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
     @BindView(R.id.switch_notifications_admin)
     Switch switchNotificationsAdmin;
     @BindView(R.id.switch_notifications_clubs)
@@ -40,10 +37,6 @@ public class SettingsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         ButterKnife.bind(this);
-
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
 

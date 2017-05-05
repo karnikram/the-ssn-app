@@ -21,8 +21,6 @@ public class DiningMenuAdapter extends SectionedRecyclerViewAdapter<DiningMenuAd
     private static final String TAG = LogHelper.makeLogTag(DiningMenuAdapter.class);
 
     private Context context;
-    private String place;
-    private String day;
     private boolean isMess;
 
     private DatabaseHandler databaseHandler;
@@ -37,8 +35,6 @@ public class DiningMenuAdapter extends SectionedRecyclerViewAdapter<DiningMenuAd
 
     public DiningMenuAdapter(Context context, String place, String day) {
         this.context = context;
-        this.place = place;
-        this.day = day;
         this.isMess = place.contains("Mess");
 
         databaseHandler = new DatabaseHandler(context);

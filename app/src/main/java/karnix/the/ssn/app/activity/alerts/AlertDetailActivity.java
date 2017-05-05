@@ -4,9 +4,7 @@ package karnix.the.ssn.app.activity.alerts;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.webkit.URLUtil;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,9 +25,6 @@ import karnix.the.ssn.ssnmachan.R;
 public class AlertDetailActivity extends BaseActivity {
     private static final String TAG = LogHelper.makeLogTag(AlertDetailActivity.class);
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-
     @BindView(R.id.content_email1)
     TextView contentEmail1;
     @BindView(R.id.post_imageView)
@@ -46,10 +41,6 @@ public class AlertDetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alert_details);
         ButterKnife.bind(this);
-
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         dispTitle = (TextView) findViewById(R.id.alert_title);
         dispContent = (TextView) findViewById(R.id.content_activity);
@@ -74,8 +65,8 @@ public class AlertDetailActivity extends BaseActivity {
         if (!post.getFileURL().equals("")) {
             Glide.with(this).load(post.getFileURL()).into(postImageView);
 
-            fileName = URLUtil.guessFileName(post.getFileURL(), null, null);
-            if (fileName.equals("downloadfile.bin")) {
+            fileName = post.getFileName();
+            if (fileName == null) {
                 links.add(post.getFileURL());
             } else {
                 links.add(fileName);

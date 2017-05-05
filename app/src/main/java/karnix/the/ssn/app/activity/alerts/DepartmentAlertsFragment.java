@@ -35,7 +35,6 @@ import karnix.the.ssn.app.utils.LogHelper;
 import karnix.the.ssn.ssnmachan.R;
 
 public class DepartmentAlertsFragment extends Fragment {
-
     private static final String TAG = LogHelper.makeLogTag(DepartmentAlertsFragment.class);
 
     @BindView(R.id.postsRecyclerView)

@@ -45,15 +45,13 @@
 
         <activity android:name="karnix.the.ssn.app.activity.bus.BusActivity" />
         <activity android:name="karnix.the.ssn.app.activity.bus.BusResultActivity" />
-        <activity android:name="karnix.the.ssn.app.activity.BusAnnouncementActivity" />
+        <activity android:name="karnix.the.ssn.app.activity.alerts.AlertsActivity" />
 
         <activity android:name="karnix.the.ssn.app.activity.alerts.AlertDetailActivity">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-        <activity android:name="karnix.the.ssn.app.activity.ExamCellActivity" />
 
         <activity
             android:name="karnix.the.ssn.app.activity.MessageActivity"

@@ -2,6 +2,7 @@ package karnix.the.ssn.app.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -12,6 +13,16 @@ import karnix.the.ssn.ssnmachan.R;
  */
 
 public class BaseActivity extends AppCompatActivity {
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

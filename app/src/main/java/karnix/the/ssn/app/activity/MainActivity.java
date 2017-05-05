@@ -34,6 +34,7 @@ import com.mikepenz.materialdrawer.util.AbstractDrawerImageLoader;
 import com.mikepenz.materialdrawer.util.DrawerImageLoader;
 
 import io.karim.MaterialTabs;
+import karnix.the.ssn.app.activity.alerts.AlertsActivity;
 import karnix.the.ssn.app.activity.bus.BusActivity;
 import karnix.the.ssn.app.activity.dining.DiningActivity;
 import karnix.the.ssn.app.adapters.MainActivityPagerAdapter;
@@ -115,18 +116,20 @@ public class MainActivity extends AppCompatActivity {
                             flag = true;
                             switch ((int) drawerItem.getIdentifier()) {
                                 case 0:
-                                    break;
+                                    return false;
                                 case 2:
                                     startActivity(new Intent(MainActivity.this, BusActivity.class));
                                     break;
                                 case 3:
-                                    startActivity(new Intent(MainActivity.this, BusAnnouncementActivity.class));
+                                    startActivity(new Intent(MainActivity.this, AlertsActivity.class)
+                                            .putExtra("type", "busdept"));
                                     break;
                                 case 4:
                                     startActivity(new Intent(MainActivity.this, DiningActivity.class));
                                     break;
                                 case 5:
-                                    startActivity(new Intent(getApplicationContext(), ExamCellActivity.class));
+                                    startActivity(new Intent(MainActivity.this, AlertsActivity.class)
+                                            .putExtra("type", "examcell"));
                                     break;
                                 case 6:
                                     startActivity(new Intent(MainActivity.this, MessageActivity.class));

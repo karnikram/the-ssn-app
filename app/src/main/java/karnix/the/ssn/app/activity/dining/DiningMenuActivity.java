@@ -38,12 +38,6 @@ public class DiningMenuActivity extends BaseActivity {
 
         place = getIntent().getStringExtra("place");
 
-        toolbar.setTitleTextColor(Color.WHITE);
-        toolbar.setTitle(place);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
         if (!place.contains("Mess")) {
             cardViewDiningMenuSpinner.setVisibility(View.GONE);
             setRecyclerViewAdapter(null);
@@ -60,6 +54,14 @@ public class DiningMenuActivity extends BaseActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        toolbar.setTitleTextColor(Color.WHITE);
+        toolbar.setTitle(place);
     }
 
     private void setRecyclerViewAdapter(String day) {

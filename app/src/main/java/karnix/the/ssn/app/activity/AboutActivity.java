@@ -3,31 +3,20 @@ package karnix.the.ssn.app.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import karnix.the.ssn.ssnmachan.R;
 
 public class AboutActivity extends BaseActivity {
     ImageView fb1, fb2;
     TextView fb3;
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.about_activity);
-        ButterKnife.bind(this);
-
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         fb1 = (ImageView) findViewById(R.id.fb1);
         fb2 = (ImageView) findViewById(R.id.fb2);
