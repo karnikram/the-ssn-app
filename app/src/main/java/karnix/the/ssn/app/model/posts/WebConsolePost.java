@@ -8,6 +8,7 @@ public class WebConsolePost {
     private String description;
     private String email;
     private String fileURL;
+    private String fileName;
     private String postedby;
     private String title;
 
@@ -89,6 +90,14 @@ public class WebConsolePost {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getFileName(){
+        return fileName;
+    }
+
+    public void setFileName(String fileName){
+        this.fileName = fileName;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package karnix.the.ssn.app.viewholder;
+package karnix.the.ssn.app.ViewHolder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -36,7 +36,7 @@ public class PostExamCellViewHolder extends RecyclerView.ViewHolder {
         mPostContent.setText(text);
     }
 
-    public void setPostDate(Long time) {
+    public void setPostDate(String time) {
         Date date = new Date(time);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm dd/MM/yyyy");
         mPostDate.setText(simpleDateFormat.format(date));
