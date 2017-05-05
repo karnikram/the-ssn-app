@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,6 +16,9 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
@@ -134,8 +138,29 @@ public class MainActivity extends AppCompatActivity {
                                     startActivity(new Intent(MainActivity.this, SettingsActivity.class));
                                     break;
                                 case 9:
+                                    GoogleSignInOptions googleSignInOptions =
+                                            new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                                                    .build();
+                                    final GoogleApiClient googleApiClient = new GoogleApiClient.Builder(MainActivity.this)
+                                            .addApi(Auth.GOOGLE_SIGN_IN_API, googleSignInOptions)
+                                            .build();
+
+                                    googleApiClient.registerConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
+                                        @Override
+                                        public void onConnected(@Nullable Bundle bundle) {
+                                            Auth.GoogleSignInApi.signOut(googleApiClient);
+                                        }
+
+                                        @Override
+                                        public void onConnectionSuspended(int i) {
+                                        }
+                                    });
+                                    googleApiClient.connect();
+
                                     FirebaseAuth.getInstance().signOut();
-                                    startActivity(new Intent(MainActivity.this, MainActivity.class));
+
+                                    startActivity(new Intent(MainActivity.this, SplashActivity.class));
+                                    finish();
                                     break;
                             }
                         }
