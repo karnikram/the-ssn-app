@@ -1,5 +1,7 @@
 package karnix.the.ssn.app.activity.alerts;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +20,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +35,6 @@ import karnix.the.ssn.app.utils.LogHelper;
 import karnix.the.ssn.ssnmachan.R;
 
 public class DepartmentAlertsFragment extends Fragment {
-
     private static final String TAG = LogHelper.makeLogTag(DepartmentAlertsFragment.class);
 
     @BindView(R.id.postsRecyclerView)
@@ -43,20 +45,31 @@ public class DepartmentAlertsFragment extends Fragment {
     Spinner spinnerDepartment;
 
     private Unbinder unbinder;
+    private SharedPreferences sharedPreferences;
+    private String[] departmentKeys;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_alerts_department, container, false);
         unbinder = ButterKnife.bind(this, rootView);
 
-        final String[] departmentKeys = {"cse", "ece", "eee", "mech", "it", "chem", "biomed", "civil"};
+        departmentKeys = new String[]{"cse", "ece", "eee", "mech", "it", "chem", "biomed", "civil"};
 
         spinnerDepartment.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 progressBar.setVisibility(View.VISIBLE);
 
-                final String type = departmentKeys[spinnerDepartment.getSelectedItemPosition()];
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("department", spinnerDepartment.getSelectedItem().toString());
+                editor.apply();
+
+                final String departmentKey = departmentKeys[spinnerDepartment.getSelectedItemPosition()];
+
+                if (sharedPreferences.getBoolean("notifications_departments", false)) {
+                    switchTopicSubscription(departmentKey);
+                }
 
                 final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
                 layoutManager.setStackFromEnd(true);
@@ -68,7 +81,7 @@ public class DepartmentAlertsFragment extends Fragment {
                 postsRecyclerView.setAdapter(postAdapter);
 
                 final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference nodesRef = database.getReference("categorywise_posts/" + type);
+                DatabaseReference nodesRef = database.getReference("categorywise_posts/" + departmentKey);
                 final ValueEventListener valueEventListener = new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -121,6 +134,14 @@ public class DepartmentAlertsFragment extends Fragment {
                 R.array.department_categories, android.R.layout.simple_spinner_dropdown_item);
         spinnerDepartment.setAdapter(arrayAdapter);
 
+        sharedPreferences = getActivity().getSharedPreferences("settings", Context.MODE_PRIVATE);
+        String department = sharedPreferences.getString("department", arrayAdapter.getItem(0).toString());
+        spinnerDepartment.setSelection(arrayAdapter.getPosition(department));
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("notifications_department_" + departmentKeys[arrayAdapter.getPosition(department)], true);
+        editor.apply();
+
         return rootView;
     }
 
@@ -128,5 +149,25 @@ public class DepartmentAlertsFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    private void switchTopicSubscription(String topic) {
+        FirebaseMessaging.getInstance().subscribeToTopic(topic);
+        LogHelper.d(TAG, "Subscribed to " + topic);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("notifications_department_" + topic, true);
+
+        for (String departmentKey : departmentKeys) {
+            if (departmentKey.equals(topic)) {
+                continue;
+            }
+
+            FirebaseMessaging.getInstance().unsubscribeFromTopic(departmentKey);
+            LogHelper.d(TAG, "Unsubscribed from " + departmentKey);
+            editor.putBoolean("notifications_department_" + departmentKey, false);
+        }
+
+        editor.apply();
     }
 }

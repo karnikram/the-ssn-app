@@ -7,21 +7,22 @@ public class WebConsolePost {
     private String date;
     private String description;
     private String email;
+    private String fileName;
     private String fileURL;
     private String postedby;
     private String title;
 
     public WebConsolePost() {
-
     }
 
     public WebConsolePost(String category, String contactno, String date, String description,
-                          String email, String fileURL, String postedby, String title) {
+                          String email, String fileName, String fileURL, String postedby, String title) {
         this.category = category;
         this.contactno = contactno;
         this.date = date;
         this.description = description;
         this.email = email;
+        this.fileName = fileName;
         this.fileURL = fileURL;
         this.postedby = postedby;
         this.title = title;
@@ -67,6 +68,14 @@ public class WebConsolePost {
         this.email = email;
     }
 
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
     public String getFileURL() {
         return fileURL;
     }
@@ -99,6 +108,7 @@ public class WebConsolePost {
                 ", date='" + date + '\'' +
                 ", description='" + description + '\'' +
                 ", email='" + email + '\'' +
+                ", fileName='" + fileName + '\'' +
                 ", fileURL='" + fileURL + '\'' +
                 ", postedby='" + postedby + '\'' +
                 ", title='" + title + '\'' +

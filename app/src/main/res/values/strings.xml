@@ -3,6 +3,8 @@
     <string name="app_name">The SSN App</string>
     <string name="temp">Karnix</string>
 
+    <string name="sign_in_email_error">You need an SSN email address to use this app.</string>
+
     <string name="drawer_home">Home</string>
     <string name="drawer_buses">Buses</string>
     <string name="drawer_dining">Dining</string>

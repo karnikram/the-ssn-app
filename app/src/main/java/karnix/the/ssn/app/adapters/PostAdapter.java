@@ -46,10 +46,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         this.context = context;
     }
 
-    private Context getContext() {
-        return context;
-    }
-
     @Override
     public PostAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();

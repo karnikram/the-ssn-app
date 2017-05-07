@@ -13,7 +13,6 @@ import karnix.the.ssn.app.model.FcmToken;
 import karnix.the.ssn.ssnmachan.R;
 
 public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
-
     private static final String TAG = "MyFirebaseIIDService";
 
     @Override

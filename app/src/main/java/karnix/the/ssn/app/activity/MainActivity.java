@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,6 +16,9 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
@@ -30,6 +34,7 @@ import com.mikepenz.materialdrawer.util.AbstractDrawerImageLoader;
 import com.mikepenz.materialdrawer.util.DrawerImageLoader;
 
 import io.karim.MaterialTabs;
+import karnix.the.ssn.app.activity.alerts.AlertsActivity;
 import karnix.the.ssn.app.activity.bus.BusActivity;
 import karnix.the.ssn.app.activity.dining.DiningActivity;
 import karnix.the.ssn.app.adapters.MainActivityPagerAdapter;
@@ -111,18 +116,20 @@ public class MainActivity extends AppCompatActivity {
                             flag = true;
                             switch ((int) drawerItem.getIdentifier()) {
                                 case 0:
-                                    break;
+                                    return false;
                                 case 2:
                                     startActivity(new Intent(MainActivity.this, BusActivity.class));
                                     break;
                                 case 3:
-                                    startActivity(new Intent(MainActivity.this, BusAnnouncementActivity.class));
+                                    startActivity(new Intent(MainActivity.this, AlertsActivity.class)
+                                            .putExtra("type", "busdept"));
                                     break;
                                 case 4:
                                     startActivity(new Intent(MainActivity.this, DiningActivity.class));
                                     break;
                                 case 5:
-                                    startActivity(new Intent(getApplicationContext(), ExamCellActivity.class));
+                                    startActivity(new Intent(MainActivity.this, AlertsActivity.class)
+                                            .putExtra("type", "examcell"));
                                     break;
                                 case 6:
                                     startActivity(new Intent(MainActivity.this, MessageActivity.class));
@@ -134,8 +141,29 @@ public class MainActivity extends AppCompatActivity {
                                     startActivity(new Intent(MainActivity.this, SettingsActivity.class));
                                     break;
                                 case 9:
+                                    GoogleSignInOptions googleSignInOptions =
+                                            new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                                                    .build();
+                                    final GoogleApiClient googleApiClient = new GoogleApiClient.Builder(MainActivity.this)
+                                            .addApi(Auth.GOOGLE_SIGN_IN_API, googleSignInOptions)
+                                            .build();
+
+                                    googleApiClient.registerConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
+                                        @Override
+                                        public void onConnected(@Nullable Bundle bundle) {
+                                            Auth.GoogleSignInApi.signOut(googleApiClient);
+                                        }
+
+                                        @Override
+                                        public void onConnectionSuspended(int i) {
+                                        }
+                                    });
+                                    googleApiClient.connect();
+
                                     FirebaseAuth.getInstance().signOut();
-                                    startActivity(new Intent(MainActivity.this, MainActivity.class));
+
+                                    startActivity(new Intent(MainActivity.this, SplashActivity.class));
+                                    finish();
                                     break;
                             }
                         }

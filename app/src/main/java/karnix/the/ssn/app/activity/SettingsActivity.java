@@ -2,7 +2,6 @@ package karnix.the.ssn.app.activity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Switch;
 
@@ -11,12 +10,12 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import karnix.the.ssn.app.utils.LogHelper;
 import karnix.the.ssn.ssnmachan.R;
 
 public class SettingsActivity extends BaseActivity {
+    private static final String TAG = LogHelper.makeLogTag(SettingsActivity.class);
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
     @BindView(R.id.switch_notifications_admin)
     Switch switchNotificationsAdmin;
     @BindView(R.id.switch_notifications_clubs)
@@ -38,10 +37,6 @@ public class SettingsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         ButterKnife.bind(this);
-
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
 
@@ -77,6 +72,7 @@ public class SettingsActivity extends BaseActivity {
                 break;
             case R.id.switch_notifications_departments:
                 switchTopicSubscription(topics[2]);
+                switchDepartmentSubscriptions();
                 break;
             case R.id.switch_notifications_exam_cell:
                 switchTopicSubscription(topics[3]);
@@ -96,13 +92,32 @@ public class SettingsActivity extends BaseActivity {
         SharedPreferences.Editor editor;
         if (sharedPreferences.getBoolean(key, false)) {
             FirebaseMessaging.getInstance().unsubscribeFromTopic(topic);
+            LogHelper.d(TAG, "Unsubscribed from " + topic);
             editor = sharedPreferences.edit();
             editor.putBoolean(key, false);
         } else {
             FirebaseMessaging.getInstance().subscribeToTopic(topic);
+            LogHelper.d(TAG, "Subscribed to " + topic);
             editor = sharedPreferences.edit();
             editor.putBoolean(key, true);
         }
         editor.apply();
+    }
+
+    private void switchDepartmentSubscriptions() {
+        String[] departmentKeys = {"cse", "ece", "eee", "mech", "it", "chem", "biomed", "civil"};
+        if (sharedPreferences.getBoolean("notifications_departments", false)) {
+            for (String departmentKey : departmentKeys) {
+                if (sharedPreferences.getBoolean("notifications_department_" + departmentKey, false)) {
+                    FirebaseMessaging.getInstance().subscribeToTopic(departmentKey);
+                    LogHelper.d(TAG, "Subscribed to " + departmentKey);
+                }
+            }
+        } else {
+            for (String departmentKey : departmentKeys) {
+                FirebaseMessaging.getInstance().unsubscribeFromTopic(departmentKey);
+                LogHelper.d(TAG, "Unsubscribed from " + departmentKey);
+            }
+        }
     }
 }

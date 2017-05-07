@@ -22,7 +22,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static String DB_PATH;
     public final Context context;
     public SQLiteDatabase sqLiteDatabase;
-    ArrayList<HashMap<String, String>> mylistData1 = new ArrayList();
+    ArrayList<HashMap<String, String>> mylistData1 = new ArrayList<>();
 
     public DatabaseHandler(Context context) {
         super(context, "database", null, 1);
@@ -197,4 +197,3 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return menuList;
     }
 }
-

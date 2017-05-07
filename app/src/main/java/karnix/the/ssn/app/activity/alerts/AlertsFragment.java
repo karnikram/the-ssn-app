@@ -29,7 +29,6 @@ import karnix.the.ssn.app.utils.LogHelper;
 import karnix.the.ssn.ssnmachan.R;
 
 public class AlertsFragment extends Fragment {
-
     private static final String TAG = LogHelper.makeLogTag(AlertsFragment.class);
 
     @BindView(R.id.postsRecyclerView)
@@ -38,10 +37,6 @@ public class AlertsFragment extends Fragment {
     ProgressBar progressBar;
 
     private Unbinder unbinder;
-
-    public AlertsFragment() {
-        // Required empty public constructor
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

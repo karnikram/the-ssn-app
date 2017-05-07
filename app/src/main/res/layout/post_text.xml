@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
@@ -14,6 +15,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="15dp" />
 
         <TextView
@@ -21,35 +23,38 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="15dp"
-            android:layout_toRightOf="@+id/postUserImage"
-            android:text="Varun Ranganathan"
+            android:layout_toEndOf="@id/postUserImage"
+            android:layout_toRightOf="@id/postUserImage"
             android:textColor="#444"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:text="Varun Ranganathan" />
 
         <TextView
             android:id="@+id/postDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/postUserImage"
+            android:layout_below="@id/postUserImage"
             android:layout_marginTop="1dp"
             android:paddingBottom="20dp"
             android:paddingLeft="12dp"
             android:paddingRight="12dp"
             android:paddingTop="12dp"
-            android:text="Yay!"
-            android:textSize="16dp" />
+            android:textSize="16sp"
+            tools:text="Yay!" />
 
         <TextView
             android:id="@+id/postDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/postUserName"
-            android:layout_below="@+id/postUserName"
+            android:layout_alignLeft="@id/postUserName"
+            android:layout_alignStart="@id/postUserName"
+            android:layout_below="@id/postUserName"
+            android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
-            android:text="Dec 9 at 15:34"
-            android:textSize="13sp" />
-
+            android:textSize="13sp"
+            tools:text="Dec 9 at 15:34" />
     </RelativeLayout>
 </android.support.v7.widget.CardView>

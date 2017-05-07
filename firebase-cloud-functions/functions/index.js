@@ -8,13 +8,13 @@ exports.sendFeedNotification = functions.database.ref('/user_posts/{pushId}').on
 
   const payload = {
     notification: {
-      title: `${snapshot.val().userName} posted a message`,
+      title: `News Feed : ${snapshot.val().userName} posted a message`,
       body: text ? (text.length <= 100 ? text : text.substring(0, 97) + '...') : '',
       icon: snapshot.val().userProfileURL,
       sound: "default"
     },
     data: {
-        title: `${snapshot.val().userName} posted a message`,
+        title: `News Feed : ${snapshot.val().userName} posted a message`,
         content: text ? (text.length <= 100 ? text : text.substring(0, 97) + '...') : '',
         color: '#2196F3'
     }
@@ -31,15 +31,16 @@ exports.sendFeedNotification = functions.database.ref('/user_posts/{pushId}').on
 exports.sendWebConsoleNotification = functions.database.ref('/posts/{pushId}').onWrite(event => {
   const snapshot = event.data;
   const text = snapshot.val().description;
+  const category = snapshot.val().category;
 
   const payload = {
     notification: {
-      title: `${snapshot.val().title}`,
+      title: `${category} : ${snapshot.val().title}`,
       body: text ? (text.length <= 100 ? text : text.substring(0, 97) + '...') : '',
       sound: "default"
     },
     data: {
-        title: `${snapshot.val().title}`,
+        title: `${category} : ${snapshot.val().title}`,
         content: text ? (text.length <= 100 ? text : text.substring(0, 97) + '...') : '',
         color: '#2196F3'
     }
@@ -50,11 +51,6 @@ exports.sendWebConsoleNotification = functions.database.ref('/posts/{pushId}').o
         timeToLive: 60 * 60 * 24 * 7 * 4
    };
 
-  var departments = ["cse", "ece", "eee", "mech", "it", "chem", "biomed", "civil"];
-  const category = snapshot.val().category;
-  if (departments.indexOf(category) > -1) {
-        return admin.messaging().sendToTopic("departments", payload, options);
-  } else {
-        return admin.messaging().sendToTopic(category, payload, options);
-  }
+
+  return admin.messaging().sendToTopic(category, payload, options);
 });
