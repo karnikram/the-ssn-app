@@ -8,17 +8,29 @@ import karnix.the.ssn.app.activity.BaseActivity;
 import karnix.the.ssn.ssnmachan.R;
 
 
-public class AlertsActivity extends BaseActivity {
+public class AlertsActivity extends BaseActivity
+{
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alerts);
 
-        Fragment fragment = new AlertsFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString("type", getIntent().getStringExtra("type"));
-        fragment.setArguments(bundle);
+        Fragment fragment;
+
+        if (getIntent().getStringExtra("type").equals("examcell"))
+        {
+            fragment = new ExamcellAlertsFragment();
+        }
+
+        else
+        {
+            fragment = new AlertsFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("type", getIntent().getStringExtra("type"));
+            fragment.setArguments(bundle);
+        }
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.fragment_container, fragment);

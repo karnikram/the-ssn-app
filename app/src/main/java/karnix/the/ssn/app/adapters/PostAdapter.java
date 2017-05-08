@@ -62,7 +62,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         final WebConsolePost post = postList.get(position);
 
         Date date = new Date(post.getDate());
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm dd/MM/yyyy");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm aaa 'on' EEE, dd MMM");
         viewHolder.dateTV.setText(simpleDateFormat.format(date));
         viewHolder.titleTV.setText(post.getTitle());
         viewHolder.descriptionTV.setText(post.getDescription());

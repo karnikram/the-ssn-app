@@ -3,7 +3,7 @@
     <string name="app_name">The SSN App</string>
     <string name="temp">Karnix</string>
 
-    <string name="sign_in_email_error">You need an SSN email address to use this app.</string>
+    <string name="sign_in_email_error">Please sign in with your SSN mail id!</string>
 
     <string name="drawer_home">Home</string>
     <string name="drawer_buses">Buses</string>
@@ -53,14 +53,15 @@
     </string-array>
 
     <string-array name="department_categories">
+        <item>Bio-Medical Engineering</item>
+        <item>Chemical Engineering</item>
+        <item>Civil Engineering</item>
         <item>Computer Science and Engineering</item>
         <item>Electronics and Communication Engineering</item>
         <item>Electrical and Electronics Engineering</item>
-        <item>Mechanical Engineering</item>
+        <item>Humanities Block</item>
         <item>Information Technology</item>
-        <item>Chemical Engineering</item>
-        <item>Bio-Medical Engineering</item>
-        <item>Civil Engineering</item>
+        <item>Mechanical Engineering</item>
     </string-array>
 
     <string name="settings_notifications">Notifications</string>

@@ -107,7 +107,8 @@ public class MainActivity extends AppCompatActivity {
                         new PrimaryDrawerItem().withIdentifier(6).withName(getString(R.string.drawer_message)).withIcon(GoogleMaterial.Icon.gmd_message),
                         new PrimaryDrawerItem().withIdentifier(7).withName(getString(R.string.drawer_about)).withIcon(GoogleMaterial.Icon.gmd_info),
                         new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withIdentifier(8).withName(getString(R.string.drawer_settings)).withIcon(GoogleMaterial.Icon.gmd_settings))
+                        new PrimaryDrawerItem().withIdentifier(8).withName(getString(R.string.drawer_settings)).withIcon(GoogleMaterial.Icon.gmd_settings),
+                        new PrimaryDrawerItem().withIdentifier(9).withName(R.string.drawer_sign_out).withIcon(GoogleMaterial.Icon.gmd_exit_to_app))
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
@@ -171,9 +172,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .build();
-
-        drawer.addStickyFooterItem(new PrimaryDrawerItem().withIdentifier(9)
-                .withName(getString(R.string.drawer_sign_out)).withIcon(GoogleMaterial.Icon.gmd_exit_to_app));
 
         adapter = new MainActivityPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(adapter);
