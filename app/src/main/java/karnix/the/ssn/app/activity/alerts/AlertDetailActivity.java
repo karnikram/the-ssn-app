@@ -11,7 +11,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,11 +32,11 @@ public class AlertDetailActivity extends BaseActivity {
     @BindView(R.id.post_imageView)
     ImageView postImageView;
 
-    private String title, content, fileName;
-    private TextView dispContent, dispNo1, dispNo2, dispUrl1, dispUrl2, dispTitle;
+    private String title, content, fileName, date;
+    private TextView dispContent, dispNo1, dispUrl1, dispUrl2, dispTitle, dispPdf, dispDate;
     private WebConsolePost post;
 
-    private ArrayList<String> links, contactNumberList;
+    private ArrayList<String> links;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,9 +47,10 @@ public class AlertDetailActivity extends BaseActivity {
         dispTitle = (TextView) findViewById(R.id.alert_title);
         dispContent = (TextView) findViewById(R.id.content_activity);
         dispNo1 = (TextView) findViewById(R.id.content_contact1);
-        dispNo2 = (TextView) findViewById(R.id.content_contact2);
-        dispUrl2 = (TextView) findViewById(R.id.content_url2);
         dispUrl1 = (TextView) findViewById(R.id.content_url1);
+        dispUrl2 = (TextView) findViewById(R.id.content_url2);
+        dispPdf = (TextView) findViewById(R.id.content_pdf);
+        dispDate = (TextView) findViewById(R.id.postdate);
 
         post = new Gson().fromJson(getIntent().getStringExtra("post"), WebConsolePost.class);
         title = post.getTitle();
@@ -55,60 +58,42 @@ public class AlertDetailActivity extends BaseActivity {
 
         dispTitle.setText(title);
 
+        Date date = new Date(post.getDate());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm aaa 'on' EEE, dd MMM");
+        dispDate.setText(simpleDateFormat.format(date));
+
         links = extractUrls();
-        contactNumberList = extractNumbers();
+
         dispUrls();
         dispNos();
 
         dispContent.setText(content);
 
         if (!post.getFileURL().equals("")) {
-            Glide.with(this).load(post.getFileURL()).into(postImageView);
 
             fileName = post.getFileName();
-            if (fileName == null) {
-                links.add(post.getFileURL());
-            } else {
-                links.add(fileName);
-            }
-            dispUrls();
-        }
 
-        if (dispUrl1.getText() != "None") {
-            dispUrl1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startUrlIntent(dispUrl1.getText().toString());
-                }
-            });
-            if (dispUrl2.getVisibility() != View.INVISIBLE) {
-                dispUrl2.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        startUrlIntent(dispUrl2.getText().toString());
-                    }
-                });
+            if(fileName.contains(".pdf"))
+            {
+                dispPdf.setText(fileName);
+                postImageView.setVisibility(View.GONE);
+            }
+
+            else if(fileName.contains(".jpg") || fileName.contains(".jpeg") || fileName.contains(".png"))
+            {
+                Glide.with(this).load(post.getFileURL()).into(postImageView);
+                dispPdf.setVisibility(View.GONE);
+            }
+            else
+            {
+                dispPdf.setVisibility(View.GONE);
+                postImageView.setVisibility(View.GONE);
             }
         }
 
-        if (dispNo1.getText() != "None") {
-            dispNo1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + dispNo1.getText().toString().trim())));
-                }
-            });
-            if (dispNo2.getVisibility() != View.INVISIBLE) {
-                dispNo2.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + dispNo2.getText().toString().trim())));
-                    }
-                });
-            }
-        }
 
-        if (!post.getEmail().equals("")) {
+        if (!post.getEmail().equals(""))
+        {
             contentEmail1.setText(post.getEmail());
             contentEmail1.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -119,36 +104,67 @@ public class AlertDetailActivity extends BaseActivity {
                 }
             });
         }
+
+        else
+            contentEmail1.setVisibility(View.GONE);
     }
+
 
     private void dispUrls() {
-        if (links.size() == 2) {
+        if (links.size() == 2)
+        {
             dispUrl1.setText(links.get(0));
             dispUrl2.setText(links.get(1));
-        } else if (links.size() == 1) {
+
+            dispUrl1.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    startUrlIntent(dispUrl1.getText().toString());
+                }
+            });
+
+            dispUrl2.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    startUrlIntent(dispUrl2.getText().toString());
+                }
+            });
+        }
+
+        else if (links.size() == 1)
+        {
             dispUrl1.setText(links.get(0));
-            dispUrl2.setVisibility(View.INVISIBLE);
-        } else {
-            dispUrl1.setText("None");
-            dispUrl2.setVisibility(View.INVISIBLE);
+            dispUrl2.setVisibility(View.GONE);
+        }
+        else
+        {
+            dispUrl1.setVisibility(View.GONE);
+            dispUrl2.setVisibility(View.GONE);
         }
     }
 
-    private void dispNos() {
-        if (!post.getContactno().equals("")) {
-            contactNumberList.add(post.getContactno());
+    private void dispNos()
+    {
+        if(!post.getContactno().equals(""))
+        {
+            dispNo1.setText(post.getContactno());
+
+            dispNo1.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + dispNo1.getText().toString().trim())));
+                }
+            });
         }
-        if (contactNumberList.size() == 2) {
-            dispNo1.setText(contactNumberList.get(0));
-            dispNo2.setText(contactNumberList.get(1));
-        } else if (contactNumberList.size() == 1) {
-            dispNo1.setText(contactNumberList.get(0));
-            dispNo2.setVisibility(View.INVISIBLE);
-        } else {
-            dispNo1.setText("None");
-            dispNo1.setTextColor(this.getResources().getColor(R.color.secondaryTextColor));
-            dispNo2.setVisibility(View.INVISIBLE);
-        }
+
+        else
+            dispNo1.setVisibility(View.GONE);
     }
 
     private ArrayList<String> extractUrls() {
@@ -174,20 +190,6 @@ public class AlertDetailActivity extends BaseActivity {
         return result;
     }
 
-    private ArrayList<String> extractNumbers() {
-        ArrayList<String> result = new ArrayList<>();
-        Pattern pattern = Pattern.compile("[0-9]+");
-        Matcher matcher = pattern.matcher(content);
-        while (matcher.find()) {
-            String no = matcher.group();
-            if (no.length() >= 10) {
-                result.add(no);
-                content = content.replace(matcher.group(), "");
-            }
-        }
-
-        return result;
-    }
 
     private void startUrlIntent(String textViewString) {
         if (textViewString.equals(fileName)) {
