@@ -1,3 +1,5 @@
+ //TODO - Check filename has spaces and handle multiple fileuploads before clicking create post button
+ //TODO - Option to remove added file in edit option
  var fileURL, fileName;
  var uploader = document.getElementById('uploader');
  var fileButton = document.getElementById('fileButton');
