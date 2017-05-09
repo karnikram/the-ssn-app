@@ -1,16 +1,24 @@
 package karnix.the.ssn.app.activity.alerts;
 
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
+import android.support.customtabs.CustomTabsIntent;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,6 +29,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import karnix.the.ssn.app.activity.BaseActivity;
 import karnix.the.ssn.app.model.posts.WebConsolePost;
+import karnix.the.ssn.app.utils.FileDownloader;
 import karnix.the.ssn.app.utils.LogHelper;
 import karnix.the.ssn.ssnmachan.R;
 
@@ -76,6 +85,16 @@ public class AlertDetailActivity extends BaseActivity {
             if(fileName.contains(".pdf"))
             {
                 dispPdf.setText(fileName);
+                dispPdf.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        Toast.makeText(AlertDetailActivity.this, "Downloading..", Toast.LENGTH_SHORT).show();
+                        new DownloadFile().execute(post.getFileURL(), post.getFileName());
+                        //startUrlIntent(post.getFileURL());
+
+                   }
+                });
                 postImageView.setVisibility(View.GONE);
             }
 
@@ -84,13 +103,14 @@ public class AlertDetailActivity extends BaseActivity {
                 Glide.with(this).load(post.getFileURL()).into(postImageView);
                 dispPdf.setVisibility(View.GONE);
             }
-            else
-            {
-                dispPdf.setVisibility(View.GONE);
-                postImageView.setVisibility(View.GONE);
-            }
+
         }
 
+        else
+        {
+            dispPdf.setVisibility(View.GONE);
+            postImageView.setVisibility(View.GONE);
+        }
 
         if (!post.getEmail().equals(""))
         {
@@ -139,6 +159,16 @@ public class AlertDetailActivity extends BaseActivity {
         {
             dispUrl1.setText(links.get(0));
             dispUrl2.setVisibility(View.GONE);
+
+            dispUrl1.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    startUrlIntent(dispUrl1.getText().toString());
+                }
+            });
+
         }
         else
         {
@@ -191,16 +221,86 @@ public class AlertDetailActivity extends BaseActivity {
     }
 
 
-    private void startUrlIntent(String textViewString) {
-        if (textViewString.equals(fileName)) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(post.getFileURL())));
-            return;
+    private void startUrlIntent(String textViewString)
+    {
+        if(!(textViewString.contains("http://") || textViewString.contains("https://")))
+        {
+            textViewString = "http://" + textViewString;
+        }
+         CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+         builder.setToolbarColor(getResources().getColor(R.color.primaryColor));
+         builder.setShowTitle(true);
+
+         CustomTabsIntent customTabsIntent = builder.build();
+         customTabsIntent.launchUrl(this, Uri.parse(textViewString));
+
+
+    }
+
+    private class DownloadFile extends AsyncTask<String, Void, String>
+    {
+        @Override
+        protected String doInBackground(String... strings)
+        {
+            String fileUrl = strings[0];
+            String fileName = strings[1];
+
+            String status;
+
+            String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
+            File folder = new File(extStorageDirectory, "TheSSNApp");
+
+            folder.mkdir();
+
+            File pdfFile = new File(folder, fileName);
+
+            try
+            {
+                pdfFile.createNewFile();
+            }
+
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+
+            status = FileDownloader.downloadFile(fileUrl, pdfFile);
+            if(status.equals("Success"))
+            return fileName;
+
+            else
+                return "Failure";
         }
 
-        if (!textViewString.startsWith("http://") && !textViewString.startsWith("https://")) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://" + textViewString.trim())));
-        } else {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(textViewString.trim())));
+        @Override
+        protected void onPostExecute(String fileName)
+        {
+
+            if(fileName.equals("Failure"))
+                Toast.makeText(AlertDetailActivity.this, "I/O Error!", Toast.LENGTH_LONG).show();
+            else
+            {
+                File pdfFile = new File(Environment.getExternalStorageDirectory() + "/TheSSNApp/" + fileName);
+                Uri path = Uri.fromFile(pdfFile);
+
+                Intent pdfIntent = new Intent(Intent.ACTION_VIEW);
+                pdfIntent.setDataAndType(path, "application/pdf");
+                pdfIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                try
+                {
+                    startActivity(pdfIntent);
+                }
+
+                catch (ActivityNotFoundException e)
+                {
+                    Toast.makeText(AlertDetailActivity.this, "Cannot find application to open PDF!", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+            }
         }
     }
+
 }
+
+
