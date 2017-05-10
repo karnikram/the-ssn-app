@@ -3,27 +3,7 @@ package karnix.the.ssn.app.activity.alerts;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.customtabs.CustomTabsIntent;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ProgressBar;
-
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import butterknife.BindView;
-
-import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -50,9 +30,6 @@ import karnix.the.ssn.app.model.Node;
 import karnix.the.ssn.app.model.posts.WebConsolePost;
 import karnix.the.ssn.app.utils.LogHelper;
 import karnix.the.ssn.ssnmachan.R;
-
-import android.support.design.widget.FloatingActionButton;
-import android.widget.Toast;
 
 public class ExamcellAlertsFragment extends Fragment {
     private static final String TAG = LogHelper.makeLogTag(AlertsFragment.class);
@@ -126,11 +103,9 @@ public class ExamcellAlertsFragment extends Fragment {
         };
         nodesRef.addChildEventListener(childEventListener);
 
-        fab.setOnClickListener(new View.OnClickListener()
-        {
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 String url = "http://www.ssnexamcell.in/fe.php";
 
                 CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();

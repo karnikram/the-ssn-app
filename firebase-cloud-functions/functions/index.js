@@ -33,10 +33,27 @@ exports.sendWebConsoleNotification = functions.database.ref('/posts/{pushId}').o
   const text = snapshot.val().description;
   const category = snapshot.val().category;
 
+  var expansion = {"admin":"Administrative Block",
+                           "busdept":"Bus Department",
+                           "clubs":"Clubs",
+                           "examcell":"Exam Cell",
+                           "biomed":"BME Department",
+                           "chem":"Chemical Engineering",
+                           "civil":"Civil Engineering",
+                           "cse":"CSE Department",
+                           "ece":"ECE Department",
+                           "eee":"EEE Department",
+                           "human":"Humanities Block",
+                           "it":"IT Department",
+                           "mech":"Mechanical Engineering Department"}
+
+   const expanded = expansion[category];
+   console.log(expanded);
+
   const payload = {
     notification: {
-      title: `${category} : ${snapshot.val().title}`,
-      body: text ? (text.length <= 100 ? text : text.substring(0, 97) + '...') : '',
+      title: expanded,
+      body: snapshot.val().title,
       sound: "default"
     },
     data: {

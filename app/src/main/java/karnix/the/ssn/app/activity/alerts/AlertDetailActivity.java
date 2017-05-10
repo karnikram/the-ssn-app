@@ -1,6 +1,5 @@
 package karnix.the.ssn.app.activity.alerts;
 
-
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
@@ -8,7 +7,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.customtabs.CustomTabsIntent;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -82,38 +80,29 @@ public class AlertDetailActivity extends BaseActivity {
 
             fileName = post.getFileName();
 
-            if(fileName.contains(".pdf"))
-            {
+            if (fileName.contains(".pdf")) {
                 dispPdf.setText(fileName);
                 dispPdf.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View v)
-                    {
+                    public void onClick(View v) {
                         Toast.makeText(AlertDetailActivity.this, "Downloading..", Toast.LENGTH_SHORT).show();
                         new DownloadFile().execute(post.getFileURL(), post.getFileName());
                         //startUrlIntent(post.getFileURL());
 
-                   }
+                    }
                 });
                 postImageView.setVisibility(View.GONE);
-            }
-
-            else if(fileName.contains(".jpg") || fileName.contains(".jpeg") || fileName.contains(".png"))
-            {
+            } else if (fileName.contains(".jpg") || fileName.contains(".jpeg") || fileName.contains(".png")) {
                 Glide.with(this).load(post.getFileURL()).into(postImageView);
                 dispPdf.setVisibility(View.GONE);
             }
 
-        }
-
-        else
-        {
+        } else {
             dispPdf.setVisibility(View.GONE);
             postImageView.setVisibility(View.GONE);
         }
 
-        if (!post.getEmail().equals(""))
-        {
+        if (!post.getEmail().equals("")) {
             contentEmail1.setText(post.getEmail());
             contentEmail1.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -123,77 +112,57 @@ public class AlertDetailActivity extends BaseActivity {
                     startActivity(Intent.createChooser(emailIntent, "Send Email"));
                 }
             });
-        }
-
-        else
+        } else
             contentEmail1.setVisibility(View.GONE);
     }
 
 
     private void dispUrls() {
-        if (links.size() == 2)
-        {
+        if (links.size() == 2) {
             dispUrl1.setText(links.get(0));
             dispUrl2.setText(links.get(1));
 
-            dispUrl1.setOnClickListener(new View.OnClickListener()
-            {
+            dispUrl1.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v)
-                {
+                public void onClick(View v) {
                     startUrlIntent(dispUrl1.getText().toString());
                 }
             });
 
-            dispUrl2.setOnClickListener(new View.OnClickListener()
-            {
+            dispUrl2.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v)
-                {
+                public void onClick(View v) {
                     startUrlIntent(dispUrl2.getText().toString());
                 }
             });
-        }
-
-        else if (links.size() == 1)
-        {
+        } else if (links.size() == 1) {
             dispUrl1.setText(links.get(0));
             dispUrl2.setVisibility(View.GONE);
 
-            dispUrl1.setOnClickListener(new View.OnClickListener()
-            {
+            dispUrl1.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v)
-                {
+                public void onClick(View v) {
                     startUrlIntent(dispUrl1.getText().toString());
                 }
             });
 
-        }
-        else
-        {
+        } else {
             dispUrl1.setVisibility(View.GONE);
             dispUrl2.setVisibility(View.GONE);
         }
     }
 
-    private void dispNos()
-    {
-        if(!post.getContactno().equals(""))
-        {
+    private void dispNos() {
+        if (!post.getContactno().equals("")) {
             dispNo1.setText(post.getContactno());
 
-            dispNo1.setOnClickListener(new View.OnClickListener()
-            {
+            dispNo1.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v)
-                {
+                public void onClick(View v) {
                     startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + dispNo1.getText().toString().trim())));
                 }
             });
-        }
-
-        else
+        } else
             dispNo1.setVisibility(View.GONE);
     }
 
@@ -221,27 +190,23 @@ public class AlertDetailActivity extends BaseActivity {
     }
 
 
-    private void startUrlIntent(String textViewString)
-    {
-        if(!(textViewString.contains("http://") || textViewString.contains("https://")))
-        {
+    private void startUrlIntent(String textViewString) {
+        if (!(textViewString.contains("http://") || textViewString.contains("https://"))) {
             textViewString = "http://" + textViewString;
         }
-         CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
-         builder.setToolbarColor(getResources().getColor(R.color.primaryColor));
-         builder.setShowTitle(true);
+        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+        builder.setToolbarColor(getResources().getColor(R.color.primaryColor));
+        builder.setShowTitle(true);
 
-         CustomTabsIntent customTabsIntent = builder.build();
-         customTabsIntent.launchUrl(this, Uri.parse(textViewString));
+        CustomTabsIntent customTabsIntent = builder.build();
+        customTabsIntent.launchUrl(this, Uri.parse(textViewString));
 
 
     }
 
-    private class DownloadFile extends AsyncTask<String, Void, String>
-    {
+    private class DownloadFile extends AsyncTask<String, Void, String> {
         @Override
-        protected String doInBackground(String... strings)
-        {
+        protected String doInBackground(String... strings) {
             String fileUrl = strings[0];
             String fileName = strings[1];
 
@@ -254,32 +219,26 @@ public class AlertDetailActivity extends BaseActivity {
 
             File pdfFile = new File(folder, fileName);
 
-            try
-            {
+            try {
                 pdfFile.createNewFile();
-            }
-
-            catch (IOException e)
-            {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
 
             status = FileDownloader.downloadFile(fileUrl, pdfFile);
-            if(status.equals("Success"))
-            return fileName;
+            if (status.equals("Success"))
+                return fileName;
 
             else
                 return "Failure";
         }
 
         @Override
-        protected void onPostExecute(String fileName)
-        {
+        protected void onPostExecute(String fileName) {
 
-            if(fileName.equals("Failure"))
+            if (fileName.equals("Failure"))
                 Toast.makeText(AlertDetailActivity.this, "I/O Error!", Toast.LENGTH_LONG).show();
-            else
-            {
+            else {
                 File pdfFile = new File(Environment.getExternalStorageDirectory() + "/TheSSNApp/" + fileName);
                 Uri path = Uri.fromFile(pdfFile);
 
@@ -287,20 +246,14 @@ public class AlertDetailActivity extends BaseActivity {
                 pdfIntent.setDataAndType(path, "application/pdf");
                 pdfIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-                try
-                {
+                try {
                     startActivity(pdfIntent);
-                }
-
-                catch (ActivityNotFoundException e)
-                {
+                } catch (ActivityNotFoundException e) {
                     Toast.makeText(AlertDetailActivity.this, "Cannot find application to open PDF!", Toast.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
             }
         }
     }
-
 }
-
 

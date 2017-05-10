@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <ImageView
+        android:id="@+id/splash_tower"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:src="@drawable/splash_tower"
-        android:id="@+id/splash_tower"/>
+        android:src="@drawable/splash_tower" />
 
     <ImageView
+        android:id="@+id/hand"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/hand"
-        android:layout_marginTop="238dp"
+        android:layout_centerHorizontal="true"
+        android:paddingRight="16dp"
         android:scaleX="0.3"
         android:scaleY="0.4"
-        android:paddingRight="17dp"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/splash_hand"/>
-
-
-</RelativeLayout>
+        android:src="@drawable/splash_hand"
+        app:layout_marginTopPercent="40%" />
+</android.support.percent.PercentRelativeLayout>

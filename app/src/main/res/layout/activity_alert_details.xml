@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backColor"
@@ -30,7 +31,7 @@
                 <LinearLayout
                     android:id="@+id/container_main_category_content"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:background="#FFFFFF"
                     android:orientation="vertical"
                     android:padding="8dp">
@@ -38,27 +39,24 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        >
+                        android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/alert_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="left"
-                            android:text="Tech Club Sesssion Tomorrow"
+                            android:layout_gravity="start"
                             android:textColor="@color/primaryTextColor"
                             android:textSize="22sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            tools:text="Tech Club Session Tomorrow" />
 
                         <TextView
                             android:id="@+id/postdate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="start"
-                            android:text="5:00 PM on 04 May, 2018"/>
-
-
+                            tools:text="5:00 PM on 04 May, 2018" />
                     </LinearLayout>
 
                     <TextView
@@ -66,9 +64,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="content"
                         android:textColor="@color/primaryTextColor"
-                        android:textIsSelectable="true" />
+                        android:textIsSelectable="true"
+                        tools:text="content" />
 
                     <ImageView
                         android:id="@+id/post_imageView"
@@ -77,58 +75,59 @@
                         android:layout_margin="16dp"
                         android:scaleType="fitCenter" />
 
-                   <TextView
+                    <TextView
                         android:id="@+id/content_pdf"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
-                        android:text=".pdf"
                         android:focusable="false"
                         android:textColor="@color/primaryColor"
                         android:textIsSelectable="true"
-                        android:textStyle="italic" />
+                        android:textStyle="italic"
+                        tools:text=".pdf" />
+
                     <TextView
                         android:id="@+id/content_url1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="url"
-                        android:focusable="false"
                         android:layout_marginBottom="8dp"
+                        android:focusable="false"
                         android:textColor="@color/primaryColor"
                         android:textIsSelectable="true"
-                        android:textStyle="italic" />
+                        android:textStyle="italic"
+                        tools:text="url" />
+
                     <TextView
                         android:id="@+id/content_url2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="url"
-                        android:focusable="false"
                         android:layout_marginBottom="8dp"
+                        android:focusable="false"
                         android:textColor="@color/primaryColor"
                         android:textIsSelectable="true"
-                        android:textStyle="italic" />
+                        android:textStyle="italic"
+                        tools:text="url" />
 
                     <TextView
+                        android:id="@+id/content_email1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/content_email1"
-                        android:text="email"
-                        android:focusable="false"
                         android:layout_marginBottom="8dp"
+                        android:focusable="false"
                         android:textColor="@color/primaryColor"
-                        android:textStyle="italic"/>
+                        android:textStyle="italic"
+                        tools:text="email" />
 
-                   <TextView
+                    <TextView
                         android:id="@+id/content_contact1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="phone"
                         android:focusable="false"
                         android:textColor="@color/primaryColor"
                         android:textIsSelectable="true"
-                        android:textStyle="italic" />
-
-                    </LinearLayout>
+                        android:textStyle="italic"
+                        tools:text="phone" />
+                </LinearLayout>
             </ScrollView>
         </android.support.v7.widget.CardView>
     </FrameLayout>
