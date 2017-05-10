@@ -40,7 +40,7 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
 
     public void setPostDate(Long time) {
         Date date = new Date(time);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm dd/MM/yyyy");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm aaa 'on' EEE, dd MMM");
         mPostDate.setText(simpleDateFormat.format(date));
     }
 

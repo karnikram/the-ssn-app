@@ -81,9 +81,9 @@
                         android:id="@+id/content_pdf"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
                         android:text=".pdf"
+                        android:focusable="false"
                         android:textColor="@color/primaryColor"
                         android:textIsSelectable="true"
                         android:textStyle="italic" />
@@ -92,6 +92,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="url"
+                        android:focusable="false"
                         android:layout_marginBottom="8dp"
                         android:textColor="@color/primaryColor"
                         android:textIsSelectable="true"
@@ -101,6 +102,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="url"
+                        android:focusable="false"
                         android:layout_marginBottom="8dp"
                         android:textColor="@color/primaryColor"
                         android:textIsSelectable="true"
@@ -111,6 +113,7 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/content_email1"
                         android:text="email"
+                        android:focusable="false"
                         android:layout_marginBottom="8dp"
                         android:textColor="@color/primaryColor"
                         android:textStyle="italic"/>
@@ -120,6 +123,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="phone"
+                        android:focusable="false"
                         android:textColor="@color/primaryColor"
                         android:textIsSelectable="true"
                         android:textStyle="italic" />

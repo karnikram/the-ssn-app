@@ -22,7 +22,7 @@
         android:layout_margin="@dimen/fab_margin"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:src="@drawable/ic_launcher"
+        android:src="@drawable/seating"
         />
 
 </RelativeLayout>

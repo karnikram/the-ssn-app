@@ -201,9 +201,9 @@ public class AlertDetailActivity extends BaseActivity {
         ArrayList<String> result = new ArrayList<String>();
 
         Pattern pattern = Pattern.compile(
-                "\\b(((ht|f)tp(s?)\\:\\/\\/|~\\/|\\/)|www.)" +
+                "\\b(((ht|f)tp(s?)\\:\\/\\/|~\\/|\\/)|www.|coe1.|coe2.)" +
                         "(\\w+:\\w+@)?(([-\\w]+\\.)+(com|org|net|gov|co|in" +
-                        "|mil|biz|info|mobi|name|aero|jobs|museum" +
+                        "|mil|biz|info|mobi|name|aero|jobs|edu|museum" +
                         "|travel|[a-z]{2}))(:[\\d]{1,5})?" +
                         "(((\\/([-\\w~!$+|.,=]|%[a-f\\d]{2})+)+|\\/)+|\\?|#)?" +
                         "((\\?([-\\w~!$+|.,*:]|%[a-f\\d{2}])+=?" +

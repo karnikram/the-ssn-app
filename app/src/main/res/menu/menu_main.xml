@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/action_feed"
-        android:icon="@drawable/ic_rss_feed"
+        android:icon="@drawable/people"
         android:title="@string/action_feed"
         app:showAsAction="always" />
 </menu>

@@ -41,7 +41,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Developer"
+                        android:text="Developers"
                         android:textColor="@color/primaryTextColor"
                         android:textSize="24sp"
                         android:textStyle="italic" />
@@ -58,7 +58,6 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Karnik Ram"
                             android:textColor="@color/primaryTextColor"
                             android:textSize="24sp"
                             android:textStyle="italic" />
@@ -75,6 +74,27 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/primaryTextColor"
+                            android:textSize="24sp"
+                            android:textStyle="italic" />
+
+                        <ImageView
+                            android:id="@+id/fb4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/fb" />
 
                     </RelativeLayout>
 
@@ -101,7 +121,6 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Krishna"
                             android:textColor="@color/primaryTextColor"
                             android:textSize="24sp"
                             android:textStyle="italic" />
