@@ -1,20 +1,3 @@
-/*
- * Copyright (C) 2017  Arun T S
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>
- */
-
 package karnix.the.ssn.app.adapters;
 
 import android.content.Context;
@@ -23,9 +6,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
@@ -58,7 +43,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(PostAdapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(final PostAdapter.ViewHolder viewHolder, int position) {
         final WebConsolePost post = postList.get(position);
 
         Date date = new Date(post.getDate());
@@ -74,6 +59,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 context.startActivity(intent);
             }
         });
+
+        if (!post.getFileURL().equals("")) {
+            Glide.with(context)
+                    .load(post.getFileURL())
+                    .placeholder(R.drawable.ic_attachment)
+                    .into(viewHolder.imageView);
+            viewHolder.imageView.setVisibility(View.VISIBLE);
+        } else {
+            Glide.clear(viewHolder.imageView);
+            viewHolder.imageView.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -86,6 +82,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         private TextView titleTV;
         private TextView dateTV;
         private TextView descriptionTV;
+        private ImageView imageView;
 
         public ViewHolder(final View itemView) {
             super(itemView);
@@ -94,6 +91,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             titleTV = (TextView) itemView.findViewById(R.id.postTitle);
             dateTV = (TextView) itemView.findViewById(R.id.postDate);
             descriptionTV = (TextView) itemView.findViewById(R.id.postDescription);
+            imageView = (ImageView) itemView.findViewById(R.id.post_imageView);
         }
     }
 }
