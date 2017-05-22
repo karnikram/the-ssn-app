@@ -19,8 +19,12 @@ public class AlertsActivity extends BaseActivity {
 
         if (getIntent().getStringExtra("type").equals("examcell")) {
             fragment = new ExamcellAlertsFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("type", getIntent().getStringExtra("type"));
+            fragment.setArguments(bundle);
         } else {
-            fragment = new AlertsFragment();
+            fragment = new ExamcellAlertsFragment();
+            //fragment = new AlertsFragment();
             Bundle bundle = new Bundle();
             bundle.putString("type", getIntent().getStringExtra("type"));
             fragment.setArguments(bundle);

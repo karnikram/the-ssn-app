@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -20,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -49,22 +51,43 @@ public class ExamcellAlertsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_alerts_exam, container, false);
         unbinder = ButterKnife.bind(this, rootView);
 
+        final String type = getArguments().getString("type");
+
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setStackFromEnd(true);
         layoutManager.setReverseLayout(true);
 
         final List<WebConsolePost> postList = new ArrayList<>();
         final PostAdapter postAdapter = new PostAdapter(getActivity(), postList);
+        final ArrayList<Node> nodesList = new ArrayList<Node>();
+        final HashMap<String,WebConsolePost> postHashMap = new HashMap<String,WebConsolePost>();
         postsRecyclerView.setLayoutManager(layoutManager);
         postsRecyclerView.setAdapter(postAdapter);
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference nodesRef = database.getReference("categorywise_posts/examcell");
+        if(type.equals("busdept")) {
+            nodesRef = database.getReference("categorywise_posts/busdept");
+            Toast.makeText(getContext(), "Bus Dept!", Toast.LENGTH_SHORT).show();
+        }
 
         final ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 WebConsolePost post = dataSnapshot.getValue(WebConsolePost.class);
+                if(post==null){
+                    postList.remove(postHashMap.get(dataSnapshot.getKey()));
+                    postHashMap.remove(dataSnapshot.getKey());
+                    postAdapter.notifyDataSetChanged();
+                    return;
+                }
+                if(postHashMap.containsKey(dataSnapshot.getKey())){
+                    if(postList.contains(postHashMap.get(dataSnapshot.getKey()))){
+                        postList.remove(postHashMap.get(dataSnapshot.getKey()));
+                        postAdapter.notifyDataSetChanged();
+                    }
+                }
+                postHashMap.put(dataSnapshot.getKey(),post);
                 postList.add(post);
                 postAdapter.notifyDataSetChanged();
                 layoutManager.scrollToPositionWithOffset(postList.size() - 1, 0);
@@ -81,8 +104,10 @@ public class ExamcellAlertsFragment extends Fragment {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Node node = dataSnapshot.getValue(Node.class);
-                DatabaseReference nodesRef = database.getReference("posts/" + node.getPid());
-                nodesRef.addValueEventListener(valueEventListener);
+                nodesList.add(node);
+                FirebaseDatabase.getInstance().getReference("posts/"+node.getPid()).addValueEventListener(valueEventListener);
+                //DatabaseReference nodesRef = database.getReference("posts/" + node.getPid());
+                //nodesRef.addValueEventListener(valueEventListener);
             }
 
             @Override
@@ -91,6 +116,10 @@ public class ExamcellAlertsFragment extends Fragment {
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
+               if(nodesList.contains(dataSnapshot.getValue(Node.class))) {
+                   nodesList.remove(dataSnapshot.getValue(Node.class));
+                   FirebaseDatabase.getInstance().getReference("posts/"+dataSnapshot.getValue(Node.class).getPid()).removeEventListener(valueEventListener);
+               }
             }
 
             @Override
