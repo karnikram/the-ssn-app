@@ -84,4 +84,6 @@
 
     <string name="connection_failed">Connection Failed</string>
     <string name="alerts_retry">Retry</string>
+
+    <string name="about_libraries">About Libraries</string>
 </resources>

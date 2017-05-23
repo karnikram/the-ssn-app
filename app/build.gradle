@@ -31,6 +31,9 @@ dependencies {
     compile 'com.android.support:support-v4:25.3.1'
     compile 'com.android.support:percent:25.3.1'
 
+    compile('com.mikepenz:aboutlibraries:5.9.6@aar') {
+        transitive = true
+    }
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.mikepenz:google-material-typeface:3.0.1.0.original@aar'

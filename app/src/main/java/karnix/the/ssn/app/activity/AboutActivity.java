@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.mikepenz.aboutlibraries.Libs;
+import com.mikepenz.aboutlibraries.LibsBuilder;
+
 import karnix.the.ssn.ssnmachan.R;
 
 public class AboutActivity extends BaseActivity {
@@ -16,7 +19,7 @@ public class AboutActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.about_activity);
+        setContentView(R.layout.activity_about);
 
         fb1 = (ImageView) findViewById(R.id.fb1);
         fb2 = (ImageView) findViewById(R.id.fb2);
@@ -102,6 +105,14 @@ public class AboutActivity extends BaseActivity {
                 }
             }
         });
+    }
 
+    public void aboutLibrariesOnClick(View view) {
+        new LibsBuilder()
+                .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
+                .withActivityTitle(getString(R.string.about_libraries))
+                .withAutoDetect(true)
+                .withFields(R.string.class.getFields())
+                .start(this);
     }
 }
