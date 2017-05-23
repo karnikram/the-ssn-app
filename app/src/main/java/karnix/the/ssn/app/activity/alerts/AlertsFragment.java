@@ -1,6 +1,9 @@
 package karnix.the.ssn.app.activity.alerts;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.customtabs.CustomTabsIntent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -36,6 +40,9 @@ public class AlertsFragment extends Fragment {
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
 
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
+
     private Unbinder unbinder;
 
     @Override
@@ -44,6 +51,11 @@ public class AlertsFragment extends Fragment {
         unbinder = ButterKnife.bind(this, rootView);
 
         final String type = getArguments().getString("type");
+        if (type.equals("examcell")) {
+            fab.setVisibility(View.VISIBLE);
+        } else {
+            fab.setVisibility(View.GONE);
+        }
 
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setStackFromEnd(true);
@@ -51,6 +63,8 @@ public class AlertsFragment extends Fragment {
 
         final List<WebConsolePost> postList = new ArrayList<>();
         final PostAdapter postAdapter = new PostAdapter(getActivity(), postList);
+        final ArrayList<Node> nodesList = new ArrayList<Node>();
+        final HashMap<String, WebConsolePost> postHashMap = new HashMap<String, WebConsolePost>();
         postsRecyclerView.setLayoutManager(layoutManager);
         postsRecyclerView.setAdapter(postAdapter);
 
@@ -61,6 +75,19 @@ public class AlertsFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 WebConsolePost post = dataSnapshot.getValue(WebConsolePost.class);
+                if (post == null) {
+                    postList.remove(postHashMap.get(dataSnapshot.getKey()));
+                    postHashMap.remove(dataSnapshot.getKey());
+                    postAdapter.notifyDataSetChanged();
+                    return;
+                }
+                if (postHashMap.containsKey(dataSnapshot.getKey())) {
+                    if (postList.contains(postHashMap.get(dataSnapshot.getKey()))) {
+                        postList.remove(postHashMap.get(dataSnapshot.getKey()));
+                        postAdapter.notifyDataSetChanged();
+                    }
+                }
+                postHashMap.put(dataSnapshot.getKey(), post);
                 postList.add(post);
                 postAdapter.notifyDataSetChanged();
                 layoutManager.scrollToPositionWithOffset(postList.size() - 1, 0);
@@ -77,8 +104,9 @@ public class AlertsFragment extends Fragment {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Node node = dataSnapshot.getValue(Node.class);
-                DatabaseReference nodesRef = database.getReference("posts/" + node.getPid());
-                nodesRef.addValueEventListener(valueEventListener);
+                nodesList.add(node);
+                FirebaseDatabase.getInstance().getReference("posts/" + node.getPid())
+                        .addValueEventListener(valueEventListener);
             }
 
             @Override
@@ -87,6 +115,12 @@ public class AlertsFragment extends Fragment {
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
+                if (nodesList.contains(dataSnapshot.getValue(Node.class))) {
+                    nodesList.remove(dataSnapshot.getValue(Node.class));
+                    FirebaseDatabase.getInstance().getReference("posts/" +
+                            dataSnapshot.getValue(Node.class).getPid())
+                            .removeEventListener(valueEventListener);
+                }
             }
 
             @Override
@@ -98,6 +132,20 @@ public class AlertsFragment extends Fragment {
             }
         };
         nodesRef.addChildEventListener(childEventListener);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = "http://www.ssnexamcell.in/fe.php";
+
+                CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                builder.setToolbarColor(getResources().getColor(R.color.primaryColor));
+                builder.setShowTitle(true);
+
+                CustomTabsIntent customTabsIntent = builder.build();
+                customTabsIntent.launchUrl(getActivity(), Uri.parse(url));
+            }
+        });
 
         return rootView;
     }
