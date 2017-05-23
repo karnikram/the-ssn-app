@@ -45,7 +45,9 @@ exports.sendWebConsoleNotification = functions.database.ref('/posts/{pushId}').o
                            "eee":"EEE Department",
                            "human":"Humanities Block",
                            "it":"IT Department",
-                           "mech":"Mechanical Engineering Department"}
+                           "mech":"Mechanical Engineering Department",
+                           "somca":"School of Management",
+                           "sase":"School of Advanced Career Education"}
 
    const expanded = expansion[category];
    console.log(expanded);

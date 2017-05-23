@@ -26,19 +26,19 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
 
         FirebaseMessaging.getInstance().subscribeToTopic(topics[0]);
         FirebaseMessaging.getInstance().subscribeToTopic(topics[1]);
-        FirebaseMessaging.getInstance().unsubscribeFromTopic(topics[2]);
+        FirebaseMessaging.getInstance().subscribeToTopic(topics[2]);
         FirebaseMessaging.getInstance().subscribeToTopic(topics[3]);
         FirebaseMessaging.getInstance().subscribeToTopic(topics[4]);
-        FirebaseMessaging.getInstance().unsubscribeFromTopic(topics[5]);
+        FirebaseMessaging.getInstance().subscribeToTopic(topics[5]);
 
         SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("notifications_" + topics[0], true);
         editor.putBoolean("notifications_" + topics[1], true);
-        editor.putBoolean("notifications_" + topics[2], false);
+        editor.putBoolean("notifications_" + topics[2], true);
         editor.putBoolean("notifications_" + topics[3], true);
         editor.putBoolean("notifications_" + topics[4], true);
-        editor.putBoolean("notifications_" + topics[5], false);
+        editor.putBoolean("notifications_" + topics[5], true);
         editor.apply();
     }
 
