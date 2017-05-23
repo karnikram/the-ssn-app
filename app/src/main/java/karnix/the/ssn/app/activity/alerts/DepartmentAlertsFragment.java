@@ -11,10 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -35,7 +33,6 @@ import karnix.the.ssn.app.adapters.PostAdapter;
 import karnix.the.ssn.app.model.Node;
 import karnix.the.ssn.app.model.posts.WebConsolePost;
 import karnix.the.ssn.app.utils.LogHelper;
-import karnix.the.ssn.app.utils.NetworkUtils;
 import karnix.the.ssn.ssnmachan.R;
 
 public class DepartmentAlertsFragment extends Fragment {
@@ -47,32 +44,18 @@ public class DepartmentAlertsFragment extends Fragment {
     ProgressBar progressBar;
     @BindView(R.id.spinner_department)
     Spinner spinnerDepartment;
-    @BindView(R.id.button_retry_alerts)
-    Button buttonRetryAlerts;
-    @BindView(R.id.textView_connection_failed)
-    TextView textViewConnectionFailed;
 
     private Unbinder unbinder;
-
-    private LinearLayoutManager linearLayoutManager;
-    private List<WebConsolePost> postList;
-    private PostAdapter postAdapter;
-
     private SharedPreferences sharedPreferences;
     private String[] departmentKeys;
-    private String departmentKey;
 
-    private ArrayList<Node> nodesList = new ArrayList<>();
-    private HashMap<String, WebConsolePost> postHashMap = new HashMap<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_alerts_department, container, false);
         unbinder = ButterKnife.bind(this, rootView);
 
-        checkConnectionStatus();
-
-        departmentKeys = new String[]{"biomed", "chem", "civil", "cse", "ece", "eee", "human", "it", "mech"};
+        departmentKeys = new String[]{"biomed", "chem", "civil", "cse", "ece", "eee", "human", "it", "mech", "sase", "somca"};
 
         spinnerDepartment.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -83,25 +66,85 @@ public class DepartmentAlertsFragment extends Fragment {
                 editor.putString("department", spinnerDepartment.getSelectedItem().toString());
                 editor.apply();
 
-                departmentKey = departmentKeys[spinnerDepartment.getSelectedItemPosition()];
+                final String departmentKey = departmentKeys[spinnerDepartment.getSelectedItemPosition()];
 
                 if (sharedPreferences.getBoolean("notifications_departments", false)) {
                     switchTopicSubscription(departmentKey);
                 }
 
-                linearLayoutManager = new LinearLayoutManager(getContext());
-                linearLayoutManager.setStackFromEnd(true);
-                linearLayoutManager.setReverseLayout(true);
+                final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+                layoutManager.setStackFromEnd(true);
+                layoutManager.setReverseLayout(true);
 
-                postList = new ArrayList<>();
-                postAdapter = new PostAdapter(getActivity(), postList);
-                postsRecyclerView.setLayoutManager(linearLayoutManager);
+                final List<WebConsolePost> postList = new ArrayList<>();
+                final PostAdapter postAdapter = new PostAdapter(getActivity(), postList);
+                final ArrayList<Node> nodesList = new ArrayList<>();
+                final HashMap<String, WebConsolePost> postHashMap = new HashMap<>();
+                postsRecyclerView.setLayoutManager(layoutManager);
                 postsRecyclerView.setAdapter(postAdapter);
 
-                nodesList = new ArrayList<>();
-                postHashMap = new HashMap<>();
+                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference nodesRef = database.getReference("categorywise_posts/" + departmentKey);
+                final ValueEventListener valueEventListener = new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        WebConsolePost post = dataSnapshot.getValue(WebConsolePost.class);
+                        if (post == null) {
+                            postList.remove(postHashMap.get(dataSnapshot.getKey()));
+                            postHashMap.remove(dataSnapshot.getKey());
+                            postAdapter.notifyDataSetChanged();
+                            return;
+                        }
+                        if (postHashMap.containsKey(dataSnapshot.getKey())) {
+                            if (postList.contains(postHashMap.get(dataSnapshot.getKey()))) {
+                                postList.remove(postHashMap.get(dataSnapshot.getKey()));
+                                postAdapter.notifyDataSetChanged();
+                            }
+                        }
+                        postHashMap.put(dataSnapshot.getKey(), post);
+                        postList.add(post);
+                        postAdapter.notifyDataSetChanged();
+                        layoutManager.scrollToPositionWithOffset(postList.size() - 1, 0);
+                        if (progressBar != null) {
+                            progressBar.setVisibility(View.GONE);
+                        }
+                    }
 
-                checkConnectionStatus();
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                };
+                ChildEventListener childEventListener = new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                        Node node = dataSnapshot.getValue(Node.class);
+                        DatabaseReference nodesRef = database.getReference("posts/" + node.getPid());
+                        nodesRef.addValueEventListener(valueEventListener);
+                    }
+
+                    @Override
+                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                    }
+
+                    @Override
+                    public void onChildRemoved(DataSnapshot dataSnapshot) {
+                        if (nodesList.contains(dataSnapshot.getValue(Node.class))) {
+                            nodesList.remove(dataSnapshot.getValue(Node.class));
+                            FirebaseDatabase.getInstance().getReference("posts/" +
+                                    dataSnapshot.getValue(Node.class).getPid())
+                                    .removeEventListener(valueEventListener);
+                        }
+                    }
+
+                    @Override
+                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                };
+                nodesRef.addChildEventListener(childEventListener);
             }
 
             @Override
@@ -121,95 +164,7 @@ public class DepartmentAlertsFragment extends Fragment {
         editor.putBoolean("notifications_department_" + departmentKeys[arrayAdapter.getPosition(department)], true);
         editor.apply();
 
-        buttonRetryAlerts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkConnectionStatus();
-            }
-        });
-
         return rootView;
-    }
-
-    private void checkConnectionStatus() {
-        if (NetworkUtils.isConnectedToInternet(getActivity())) {
-            getPosts();
-        } else {
-            progressBar.setVisibility(View.GONE);
-
-            textViewConnectionFailed.setVisibility(View.VISIBLE);
-            buttonRetryAlerts.setVisibility(View.VISIBLE);
-        }
-    }
-
-    private void getPosts() {
-        progressBar.setVisibility(View.VISIBLE);
-
-        textViewConnectionFailed.setVisibility(View.GONE);
-        buttonRetryAlerts.setVisibility(View.GONE);
-        
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference nodesRef = database.getReference("categorywise_posts/" + departmentKey);
-        final ValueEventListener valueEventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                WebConsolePost post = dataSnapshot.getValue(WebConsolePost.class);
-                if (post == null) {
-                    postList.remove(postHashMap.get(dataSnapshot.getKey()));
-                    postHashMap.remove(dataSnapshot.getKey());
-                    postAdapter.notifyDataSetChanged();
-                    return;
-                }
-                if (postHashMap.containsKey(dataSnapshot.getKey())) {
-                    if (postList.contains(postHashMap.get(dataSnapshot.getKey()))) {
-                        postList.remove(postHashMap.get(dataSnapshot.getKey()));
-                        postAdapter.notifyDataSetChanged();
-                    }
-                }
-                postHashMap.put(dataSnapshot.getKey(), post);
-                postList.add(post);
-                postAdapter.notifyDataSetChanged();
-                linearLayoutManager.scrollToPositionWithOffset(postList.size() - 1, 0);
-                if (progressBar != null) {
-                    progressBar.setVisibility(View.GONE);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        };
-        ChildEventListener childEventListener = new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Node node = dataSnapshot.getValue(Node.class);
-                DatabaseReference nodesRef = database.getReference("posts/" + node.getPid());
-                nodesRef.addValueEventListener(valueEventListener);
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-                if (nodesList.contains(dataSnapshot.getValue(Node.class))) {
-                    nodesList.remove(dataSnapshot.getValue(Node.class));
-                    FirebaseDatabase.getInstance().getReference("posts/" +
-                            dataSnapshot.getValue(Node.class).getPid())
-                            .removeEventListener(valueEventListener);
-                }
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        };
-        nodesRef.addChildEventListener(childEventListener);
     }
 
     @Override

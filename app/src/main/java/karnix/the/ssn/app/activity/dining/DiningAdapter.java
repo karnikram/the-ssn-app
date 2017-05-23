@@ -109,6 +109,15 @@ public class DiningAdapter extends BaseAdapter {
                     Timings.canteen.init();
                     return (calendar.after(Timings.canteen.start) && calendar.before(Timings.canteen.end));
                 }
+
+            case 3:
+                Timings.tutti.init();
+                return (calendar.after(Timings.tutti.start) && calendar.before(Timings.tutti.end));
+
+            case 4:
+                Timings.snow.init();
+                return (calendar.after(Timings.snow.start) && calendar.before(Timings.snow.end));
+
         }
         return false;
     }

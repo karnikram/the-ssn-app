@@ -27,23 +27,19 @@
     </string-array>
 
     <string-array name="dining_mess_categories">
+        <item>Sunday</item>
         <item>Monday</item>
         <item>Tuesday</item>
         <item>Wednesday</item>
         <item>Thursday</item>
         <item>Friday</item>
         <item>Saturday</item>
-        <item>Sunday</item>
     </string-array>
 
     <string name="application_id">FT5LiYFPZTttR7NKcp6EFYo6E5ht9HnuhimWlT84</string>
     <string name="client_key">aWVS52GVM6RFAzuC1sr51BnByMq0J9mA5ZVV1Coe</string>
 
-    <string name="description">SSN Notice Boards - now in your pocket. \n\n An app for SSNites, by SSNites, the app has three major tabs.
-    Updates on college events will be posted under \'Alerts\', with prompt notifications so you don\'t miss out on the news. You can also
-    contribute to this section. If you get wind of what our college is up to, don\'t hesitate to send us the information! \n\n \'Dining\' lists
-    all the menus in the college canteen and other eating joints. \n\n \'Buses\' gives you access to all the bus routes and the morning schedule.
-    Be informed of changes on time instead of learning the hard way.</string>
+    <string name="description">SSN Notice Boards - now in your pocket.</string>
 
     <string name="shout_outs">Shout outs to Krishna GJ and Adarshana Rajagopal.</string>
 
@@ -64,6 +60,8 @@
         <item>Humanities Block</item>
         <item>Information Technology</item>
         <item>Mechanical Engineering</item>
+        <item>SASE</item>
+        <item>SOMCA</item>
     </string-array>
 
     <string name="settings_notifications">Notifications</string>

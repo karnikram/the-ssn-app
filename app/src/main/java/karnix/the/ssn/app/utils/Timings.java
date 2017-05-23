@@ -164,7 +164,7 @@ public class Timings {
             start.set(Calendar.HOUR_OF_DAY, 7);
             start.set(Calendar.MINUTE, 30);
             end.set(Calendar.HOUR_OF_DAY, 21);
-            end.set(Calendar.MINUTE, 00);
+            end.set(Calendar.MINUTE, 0);
         }
     }
 
@@ -177,6 +177,34 @@ public class Timings {
             start.set(Calendar.MINUTE, 30);
             end.set(Calendar.HOUR_OF_DAY, 21);
             end.set(Calendar.MINUTE, 00);
+        }
+    }
+
+    public static class tutti
+    {
+        public static Calendar start = Calendar.getInstance();
+        public static Calendar end = Calendar.getInstance();
+
+        public static void init()
+        {
+            start.set(Calendar.HOUR_OF_DAY, 7);
+            start.set(Calendar.MINUTE, 0);
+            end.set(Calendar.HOUR_OF_DAY, 22);
+            end.set(Calendar.MINUTE, 0);
+        }
+    }
+
+    public static class snow
+    {
+        public static Calendar start = Calendar.getInstance();
+        public static Calendar end = Calendar.getInstance();
+
+        public static void init()
+        {
+            start.set(Calendar.HOUR_OF_DAY, 8);
+            start.set(Calendar.MINUTE, 0);
+            end.set(Calendar.HOUR_OF_DAY, 21);
+            end.set(Calendar.MINUTE, 30);
         }
     }
 }

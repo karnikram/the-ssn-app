@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 
+import java.util.Calendar;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import karnix.the.ssn.app.activity.BaseActivity;
@@ -43,6 +45,8 @@ public class DiningMenuActivity extends BaseActivity {
             setRecyclerViewAdapter(null);
             return;
         }
+
+        spinnerDiningMenuCategory.setSelection(Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 1);
 
         spinnerDiningMenuCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

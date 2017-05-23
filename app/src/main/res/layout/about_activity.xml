@@ -42,9 +42,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:text="Developers"
+                        android:textStyle="italic"
                         android:textColor="@color/primaryTextColor"
                         android:textSize="24sp"
-                        android:textStyle="italic" />
+                         />
 
                     <View
                         android:layout_width="105dp"
@@ -59,8 +60,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/primaryTextColor"
+                            android:text="Karnik Ram"
+                            android:textStyle="italic"
                             android:textSize="24sp"
-                            android:textStyle="italic" />
+                             />
 
                         <ImageView
                             android:id="@+id/fb1"
@@ -86,7 +89,56 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/primaryTextColor"
                             android:textSize="24sp"
-                            android:textStyle="italic" />
+                            android:text="Adithya Sankar"
+                            android:textStyle="italic"
+                            />
+
+                        <ImageView
+                            android:id="@+id/fb2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/fb" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/primaryTextColor"
+                            android:textSize="24sp"
+                            android:text="Varun Ranganathan"
+                            android:textStyle="italic"
+                            />
+
+                        <ImageView
+                            android:id="@+id/fb3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/fb" />
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/primaryTextColor"
+                            android:textSize="24sp"
+                            android:text="Muthu Annamalai CT"
+                            android:textStyle="italic"
+                            />
 
                         <ImageView
                             android:id="@+id/fb4"
@@ -102,10 +154,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Vectors"
+                        android:text="Designs"
+                        android:textStyle="italic"
                         android:textColor="@color/primaryTextColor"
                         android:textSize="24sp"
-                        android:textStyle="italic" />
+                        />
 
 
                     <View
@@ -122,11 +175,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/primaryTextColor"
+                            android:text="Karthiknathan S"
                             android:textSize="24sp"
                             android:textStyle="italic" />
 
                         <ImageView
-                            android:id="@+id/fb2"
+                            android:id="@+id/fb5"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
@@ -168,11 +222,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="-Smudge-"
+                        android:text="-Octo-"
                         android:textColor="@color/secondaryTextColor"
                         android:textSize="14sp"
                         android:textStyle="italic" />
-
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -182,7 +235,7 @@
                         android:src="@drawable/ic_launcher" />
 
                     <TextView
-                        android:id="@+id/fb3"
+                        android:id="@+id/fb6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -196,6 +249,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:text="@string/description"
+                        android:gravity="center"
                         android:textSize="16sp"
                         android:textStyle="italic" />
 

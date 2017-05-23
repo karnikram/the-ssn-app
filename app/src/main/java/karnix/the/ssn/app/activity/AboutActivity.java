@@ -20,7 +20,7 @@ public class AboutActivity extends BaseActivity {
 
         fb1 = (ImageView) findViewById(R.id.fb1);
         fb2 = (ImageView) findViewById(R.id.fb2);
-        fb3 = (TextView) findViewById(R.id.fb3);
+        fb3 = (TextView) findViewById(R.id.fb6);
 
         fb1.setOnClickListener(new View.OnClickListener() {
             @Override
