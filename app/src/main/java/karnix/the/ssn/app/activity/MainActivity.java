@@ -119,13 +119,13 @@ public class MainActivity extends AppCompatActivity {
                                 case 0:
                                     return false;
                                 case 1:
-                                        String url = "http://ssn.almaconnect.com";
-                                        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
-                                        builder.setToolbarColor(getResources().getColor(R.color.primaryColor));
-                                        builder.setShowTitle(true);
+                                    String url = "http://ssn.almaconnect.com";
+                                    CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                                    builder.setToolbarColor(getResources().getColor(R.color.primaryColor));
+                                    builder.setShowTitle(true);
 
-                                        CustomTabsIntent customTabsIntent = builder.build();
-                                        customTabsIntent.launchUrl(MainActivity.this, Uri.parse(url));
+                                    CustomTabsIntent customTabsIntent = builder.build();
+                                    customTabsIntent.launchUrl(MainActivity.this, Uri.parse(url));
                                     break;
                                 case 2:
                                     startActivity(new Intent(MainActivity.this, BusActivity.class));

@@ -1,7 +1,6 @@
 package karnix.the.ssn.app.activity;
 
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -42,7 +41,7 @@ public class AboutActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 try {
-                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("fb://facewebmodal/f?href=http://m.facebook.com/adithya321")));
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("fb://facewebmodal/f?href=http://m.facebook.com/adithya321")));
                 } catch (Exception e) {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://m.facebook.com/adithya321")));
                 }
@@ -53,7 +52,7 @@ public class AboutActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 try {
-                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("fb://facewebmodal/f?href=http://m.facebook.com/varun.ranganathan.1")));
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("fb://facewebmodal/f?href=http://m.facebook.com/varun.ranganathan.1")));
                 } catch (Exception e) {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://m.facebook.com/varun.ranganathan.1")));
                 }
@@ -62,30 +61,21 @@ public class AboutActivity extends BaseActivity {
 
         fb4.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                try
-                {
+            public void onClick(View v) {
+                try {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("fb://facewebmodal/f?href=http://m.facebook.com/muthuannamalai.chidambaram")));
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://m.facebook.com/muthuannamalai.chidambaram")));
                 }
             }
         });
 
-            fb5.setOnClickListener(new View.OnClickListener() {
+        fb5.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                try
-                {
+            public void onClick(View v) {
+                try {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("fb://facewebmodal/f?href=http://m.facebook.com/sowbaghyanathan.karthiknathan")));
-                }
-
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://m.facebook.com/sowbaghyanathan.karthiknathan")));
                 }
             }
@@ -93,15 +83,10 @@ public class AboutActivity extends BaseActivity {
 
         fb6.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                try
-                {
+            public void onClick(View v) {
+                try {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/893173980726657")));
-                }
-
-                catch(Exception e)
-                {
+                } catch (Exception e) {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://m.facebook.com/ssnmachan")));
                 }
             }
@@ -109,15 +94,10 @@ public class AboutActivity extends BaseActivity {
 
         fb7.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                try
-                {
+            public void onClick(View v) {
+                try {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("fb://facewebmodal/f?href=http://m.facebook.com/gj.krrish")));
-                }
-
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://m.facebook.com/gj.krrish")));
                 }
             }

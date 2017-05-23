@@ -28,21 +28,22 @@ public class MainActivityPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        Fragment fragment;
         Bundle bundle;
         switch (position) {
             case 0:
-                fragment = new AlertsFragment();
+                Fragment adminAlertsFragment = new AlertsFragment();
                 bundle = new Bundle();
                 bundle.putString("type", "admin");
-                fragment.setArguments(bundle);
-                return fragment;
+                adminAlertsFragment.setArguments(bundle);
+                return adminAlertsFragment;
+
             case 1:
-                fragment = new AlertsFragment();
+                Fragment clubsAlertsFragment = new AlertsFragment();
                 bundle = new Bundle();
                 bundle.putString("type", "clubs");
-                fragment.setArguments(bundle);
-                return fragment;
+                clubsAlertsFragment.setArguments(bundle);
+                return clubsAlertsFragment;
+
             default:
             case 2:
                 return new DepartmentAlertsFragment();

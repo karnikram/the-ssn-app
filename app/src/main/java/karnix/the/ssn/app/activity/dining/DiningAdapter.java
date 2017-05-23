@@ -111,24 +111,18 @@ public class DiningAdapter extends BaseAdapter {
                 }
 
             case 4:
-                if(calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY)
-                {
-                 Timings.tuttiSun.init();
-                    return(calendar.after(Timings.tuttiSun.start) && calendar.before(Timings.tuttiSun.end));
-                }
-                else
-                {
+                if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+                    Timings.tuttiSun.init();
+                    return (calendar.after(Timings.tuttiSun.start) && calendar.before(Timings.tuttiSun.end));
+                } else {
                     Timings.tutti.init();
                     return (calendar.after(Timings.tutti.start) && calendar.before(Timings.tutti.end));
                 }
             case 3:
-                if(calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY)
-                {
+                if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
                     Timings.snowSun.init();
                     return (calendar.after(Timings.snowSun.start) && calendar.before(Timings.tuttiSun.end));
-                }
-                else
-                {
+                } else {
                     Timings.snow.init();
                     return (calendar.after(Timings.snow.start) && calendar.before(Timings.snow.end));
                 }

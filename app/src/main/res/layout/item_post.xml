@@ -29,7 +29,7 @@
             tools:src="@drawable/ic_attachment" />
 
 
-         <LinearLayout
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
@@ -44,8 +44,8 @@
                 android:layout_marginTop="4dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textStyle="italic"
                 android:textAppearance="?android:textAppearanceLarge"
+                android:textStyle="italic"
                 tools:text="Title" />
 
             <TextView
@@ -68,7 +68,6 @@
                 android:textColor="@color/secondaryTextColor"
                 tools:text="@string/lorem_ipsum" />
         </LinearLayout>
-
     </LinearLayout>
 
     <View style="@style/DividerStyle" />

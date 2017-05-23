@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -9,7 +8,6 @@
     android:orientation="vertical">
 
     <include layout="@layout/toolbar" />
-
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -24,8 +22,7 @@
             card_view:cardBackgroundColor="@android:color/white"
             card_view:cardCornerRadius="8dp">
 
-
-            <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fillViewport="true">
@@ -42,10 +39,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:text="Developers"
-                        android:textStyle="italic"
                         android:textColor="@color/primaryTextColor"
                         android:textSize="24sp"
-                         />
+                        android:textStyle="italic" />
 
                     <View
                         android:layout_width="105dp"
@@ -59,11 +55,10 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/primaryTextColor"
                             android:text="Karnik Ram"
-                            android:textStyle="italic"
+                            android:textColor="@color/primaryTextColor"
                             android:textSize="24sp"
-                             />
+                            android:textStyle="italic" />
 
                         <ImageView
                             android:id="@+id/fb1"
@@ -77,7 +72,6 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
-
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -87,11 +81,10 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:text="Adithya J"
                             android:textColor="@color/primaryTextColor"
                             android:textSize="24sp"
-                            android:text="Adithya Sankar"
-                            android:textStyle="italic"
-                            />
+                            android:textStyle="italic" />
 
                         <ImageView
                             android:id="@+id/fb2"
@@ -100,7 +93,6 @@
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:src="@drawable/fb" />
-
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -110,11 +102,10 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:text="Varun Ranganathan"
                             android:textColor="@color/primaryTextColor"
                             android:textSize="24sp"
-                            android:text="Varun Ranganathan"
-                            android:textStyle="italic"
-                            />
+                            android:textStyle="italic" />
 
                         <ImageView
                             android:id="@+id/fb3"
@@ -131,10 +122,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:text="Web Developer"
-                        android:textStyle="italic"
                         android:textColor="@color/primaryTextColor"
                         android:textSize="24sp"
-                         />
+                        android:textStyle="italic" />
 
                     <View
                         android:layout_width="145dp"
@@ -148,11 +138,10 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/primaryTextColor"
                             android:text="Muthu Annamalai CT"
-                            android:textStyle="italic"
+                            android:textColor="@color/primaryTextColor"
                             android:textSize="24sp"
-                             />
+                            android:textStyle="italic" />
 
                         <ImageView
                             android:id="@+id/fb4"
@@ -174,10 +163,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:text="Designs"
-                        android:textStyle="italic"
                         android:textColor="@color/primaryTextColor"
                         android:textSize="24sp"
-                        />
+                        android:textStyle="italic" />
 
 
                     <View
@@ -193,8 +181,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/primaryTextColor"
                             android:text="Karthiknathan S"
+                            android:textColor="@color/primaryTextColor"
                             android:textSize="24sp"
                             android:textStyle="italic" />
 
@@ -216,8 +204,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/primaryTextColor"
                             android:text="Krishna GJ"
+                            android:textColor="@color/primaryTextColor"
                             android:textSize="24sp"
                             android:textStyle="italic" />
 
@@ -291,12 +279,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="@string/description"
                         android:gravity="center"
+                        android:text="@string/description"
                         android:textSize="16sp"
                         android:textStyle="italic" />
-
-
                 </LinearLayout>
             </ScrollView>
         </android.support.v7.widget.CardView>

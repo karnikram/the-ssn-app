@@ -33,7 +33,7 @@ public class DiningMenuAdapter extends SectionedRecyclerViewAdapter<DiningMenuAd
     private String[] snowCubeSections = {"Softies Cone", "Delights", "Sundae Mania", "Sundae & Fantasies", "Jelly Jellose",
             "Snow Specials", "Ice Cream Shakes", "Sandwiches", "Crispy Snacks", "Wraps", "Sweet Corn", "Pop Corn"};
 
-    private String [] tuttiSections = {"South Indian", "Snack", "Manchurian", "Indian", "Parotha", "Chinese",
+    private String[] tuttiSections = {"South Indian", "Snack", "Manchurian", "Indian", "Parotha", "Chinese",
             "Biryani"};
 
     private List<List<List<String>>> messMenuList;
@@ -43,16 +43,16 @@ public class DiningMenuAdapter extends SectionedRecyclerViewAdapter<DiningMenuAd
 
     public DiningMenuAdapter(Context context, String place, String day) {
         this.context = context;
-        if(place.contains("Mess"))
+        if (place.contains("Mess"))
             this.is = 0;
 
-        if(place.contains("Canteen"))
+        if (place.contains("Canteen"))
             this.is = 1;
 
-        if(place.contains("Snow"))
+        if (place.contains("Snow"))
             this.is = 2;
 
-        if(place.contains("Tutti"))
+        if (place.contains("Tutti"))
             this.is = 3;
 
         databaseHandler = new DatabaseHandler(context);
@@ -68,7 +68,7 @@ public class DiningMenuAdapter extends SectionedRecyclerViewAdapter<DiningMenuAd
             for (String storesSection : storesSections)
                 storesMenuList.add(databaseHandler.getStoresMenu(place, storesSection));
 
-        else if(is ==2)
+        else if (is == 2)
             for (String snowCubeSection : snowCubeSections)
                 snowCubeList.add(databaseHandler.getSnowMenu(place, snowCubeSection));
 
@@ -80,24 +80,24 @@ public class DiningMenuAdapter extends SectionedRecyclerViewAdapter<DiningMenuAd
     @Override
     public int getSectionCount() {
         if (is == 0) return messSections.length;
-        else if(is == 1) return storesSections.length;
-        else if(is == 2) return snowCubeSections.length;
+        else if (is == 1) return storesSections.length;
+        else if (is == 2) return snowCubeSections.length;
         else return tuttiSections.length;
     }
 
     @Override
     public int getItemCount(int section) {
         if (is == 0) return messMenuList.get(section).size();
-        else if(is == 1) return storesMenuList.get(section).size();
-        else if(is == 2) return snowCubeList.get(section).size();
+        else if (is == 1) return storesMenuList.get(section).size();
+        else if (is == 2) return snowCubeList.get(section).size();
         else return tuttiList.get(section).size();
     }
 
     @Override
     public void onBindHeaderViewHolder(DiningMenuViewHolder holder, int section, boolean expanded) {
         if (is == 0) holder.title.setText(messSections[section]);
-        else if(is == 1) holder.title.setText(storesSections[section]);
-        else if(is == 2) holder.title.setText(snowCubeSections[section]);
+        else if (is == 1) holder.title.setText(storesSections[section]);
+        else if (is == 2) holder.title.setText(snowCubeSections[section]);
         else holder.title.setText(tuttiSections[section]);
         holder.caret.setImageResource(expanded ? R.drawable.ic_collapse : R.drawable.ic_expand);
     }
@@ -114,9 +114,9 @@ public class DiningMenuAdapter extends SectionedRecyclerViewAdapter<DiningMenuAd
             else holder.title.setTextColor(context.getResources().getColor(R.color.close));
 
             holder.price.setVisibility(View.GONE);
-        } else if(is == 1) menuList = storesMenuList.get(section);
+        } else if (is == 1) menuList = storesMenuList.get(section);
 
-        else if(is == 2) menuList = snowCubeList.get(section);
+        else if (is == 2) menuList = snowCubeList.get(section);
 
         else menuList = tuttiList.get(section);
 

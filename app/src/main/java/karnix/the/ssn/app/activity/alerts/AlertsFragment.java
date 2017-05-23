@@ -62,8 +62,6 @@ public class AlertsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_alerts, container, false);
         unbinder = ButterKnife.bind(this, rootView);
 
-        checkConnectionStatus();
-
         type = getArguments().getString("type");
         if (type.equals("examcell")) {
             fab.setVisibility(View.VISIBLE);
@@ -100,6 +98,8 @@ public class AlertsFragment extends Fragment {
                 checkConnectionStatus();
             }
         });
+
+        checkConnectionStatus();
 
         return rootView;
     }

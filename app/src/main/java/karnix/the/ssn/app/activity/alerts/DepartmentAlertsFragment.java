@@ -70,8 +70,6 @@ public class DepartmentAlertsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_alerts_department, container, false);
         unbinder = ButterKnife.bind(this, rootView);
 
-        checkConnectionStatus();
-
         departmentKeys = new String[]{"biomed", "chem", "civil", "cse", "ece", "eee", "human", "it", "mech"};
 
         spinnerDepartment.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -127,6 +125,8 @@ public class DepartmentAlertsFragment extends Fragment {
                 checkConnectionStatus();
             }
         });
+
+        checkConnectionStatus();
 
         return rootView;
     }

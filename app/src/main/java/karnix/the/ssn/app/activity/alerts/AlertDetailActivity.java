@@ -33,7 +33,6 @@ import karnix.the.ssn.app.activity.BaseActivity;
 import karnix.the.ssn.app.model.posts.WebConsolePost;
 import karnix.the.ssn.app.utils.FileDownloader;
 import karnix.the.ssn.app.utils.LogHelper;
-import karnix.the.ssn.ssnmachan.Manifest;
 import karnix.the.ssn.ssnmachan.R;
 
 public class AlertDetailActivity extends BaseActivity {
@@ -92,16 +91,13 @@ public class AlertDetailActivity extends BaseActivity {
                     @Override
                     public void onClick(View v) {
                         Toast.makeText(AlertDetailActivity.this, "Downloading..", Toast.LENGTH_SHORT).show();
-                        if(ContextCompat.checkSelfPermission(AlertDetailActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                                != PackageManager.PERMISSION_GRANTED)
-                        {
+                        if (ContextCompat.checkSelfPermission(AlertDetailActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                                != PackageManager.PERMISSION_GRANTED) {
 
                             ActivityCompat.requestPermissions(AlertDetailActivity.this,
                                     new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
                                     MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
-                        }
-                        else
-                        {
+                        } else {
                             new DownloadFile().execute(post.getFileURL(), post.getFileName());
                         }
                     }
@@ -132,22 +128,16 @@ public class AlertDetailActivity extends BaseActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
-    {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-       if(requestCode == MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE)
-       {
-           if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-           {
-              new DownloadFile().execute(post.getFileURL(), post.getFileName());
-           }
+        if (requestCode == MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                new DownloadFile().execute(post.getFileURL(), post.getFileName());
+            }
+        } else {
+            Toast.makeText(this, "Permission to open file denied!", Toast.LENGTH_LONG).show();
         }
-
-        else
-       {
-           Toast.makeText(this, "Permission to open file denied!", Toast.LENGTH_LONG).show();
-       }
     }
 
     private void dispUrls() {
