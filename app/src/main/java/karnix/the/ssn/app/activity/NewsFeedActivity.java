@@ -19,7 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import karnix.the.ssn.app.model.posts.Post;
-import karnix.the.ssn.app.ViewHolder.PostViewHolder;
+import karnix.the.ssn.app.viewholder.PostViewHolder;
 import karnix.the.ssn.ssnmachan.R;
 
 public class NewsFeedActivity extends AppCompatActivity {

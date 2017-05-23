@@ -23,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -77,6 +78,8 @@ public class DepartmentAlertsFragment extends Fragment {
 
                 final List<WebConsolePost> postList = new ArrayList<>();
                 final PostAdapter postAdapter = new PostAdapter(getActivity(), postList);
+                final ArrayList<Node> nodesList = new ArrayList<>();
+                final HashMap<String, WebConsolePost> postHashMap = new HashMap<>();
                 postsRecyclerView.setLayoutManager(layoutManager);
                 postsRecyclerView.setAdapter(postAdapter);
 
@@ -86,6 +89,19 @@ public class DepartmentAlertsFragment extends Fragment {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         WebConsolePost post = dataSnapshot.getValue(WebConsolePost.class);
+                        if (post == null) {
+                            postList.remove(postHashMap.get(dataSnapshot.getKey()));
+                            postHashMap.remove(dataSnapshot.getKey());
+                            postAdapter.notifyDataSetChanged();
+                            return;
+                        }
+                        if (postHashMap.containsKey(dataSnapshot.getKey())) {
+                            if (postList.contains(postHashMap.get(dataSnapshot.getKey()))) {
+                                postList.remove(postHashMap.get(dataSnapshot.getKey()));
+                                postAdapter.notifyDataSetChanged();
+                            }
+                        }
+                        postHashMap.put(dataSnapshot.getKey(), post);
                         postList.add(post);
                         postAdapter.notifyDataSetChanged();
                         layoutManager.scrollToPositionWithOffset(postList.size() - 1, 0);
@@ -112,6 +128,12 @@ public class DepartmentAlertsFragment extends Fragment {
 
                     @Override
                     public void onChildRemoved(DataSnapshot dataSnapshot) {
+                        if (nodesList.contains(dataSnapshot.getValue(Node.class))) {
+                            nodesList.remove(dataSnapshot.getValue(Node.class));
+                            FirebaseDatabase.getInstance().getReference("posts/" +
+                                    dataSnapshot.getValue(Node.class).getPid())
+                                    .removeEventListener(valueEventListener);
+                        }
                     }
 
                     @Override

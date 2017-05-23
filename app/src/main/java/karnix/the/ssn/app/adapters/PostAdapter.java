@@ -45,7 +45,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(final PostAdapter.ViewHolder viewHolder, int position) {
         final WebConsolePost post = postList.get(position);
-        if(post==null) return;
+        if (post == null) return;
         Date date = new Date(post.getDate());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm aaa 'on' EEE, dd MMM");
         viewHolder.dateTV.setText(simpleDateFormat.format(date));
