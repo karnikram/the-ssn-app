@@ -71,7 +71,7 @@ public class GoogleSignInActivity extends AppCompatActivity implements GoogleApi
                         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users/" + user.getUid());
                         User user1 = new User(user.getUid(), user.getDisplayName(), user.getPhotoUrl().toString(), user.getEmail());
                         databaseReference.setValue(user1);
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        startActivity(new Intent(getApplicationContext(), IntroActivity.class));
                         finish();
                     } else {
                         FirebaseAuth.getInstance().signOut();

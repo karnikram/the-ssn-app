@@ -7,13 +7,13 @@
 
     <string name="drawer_home">Home</string>
     <string name="drawer_alma">Alma Connect</string>
-    <string name="drawer_buses">Buses</string>
+    <string name="drawer_buses">Bus Routes</string>
     <string name="drawer_dining">Dining</string>
     <string name="drawer_exam_cell">Exam Cell</string>
-    <string name="drawer_bus_announcements">Bus Announcements</string>
+    <string name="drawer_bus_announcements">Bus Alerts</string>
     <string name="drawer_message">Post Message</string>
     <string name="drawer_about">App Info</string>
-    <string name="drawer_settings">Settings</string>
+    <string name="drawer_settings">Notification Settings</string>
     <string name="drawer_sign_out">Sign Out</string>
 
     <string name="action_feed">News Feed</string>
@@ -58,11 +58,11 @@
         <item>Computer Science and Engineering</item>
         <item>Electronics and Communication Engineering</item>
         <item>Electrical and Electronics Engineering</item>
-        <item>Humanities and Science Department</item>
+        <item>Humanities and Sciences Department</item>
         <item>Information Technology</item>
         <item>Mechanical Engineering</item>
-        <item>SACE</item>
-        <item>SOMCA</item>
+        <item>School of Advanced Career Education</item>
+        <item>School of Management</item>
     </string-array>
 
     <string name="settings_notifications">Notifications</string>
@@ -84,6 +84,13 @@
 
     <string name="connection_failed">Connection Failed</string>
     <string name="alerts_retry">Retry</string>
+
+    <string name="slide1">Keeping yourself up to date with all things SSN is now easier than ever.</string>
+    <string name="slide2">Three tabs - Admin, Clubs and Department - All the important information, right in the front.</string>
+    <string name="slide3">Everything AU. Including your seating arrangements.</string>
+    <string name="slide4">To help you make wiser decisions when you are hungry.</string>
+    <string name="slide5">Keep track of all the last minute bus route changes.</string>
+    <string name="slide6">A social feed for everyone to share.</string>
 
     <string name="about_libraries">About Libraries</string>
 </resources>

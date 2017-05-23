@@ -26,6 +26,9 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="karnix.the.ssn.app.activity.IntroActivity"
+                  android:label="@string/app_name"/>
+
         <activity
             android:name="karnix.the.ssn.app.activity.MainActivity"
             android:label="@string/app_name"
