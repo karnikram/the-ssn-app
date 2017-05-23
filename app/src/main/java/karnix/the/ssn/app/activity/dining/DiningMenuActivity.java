@@ -59,9 +59,6 @@ public class DiningMenuActivity extends BaseActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-        toolbar.setTitleTextColor(Color.WHITE);
-        toolbar.setTitle(place);
     }
 
     private void setRecyclerViewAdapter(String day) {
