@@ -2,11 +2,15 @@ package karnix.the.ssn.app.activity.alerts;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.customtabs.CustomTabsIntent;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,10 +33,12 @@ import karnix.the.ssn.app.activity.BaseActivity;
 import karnix.the.ssn.app.model.posts.WebConsolePost;
 import karnix.the.ssn.app.utils.FileDownloader;
 import karnix.the.ssn.app.utils.LogHelper;
+import karnix.the.ssn.ssnmachan.Manifest;
 import karnix.the.ssn.ssnmachan.R;
 
 public class AlertDetailActivity extends BaseActivity {
     private static final String TAG = LogHelper.makeLogTag(AlertDetailActivity.class);
+    private static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 0;
 
     @BindView(R.id.content_email1)
     TextView contentEmail1;
@@ -86,9 +92,18 @@ public class AlertDetailActivity extends BaseActivity {
                     @Override
                     public void onClick(View v) {
                         Toast.makeText(AlertDetailActivity.this, "Downloading..", Toast.LENGTH_SHORT).show();
-                        new DownloadFile().execute(post.getFileURL(), post.getFileName());
-                        //startUrlIntent(post.getFileURL());
+                        if(ContextCompat.checkSelfPermission(AlertDetailActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                                != PackageManager.PERMISSION_GRANTED)
+                        {
 
+                            ActivityCompat.requestPermissions(AlertDetailActivity.this,
+                                    new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                    MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+                        }
+                        else
+                        {
+                            new DownloadFile().execute(post.getFileURL(), post.getFileName());
+                        }
                     }
                 });
                 postImageView.setVisibility(View.GONE);
@@ -101,7 +116,6 @@ public class AlertDetailActivity extends BaseActivity {
             dispPdf.setVisibility(View.GONE);
             postImageView.setVisibility(View.GONE);
         }
-
         if (!post.getEmail().equals("")) {
             contentEmail1.setText(post.getEmail());
             contentEmail1.setOnClickListener(new View.OnClickListener() {
@@ -114,8 +128,27 @@ public class AlertDetailActivity extends BaseActivity {
             });
         } else
             contentEmail1.setVisibility(View.GONE);
+
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
+    {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+       if(requestCode == MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE)
+       {
+           if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+           {
+              new DownloadFile().execute(post.getFileURL(), post.getFileName());
+           }
+        }
+
+        else
+       {
+           Toast.makeText(this, "Permission to open file denied!", Toast.LENGTH_LONG).show();
+       }
+    }
 
     private void dispUrls() {
         if (links.size() == 2) {
@@ -200,8 +233,6 @@ public class AlertDetailActivity extends BaseActivity {
 
         CustomTabsIntent customTabsIntent = builder.build();
         customTabsIntent.launchUrl(this, Uri.parse(textViewString));
-
-
     }
 
     private class DownloadFile extends AsyncTask<String, Void, String> {

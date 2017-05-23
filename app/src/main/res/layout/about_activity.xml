@@ -126,6 +126,20 @@
 
                     </RelativeLayout>
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Web Developer"
+                        android:textStyle="italic"
+                        android:textColor="@color/primaryTextColor"
+                        android:textSize="24sp"
+                         />
+
+                    <View
+                        android:layout_width="145dp"
+                        android:layout_height="1dp"
+                        android:background="@color/primaryColor" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -135,10 +149,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/primaryTextColor"
-                            android:textSize="24sp"
                             android:text="Muthu Annamalai CT"
                             android:textStyle="italic"
-                            />
+                            android:textSize="24sp"
+                             />
 
                         <ImageView
                             android:id="@+id/fb4"
@@ -147,6 +161,11 @@
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:src="@drawable/fb" />
+
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
 
                     </RelativeLayout>
 
@@ -188,6 +207,30 @@
                             android:src="@drawable/fb" />
 
                     </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/primaryTextColor"
+                            android:text="Krishna GJ"
+                            android:textSize="24sp"
+                            android:textStyle="italic" />
+
+                        <ImageView
+                            android:id="@+id/fb7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/fb" />
+
+                    </RelativeLayout>
+
 
                     <TextView
                         android:layout_width="wrap_content"

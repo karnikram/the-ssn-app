@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -99,14 +100,15 @@ public class MainActivity extends AppCompatActivity {
                 .addDrawerItems(
                         new PrimaryDrawerItem().withIdentifier(0).withName(getString(R.string.drawer_home)).withIcon(GoogleMaterial.Icon.gmd_home),
                         new DividerDrawerItem(),
+                        new PrimaryDrawerItem().withIdentifier(1).withName(R.string.drawer_alma).withIcon(GoogleMaterial.Icon.gmd_school),
                         new PrimaryDrawerItem().withIdentifier(2).withName(getString(R.string.drawer_buses)).withIcon(GoogleMaterial.Icon.gmd_directions_bus),
                         new PrimaryDrawerItem().withIdentifier(3).withName(getString(R.string.drawer_bus_announcements)).withIcon(GoogleMaterial.Icon.gmd_announcement),
                         new PrimaryDrawerItem().withIdentifier(4).withName(getString(R.string.drawer_dining)).withIcon(GoogleMaterial.Icon.gmd_local_dining),
                         new PrimaryDrawerItem().withIdentifier(5).withName(getString(R.string.drawer_exam_cell)).withIcon(GoogleMaterial.Icon.gmd_assignment),
                         new DividerDrawerItem(),
-                        new PrimaryDrawerItem().withIdentifier(7).withName(getString(R.string.drawer_about)).withIcon(GoogleMaterial.Icon.gmd_info),
                         new PrimaryDrawerItem().withIdentifier(8).withName(getString(R.string.drawer_settings)).withIcon(GoogleMaterial.Icon.gmd_settings),
-                        new PrimaryDrawerItem().withIdentifier(9).withName(R.string.drawer_sign_out).withIcon(GoogleMaterial.Icon.gmd_exit_to_app))
+                        new PrimaryDrawerItem().withIdentifier(7).withName(getString(R.string.drawer_about)).withIcon(GoogleMaterial.Icon.gmd_info))
+                .addStickyDrawerItems(new PrimaryDrawerItem().withIdentifier(9).withName(R.string.drawer_sign_out).withIcon(GoogleMaterial.Icon.gmd_exit_to_app))
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
@@ -116,6 +118,15 @@ public class MainActivity extends AppCompatActivity {
                             switch ((int) drawerItem.getIdentifier()) {
                                 case 0:
                                     return false;
+                                case 1:
+                                        String url = "http://ssn.almaconnect.com";
+                                        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                                        builder.setToolbarColor(getResources().getColor(R.color.primaryColor));
+                                        builder.setShowTitle(true);
+
+                                        CustomTabsIntent customTabsIntent = builder.build();
+                                        customTabsIntent.launchUrl(MainActivity.this, Uri.parse(url));
+                                    break;
                                 case 2:
                                     startActivity(new Intent(MainActivity.this, BusActivity.class));
                                     break;

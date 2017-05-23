@@ -194,6 +194,20 @@ public class Timings {
         }
     }
 
+    public static class tuttiSun
+    {
+        public static Calendar start = Calendar.getInstance();
+        public static Calendar end = Calendar.getInstance();
+
+        public static void init()
+        {
+            start.set(Calendar.HOUR_OF_DAY, 11);
+            start.set(Calendar.MINUTE, 0);
+            end.set(Calendar.HOUR_OF_DAY, 22);
+            end.set(Calendar.MINUTE, 0);
+        }
+    }
+
     public static class snow
     {
         public static Calendar start = Calendar.getInstance();
@@ -205,6 +219,20 @@ public class Timings {
             start.set(Calendar.MINUTE, 0);
             end.set(Calendar.HOUR_OF_DAY, 21);
             end.set(Calendar.MINUTE, 30);
+        }
+    }
+
+    public static class snowSun
+    {
+        public static Calendar start = Calendar.getInstance();
+        public static Calendar end = Calendar.getInstance();
+
+        public static void init()
+        {
+            start.set(Calendar.HOUR_OF_DAY, 11);
+            start.set(Calendar.MINUTE, 0);
+            end.set(Calendar.HOUR_OF_DAY, 22);
+            end.set(Calendar.MINUTE, 0);
         }
     }
 }
