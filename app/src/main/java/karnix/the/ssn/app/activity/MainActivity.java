@@ -107,8 +107,8 @@ public class MainActivity extends AppCompatActivity {
                         new PrimaryDrawerItem().withIdentifier(5).withName(getString(R.string.drawer_exam_cell)).withIcon(GoogleMaterial.Icon.gmd_assignment),
                         new DividerDrawerItem(),
                         new PrimaryDrawerItem().withIdentifier(8).withName(getString(R.string.drawer_settings)).withIcon(GoogleMaterial.Icon.gmd_settings),
-                        new PrimaryDrawerItem().withIdentifier(7).withName(getString(R.string.drawer_about)).withIcon(GoogleMaterial.Icon.gmd_info))
-                .addStickyDrawerItems(new PrimaryDrawerItem().withIdentifier(9).withName(R.string.drawer_sign_out).withIcon(GoogleMaterial.Icon.gmd_exit_to_app))
+                        new PrimaryDrawerItem().withIdentifier(7).withName(getString(R.string.drawer_about)).withIcon(GoogleMaterial.Icon.gmd_info),
+                        new PrimaryDrawerItem().withIdentifier(9).withName(R.string.drawer_sign_out).withIcon(GoogleMaterial.Icon.gmd_exit_to_app))
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
