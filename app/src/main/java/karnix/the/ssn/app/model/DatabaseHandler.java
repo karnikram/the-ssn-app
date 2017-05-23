@@ -196,4 +196,27 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         return menuList;
     }
+
+    public List<List<String>> getSnowMenu(String place, String category) {
+        List<List<String>> menuList = new ArrayList<>();
+
+        Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM '" + place +
+                "' WHERE category = '" + category + "'", null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            List<String> itemDetails = new ArrayList<>();
+
+            itemDetails.add(cursor.getString(0));
+            itemDetails.add(cursor.getString(1));
+
+            menuList.add(itemDetails);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        getReadableDatabase().close();
+
+        return menuList;
+    }
 }
+

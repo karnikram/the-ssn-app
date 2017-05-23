@@ -87,7 +87,7 @@ public class DiningAdapter extends BaseAdapter {
                             || (calendar.after(Timings.pg.s1) && calendar.before(Timings.pg.s2))
                             || (calendar.after(Timings.pg.d1) && calendar.before(Timings.pg.d2));
                 }
-            case 2:
+            case 5:
                 if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
                     Timings.ugSun.init();
                     return (calendar.after(Timings.ugSun.b1) && calendar.before(Timings.ugSun.b2))
@@ -101,7 +101,7 @@ public class DiningAdapter extends BaseAdapter {
                             || (calendar.after(Timings.ug.s1) && calendar.before(Timings.ug.s2))
                             || (calendar.after(Timings.ug.d1) && calendar.before(Timings.ug.d2));
                 }
-            case 3:
+            case 2:
                 if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
                     Timings.canteenSun.init();
                     return (calendar.after(Timings.canteenSun.start)) && calendar.before(Timings.canteenSun.end);

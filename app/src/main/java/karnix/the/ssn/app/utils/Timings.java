@@ -15,9 +15,9 @@ public class Timings {
 
         public static void init() {
             b1.set(Calendar.HOUR_OF_DAY, 6);
-            b1.set(Calendar.MINUTE, 45);
-            b2.set(Calendar.HOUR_OF_DAY, 8);
-            b2.set(Calendar.MINUTE, 0);
+            b1.set(Calendar.MINUTE, 50);
+            b2.set(Calendar.HOUR_OF_DAY, 7);
+            b2.set(Calendar.MINUTE, 50);
             l1.set(Calendar.HOUR_OF_DAY, 11);
             l1.set(Calendar.MINUTE, 30);
             l2.set(Calendar.HOUR_OF_DAY, 13);
@@ -49,9 +49,9 @@ public class Timings {
             b2.set(Calendar.HOUR_OF_DAY, 9);
             b2.set(Calendar.MINUTE, 0);
             l1.set(Calendar.HOUR_OF_DAY, 12);
-            l1.set(Calendar.MINUTE, 30);
-            l2.set(Calendar.HOUR_OF_DAY, 14);
-            l2.set(Calendar.MINUTE, 0);
+            l1.set(Calendar.MINUTE, 0);
+            l2.set(Calendar.HOUR_OF_DAY, 13);
+            l2.set(Calendar.MINUTE, 30);
             s1.set(Calendar.HOUR_OF_DAY, 16);
             s1.set(Calendar.MINUTE, 0);
             s2.set(Calendar.HOUR_OF_DAY, 17);
@@ -138,9 +138,9 @@ public class Timings {
 
         public static void init() {
             b1.set(Calendar.HOUR_OF_DAY, 6);
-            b1.set(Calendar.MINUTE, 50);
-            b2.set(Calendar.HOUR_OF_DAY, 7);
-            b2.set(Calendar.MINUTE, 50);
+            b1.set(Calendar.MINUTE, 45);
+            b2.set(Calendar.HOUR_OF_DAY, 8);
+            b2.set(Calendar.MINUTE, 10);
             l1.set(Calendar.HOUR_OF_DAY, 11);
             l1.set(Calendar.MINUTE, 30);
             l2.set(Calendar.HOUR_OF_DAY, 13);
@@ -163,8 +163,8 @@ public class Timings {
         public static void init() {
             start.set(Calendar.HOUR_OF_DAY, 7);
             start.set(Calendar.MINUTE, 30);
-            end.set(Calendar.HOUR_OF_DAY, 20);
-            end.set(Calendar.MINUTE, 30);
+            end.set(Calendar.HOUR_OF_DAY, 21);
+            end.set(Calendar.MINUTE, 00);
         }
     }
 
@@ -175,8 +175,8 @@ public class Timings {
         public static void init() {
             start.set(Calendar.HOUR_OF_DAY, 15);
             start.set(Calendar.MINUTE, 30);
-            end.set(Calendar.HOUR_OF_DAY, 20);
-            end.set(Calendar.MINUTE, 30);
+            end.set(Calendar.HOUR_OF_DAY, 21);
+            end.set(Calendar.MINUTE, 00);
         }
     }
 }

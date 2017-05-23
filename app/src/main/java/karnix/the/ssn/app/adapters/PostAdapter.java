@@ -60,13 +60,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             }
         });
 
-        if (!post.getFileURL().equals("")) {
+        if (post.getFileURL().contains("jpg") || post.getFileURL().contains("jpeg") || post.getFileURL().contains("png"))
+        {
             Glide.with(context)
                     .load(post.getFileURL())
-                    .placeholder(R.drawable.ic_attachment)
                     .into(viewHolder.imageView);
             viewHolder.imageView.setVisibility(View.VISIBLE);
-        } else {
+        }
+        else
+        {
             Glide.clear(viewHolder.imageView);
             viewHolder.imageView.setVisibility(View.GONE);
         }

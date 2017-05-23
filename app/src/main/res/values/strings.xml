@@ -20,8 +20,10 @@
     <string-array name="dining_options">
         <item>Ladies Mess</item>
         <item>PG Gents Mess</item>
-        <item>UG Gents Mess</item>
         <item>Stores/Canteen</item>
+        <item>Snow Cube</item>
+        <item>Tutti Frutti</item>
+        <item>UG Gents Mess</item>
     </string-array>
 
     <string-array name="dining_mess_categories">
@@ -43,7 +45,7 @@
     all the menus in the college canteen and other eating joints. \n\n \'Buses\' gives you access to all the bus routes and the morning schedule.
     Be informed of changes on time instead of learning the hard way.</string>
 
-    <string name="shout_outs">Shout outs to Seshathiri for the bus routes database, Mira and Sreenivas for the desciptions, Karthiknathan for the app icon and Arun TS.</string>
+    <string name="shout_outs">Shout outs to Krishna GJ and Adarshana Rajagopal.</string>
 
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, his consul verear torquatos ne. Magna graecis eam no. Mel eu inani ludus, pro bonorum habemus no, ius copiosae convenire te. Usu at illud probatus, no pri fabulas pertinax. In putent voluptaria ius, vix augue noluisse verterem an. Cum inani persius theophrastus at, vel ad tempor cotidieque.</string>
 

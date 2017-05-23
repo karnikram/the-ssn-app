@@ -28,7 +28,8 @@
             android:paddingTop="8dp"
             tools:src="@drawable/ic_attachment" />
 
-        <LinearLayout
+
+         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
@@ -66,6 +67,7 @@
                 android:textColor="@color/secondaryTextColor"
                 tools:text="@string/lorem_ipsum" />
         </LinearLayout>
+
     </LinearLayout>
 
     <View style="@style/DividerStyle" />
