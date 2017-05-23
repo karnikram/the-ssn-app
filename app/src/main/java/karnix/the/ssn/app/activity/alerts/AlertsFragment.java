@@ -63,8 +63,8 @@ public class AlertsFragment extends Fragment {
 
         final List<WebConsolePost> postList = new ArrayList<>();
         final PostAdapter postAdapter = new PostAdapter(getActivity(), postList);
-        final ArrayList<Node> nodesList = new ArrayList<Node>();
-        final HashMap<String, WebConsolePost> postHashMap = new HashMap<String, WebConsolePost>();
+        final ArrayList<Node> nodesList = new ArrayList<>();
+        final HashMap<String, WebConsolePost> postHashMap = new HashMap<>();
         postsRecyclerView.setLayoutManager(layoutManager);
         postsRecyclerView.setAdapter(postAdapter);
 
