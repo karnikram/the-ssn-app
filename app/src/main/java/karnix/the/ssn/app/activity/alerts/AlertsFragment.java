@@ -10,7 +10,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -30,6 +32,7 @@ import karnix.the.ssn.app.adapters.PostAdapter;
 import karnix.the.ssn.app.model.Node;
 import karnix.the.ssn.app.model.posts.WebConsolePost;
 import karnix.the.ssn.app.utils.LogHelper;
+import karnix.the.ssn.app.utils.NetworkUtils;
 import karnix.the.ssn.ssnmachan.R;
 
 public class AlertsFragment extends Fragment {
@@ -42,31 +45,84 @@ public class AlertsFragment extends Fragment {
 
     @BindView(R.id.fab)
     FloatingActionButton fab;
+    @BindView(R.id.button_retry_alerts)
+    Button buttonRetryAlerts;
+    @BindView(R.id.textView_connection_failed)
+    TextView textViewConnectionFailed;
 
     private Unbinder unbinder;
 
+    private String type;
+    private LinearLayoutManager linearLayoutManager;
+    private List<WebConsolePost> postList;
+    private PostAdapter postAdapter;
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_alerts, container, false);
         unbinder = ButterKnife.bind(this, rootView);
 
-        final String type = getArguments().getString("type");
+        checkConnectionStatus();
+
+        type = getArguments().getString("type");
         if (type.equals("examcell")) {
             fab.setVisibility(View.VISIBLE);
         } else {
             fab.setVisibility(View.GONE);
         }
 
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        layoutManager.setStackFromEnd(true);
-        layoutManager.setReverseLayout(true);
+        linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setStackFromEnd(true);
+        linearLayoutManager.setReverseLayout(true);
 
-        final List<WebConsolePost> postList = new ArrayList<>();
-        final PostAdapter postAdapter = new PostAdapter(getActivity(), postList);
+        postList = new ArrayList<>();
+        postAdapter = new PostAdapter(getActivity(), postList);
+        postsRecyclerView.setLayoutManager(linearLayoutManager);
+        postsRecyclerView.setAdapter(postAdapter);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = "http://www.ssnexamcell.in/fe.php";
+
+                CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                builder.setToolbarColor(getResources().getColor(R.color.primaryColor));
+                builder.setShowTitle(true);
+
+                CustomTabsIntent customTabsIntent = builder.build();
+                customTabsIntent.launchUrl(getActivity(), Uri.parse(url));
+            }
+        });
+
+        buttonRetryAlerts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkConnectionStatus();
+            }
+        });
+
+        return rootView;
+    }
+
+    private void checkConnectionStatus() {
+        if (NetworkUtils.isConnectedToInternet(getActivity())) {
+            getPosts();
+        } else {
+            progressBar.setVisibility(View.GONE);
+
+            textViewConnectionFailed.setVisibility(View.VISIBLE);
+            buttonRetryAlerts.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void getPosts() {
+        progressBar.setVisibility(View.VISIBLE);
+
+        textViewConnectionFailed.setVisibility(View.GONE);
+        buttonRetryAlerts.setVisibility(View.GONE);
+
         final ArrayList<Node> nodesList = new ArrayList<>();
         final HashMap<String, WebConsolePost> postHashMap = new HashMap<>();
-        postsRecyclerView.setLayoutManager(layoutManager);
-        postsRecyclerView.setAdapter(postAdapter);
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference nodesRef = database.getReference("categorywise_posts/" + type);
@@ -90,7 +146,7 @@ public class AlertsFragment extends Fragment {
                 postHashMap.put(dataSnapshot.getKey(), post);
                 postList.add(post);
                 postAdapter.notifyDataSetChanged();
-                layoutManager.scrollToPositionWithOffset(postList.size() - 1, 0);
+                linearLayoutManager.scrollToPositionWithOffset(postList.size() - 1, 0);
                 if (progressBar != null) {
                     progressBar.setVisibility(View.GONE);
                 }
@@ -132,22 +188,6 @@ public class AlertsFragment extends Fragment {
             }
         };
         nodesRef.addChildEventListener(childEventListener);
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String url = "http://www.ssnexamcell.in/fe.php";
-
-                CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
-                builder.setToolbarColor(getResources().getColor(R.color.primaryColor));
-                builder.setShowTitle(true);
-
-                CustomTabsIntent customTabsIntent = builder.build();
-                customTabsIntent.launchUrl(getActivity(), Uri.parse(url));
-            }
-        });
-
-        return rootView;
     }
 
     @Override

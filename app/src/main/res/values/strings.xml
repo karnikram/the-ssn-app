@@ -81,4 +81,6 @@
         <item>user_posts</item>
     </string-array>
 
+    <string name="connection_failed">Connection Failed</string>
+    <string name="alerts_retry">Retry</string>
 </resources>

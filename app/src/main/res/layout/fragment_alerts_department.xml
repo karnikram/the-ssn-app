@@ -22,4 +22,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
+
+    <TextView
+        android:id="@+id/textView_connection_failed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/connection_failed"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/button_retry_alerts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView_connection_failed"
+        android:layout_centerInParent="true"
+        android:text="@string/alerts_retry"
+        android:visibility="gone" />
 </RelativeLayout>
