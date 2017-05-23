@@ -43,7 +43,7 @@ exports.sendWebConsoleNotification = functions.database.ref('/posts/{pushId}').o
                            "cse":"CSE Department",
                            "ece":"ECE Department",
                            "eee":"EEE Department",
-                           "human":"Humanities Block",
+                           "human":"Humanities and Science Department",
                            "it":"IT Department",
                            "mech":"Mechanical Engineering Department",
                            "somca":"School of Management",
