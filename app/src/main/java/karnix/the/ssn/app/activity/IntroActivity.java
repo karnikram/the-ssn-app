@@ -1,19 +1,17 @@
 package karnix.the.ssn.app.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
-import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntro2;
-import com.github.paolorotolo.appintro.AppIntro2Fragment;
-import com.github.paolorotolo.appintro.AppIntroFragment;
 
 import karnix.the.ssn.ssnmachan.R;
 
-public class IntroActivity extends AppIntro
+public class IntroActivity extends AppIntro2
 {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState)
