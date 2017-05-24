@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'com.google.firebase.firebase-crash'
+apply plugin: 'com.google.firebase.firebase-perf'
 
 android {
     compileSdkVersion 25
@@ -54,6 +56,7 @@ dependencies {
     compile 'com.google.firebase:firebase-crash:10.2.6'
     compile 'com.google.firebase:firebase-database:10.2.6'
     compile 'com.google.firebase:firebase-messaging:10.2.6'
+    compile 'com.google.firebase:firebase-perf:10.2.6'
 
     compile 'com.google.android.gms:play-services-auth:10.2.6'
 
