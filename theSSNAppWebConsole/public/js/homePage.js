@@ -39,10 +39,12 @@ function signInWithGoogle() {
                         });
                         var mainbutton = document.getElementById("mainbutton");
                         if (found) {
-                            mainbutton.innerHTML = "<h4>Welcome <strong>" + profile.displayName + "</strong>!</h4><h5>You have persmissions to post under : <strong>"+userPermission.toUpperCase() +"</strong> category .</h5><br/><a href='createPost.html'><button class='btn btn-default'><span class='signin-txt'>Proceed</span></button></a>";
+                            $("#theSsnAppLogo").attr("src", "../img/entrance.png");
+                            $("#theSsnAppLogo").attr("height", "150");
+                            mainbutton.innerHTML = "<h4>Welcome <strong>" + profile.displayName + "</strong>!</h4><h5>You have permissions to post under : <strong>"+userPermission.toUpperCase() +"</strong> category .</h5><br/><a href='createPost.html'><button class='btn btn-default'><span class='signin-txt'>Proceed</span></button></a>";
 
                         } else {
-                            mainbutton.innerHTML = "<h4>" + userName + ", you are not authorised to access the webconsole. To use our android client please visit PlayStore.</h4><a href='#'><button class='btn btn-default'><span class='signin-txt'>Playstore - The SSN App</span></button></a>";
+                            mainbutton.innerHTML = "<h4><strong>" + userName + "</strong>, you are not authorised to access the webconsole. To use our android app please visit PlayStore.</h4><a href='https://goo.gl/lgzwPe' target='_blank'><button class='btn btn-default'><span class='signin-txt'>Playstore - The SSN App</span></button></a>";
                         }
                     });
             });

@@ -49,10 +49,12 @@
                 <div class="form-group">
                     <label for="description">Description* :</label>
                     <textarea rows="5" cols="100" id="description" class="form-control" required></textarea>
+                    <div>Note: Any links(max:2) provided in the description will be displayed at the bottom of the post in the mobile app.</div>
                 </div>
                 <div class="form-group">
                     <label>Upload File** :</label>
                     <progress value="0" max="100" id="uploader">0%</progress>
+                    <span id="fileHelpText"></span>
                     <input type="file" value="upload" id="fileButton" />
                 </div>
                 <div class="form-group">

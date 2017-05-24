@@ -31,8 +31,12 @@
          task.on('state_changed',
 
              function progress(snapshot) {
+                 document.getElementById('fileHelpText').innerHTML="Uploading File";
                  var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                  uploader.value = percentage;
+                 if(uploader.value == 100){
+                     document.getElementById('fileHelpText').innerHTML="File Succesfully Uploaded";
+                 }
              },
 
              function error(err) {
@@ -83,6 +87,19 @@
                              document.getElementById('modalText').innerHTML = "Title and Description should not be empty!";
                              $('#templateModal').modal('toggle');
                          } else {
+                             if((email!="") && !validateEmail(email)){
+                                 console.log("Invalid Email");
+                                 document.getElementById('loader').style.display = "none";
+                                 document.getElementById('modalText').innerHTML = "Enter a valid Email Address!";
+                                 $('#templateModal').modal('toggle');
+                             }
+                             else if ((email!="") && !validatePhone(contactno)){
+                                console.log("Invalid Phone No");
+                                 document.getElementById('loader').style.display = "none";
+                                 document.getElementById('modalText').innerHTML = "Enter a valid Phone No!";
+                                 $('#templateModal').modal('toggle');
+                             }
+                             else {
                              var date = Date();
                              var pid = firebase.database().ref('posts/').push();
                              if (pid.key) {
@@ -122,6 +139,7 @@
                              categoryWise.set({
                                  'pid': pid.key,
                              });
+                            }
                          }
                      }
 

@@ -45,9 +45,9 @@ function createEditPostModal(postRef, postTitle, postDescription, contactno, ema
     $('#contactno').attr("value", contactno);
     $('#email').attr("value", email);
     if (uploadedFileURL == "") {
-        document.getElementById('prevUploadedFile').innerHTML = "No File Uploaded";
+        document.getElementById('UploadedFile').innerHTML = "No File Uploaded";
     } else {
-        $('#oldFileLink').attr("href", uploadedFileURL);
+        $('#FileLink').attr("href", uploadedFileURL);
     }
     oldFileURL = uploadedFileURL;
     oldFileName = uploadedFileName;
@@ -202,8 +202,12 @@ fileButton.addEventListener('change', function(e) {
         task.on('state_changed',
 
             function progress(snapshot) {
+                document.getElementById('fileHelpText').innerHTML="Uploading File";
                 var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                 uploader.value = percentage;
+                if(uploader.value == 100){
+                     document.getElementById('fileHelpText').innerHTML="File Succesfully Uploaded";
+                 }
             },
 
             function error(err) {
@@ -212,6 +216,7 @@ fileButton.addEventListener('change', function(e) {
 
             function complete() {
                 fileURL = task.snapshot.downloadURL;
+                $('#FileLink').attr("href", fileURL);
                 console.log(fileURL);
             }
 
