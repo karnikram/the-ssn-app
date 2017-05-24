@@ -6,6 +6,7 @@ package karnix.the.ssn.app.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -31,6 +32,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import karnix.the.ssn.app.model.User;
 import karnix.the.ssn.ssnmachan.R;
@@ -68,6 +70,25 @@ public class GoogleSignInActivity extends AppCompatActivity implements GoogleApi
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     if (user.getEmail().contains("ssn.edu")) {
+                        String[] topics = getResources().getStringArray(R.array.notification_category_keys);
+
+                        FirebaseMessaging.getInstance().subscribeToTopic(topics[0]);
+                        FirebaseMessaging.getInstance().subscribeToTopic(topics[1]);
+                        FirebaseMessaging.getInstance().subscribeToTopic(topics[2]);
+                        FirebaseMessaging.getInstance().subscribeToTopic(topics[3]);
+                        FirebaseMessaging.getInstance().subscribeToTopic(topics[4]);
+                        FirebaseMessaging.getInstance().subscribeToTopic(topics[5]);
+
+                        SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean("notifications_" + topics[0], true);
+                        editor.putBoolean("notifications_" + topics[1], true);
+                        editor.putBoolean("notifications_" + topics[2], true);
+                        editor.putBoolean("notifications_" + topics[3], true);
+                        editor.putBoolean("notifications_" + topics[4], true);
+                        editor.putBoolean("notifications_" + topics[5], true);
+                        editor.apply();
+
                         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users/" + user.getUid());
                         User user1 = new User(user.getUid(), user.getDisplayName(), user.getPhotoUrl().toString(), user.getEmail());
                         databaseReference.setValue(user1);
