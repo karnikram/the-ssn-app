@@ -142,7 +142,8 @@ a
 
 #theSsnAppLogo,#ssnLogoBlue
 {
-    margin: 15px;
+    margin: auto;
+    margin-bottom: 20px;
     display:block;
 }
 
@@ -170,6 +171,8 @@ a
 #infoMainContent
 {
     top: 3%;
+    left: 30%;
+    width: 40%;
 }
 
 #noteContent

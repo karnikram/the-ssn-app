@@ -3,7 +3,14 @@
  var fileURL, fileName;
  var uploader = document.getElementById('uploader');
  var fileButton = document.getElementById('fileButton');
-
+/*
+$(document).ready(function() {
+if($(window).width()<1000){
+         document.getElementById('modalText').innerHTML = "For best experience use the console from a desktop or laptop.";
+         $('#templateModal').modal('toggle');
+     }
+});
+*/
  fileButton.addEventListener('change', function(e) {
      //Get file
      var file = e.target.files[0];

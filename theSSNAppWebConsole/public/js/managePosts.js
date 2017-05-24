@@ -114,7 +114,12 @@ function constructPostView(postChildSnapshot) {
 }
 
 function managePosts() {
-
+    /*
+    if($(window).width()<1000){
+         document.getElementById('modalText').innerHTML = "For best experience use the console from a desktop or laptop.";
+         $('#templateModal').modal('toggle');
+     }
+    */
     firebase.auth().onAuthStateChanged(function(user) {
         var name, email, uid;
         var found = 0;

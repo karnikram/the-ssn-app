@@ -1,5 +1,11 @@
 var provider = new firebase.auth.GoogleAuthProvider();
 
+$(document).ready(function() {
+if($(window).width()<1000){
+         document.getElementById('modalText').innerHTML = "For best experience use the console from a desktop or laptop.";
+         $('#templateModal').modal('toggle');
+     }
+});
 function signInWithGoogle() {
     //var maincontent = document.getElementById("maincontent");
     document.getElementById("mainbutton").innerHTML=" <img src='img/hourglass.svg'  id='smallLoader'>"
@@ -40,7 +46,6 @@ function signInWithGoogle() {
                         var mainbutton = document.getElementById("mainbutton");
                         if (found) {
                             $("#theSsnAppLogo").attr("src", "../img/entrance.png");
-                            $("#theSsnAppLogo").attr("height", "150");
                             mainbutton.innerHTML = "<h4>Welcome <strong>" + profile.displayName + "</strong>!</h4><h5>You have permissions to post under : <strong>"+userPermission.toUpperCase() +"</strong> category .</h5><br/><a href='createPost.html'><button class='btn btn-default'><span class='signin-txt'>Proceed</span></button></a>";
 
                         } else {

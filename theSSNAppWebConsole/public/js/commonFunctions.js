@@ -4,6 +4,8 @@
  $(document).ready(function() {
     var found = 0;
      $('[data-toggle="tooltip"]').tooltip();
+
+     
      firebase.auth().onAuthStateChanged(function(user) {
          if (user != null) {
              signedInUserName = user.displayName + "";

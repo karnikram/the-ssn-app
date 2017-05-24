@@ -19,7 +19,7 @@
 <body>
     <div id="mainContent">
         <center>
-            <img src="img/theSsnAppLogo.png" id="theSsnAppLogo">
+            <img src="img/theSsnAppLogo.png" id="theSsnAppLogo" class="img-responsive">
             <img src="img/ssn-logo-blue.jpg" id="ssnLogoBlue">
             <h3 id="main-txt">The SSN App Web Console</h3>
             <div id="mainbutton">
@@ -32,10 +32,28 @@
     <div id="noteContent">
         <center>
         <span><strong>Note:</strong> 
-        Sign in with your registered email-ID. This console is only for heads of clubs, heads of official groups and administrative staff of SSN College of Engineering. To use our android app, please download it from the <a href='https://goo.gl/lgzwPe' target='_blank'>Playstore.</a> If you would like to get access to use the webconsole please contact <a href="theSsnAppTeam.html">The SSN App team.</a>
+        Sign in with your registered email-ID. This console is only for heads of clubs, heads of official groups and administrative staff of SSN College of Engineering. To use our android app, please download it from the <a href='https://goo.gl/lgzwPe' target='_blank'>Playstore.</a> If you would like to get access to use the webconsole please contact <a href="theSsnAppTeam.html">The SSN App team.</a><span class="visible-xs visible-sm"> <strong> For best experience use the console from a desktop or laptop.</strong></span>
         </span>
         </center>
     </div>
+
+     <div class="modal fade" id="templateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <center>
+                        <h4 id="modalText"></h4>
+                        </center>
+                    </div>
+                    <div class="modal-footer">
+                        <center>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
