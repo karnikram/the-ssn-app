@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:background="@color/backColor"
-              android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backColor"
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:layout_marginBottom="20dp"
-        android:gravity= "center"
-        android:textColor="@color/primary_dark"
         android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="60dp"
+        android:gravity="center"
+        android:text="Home Screen"
+        android:textColor="@color/primary_dark"
         android:textSize="26sp"
-        android:textStyle="bold|italic"
-        android:text="Home Screen"/>
+        android:textStyle="bold|italic" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:src="@drawable/slide2"/>
+        android:src="@drawable/slide2" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/primary_dark"
-        android:textSize="18sp"
-        android:layout_marginTop="30dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginTop="30dp"
         android:gravity="center"
-        android:textStyle="italic"
-        android:text="@string/slide2"/>
+        android:text="@string/slide2"
+        android:textColor="@color/primary_dark"
+        android:textSize="18sp"
+        android:textStyle="italic" />
 
 </LinearLayout>

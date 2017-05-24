@@ -45,7 +45,7 @@ public class GoogleSignInActivity extends AppCompatActivity implements GoogleApi
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);//heu
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google);
 
         findViewById(R.id.sign_in_button).setOnClickListener(this);
