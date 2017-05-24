@@ -4,6 +4,7 @@ import android.app.Application
 import android.os.StrictMode
 
 import com.facebook.stetho.Stetho
+import com.google.firebase.database.FirebaseDatabase
 
 import karnix.the.ssn.ssnmachan.BuildConfig
 
@@ -21,5 +22,7 @@ class TheSsnApplication : Application() {
 
             Stetho.initializeWithDefaults(this)
         }
+
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true)
     }
 }

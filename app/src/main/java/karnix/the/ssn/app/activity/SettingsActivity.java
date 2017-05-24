@@ -105,7 +105,7 @@ public class SettingsActivity extends BaseActivity {
     }
 
     private void switchDepartmentSubscriptions() {
-        String[] departmentKeys = {"cse", "ece", "eee", "mech", "it", "chem", "biomed", "civil"};
+        String[] departmentKeys = getResources().getStringArray(R.array.department_category_keys);
         if (sharedPreferences.getBoolean("notifications_departments", false)) {
             for (String departmentKey : departmentKeys) {
                 if (sharedPreferences.getBoolean("notifications_department_" + departmentKey, false)) {

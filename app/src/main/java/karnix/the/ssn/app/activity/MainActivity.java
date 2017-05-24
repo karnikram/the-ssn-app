@@ -22,6 +22,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
@@ -151,6 +152,20 @@ public class MainActivity extends AppCompatActivity {
                                     startActivity(new Intent(MainActivity.this, SettingsActivity.class));
                                     break;
                                 case 9:
+                                    String[] topics = getResources().getStringArray(R.array.notification_category_keys);
+                                    FirebaseMessaging.getInstance().unsubscribeFromTopic(topics[0]);
+                                    FirebaseMessaging.getInstance().unsubscribeFromTopic(topics[1]);
+                                    FirebaseMessaging.getInstance().unsubscribeFromTopic(topics[2]);
+                                    FirebaseMessaging.getInstance().unsubscribeFromTopic(topics[3]);
+                                    FirebaseMessaging.getInstance().unsubscribeFromTopic(topics[4]);
+                                    FirebaseMessaging.getInstance().unsubscribeFromTopic(topics[5]);
+
+                                    String[] departmentKeys = getResources().getStringArray(R.array.department_category_keys);
+                                    for (String departmentKey : departmentKeys) {
+                                        FirebaseMessaging.getInstance().unsubscribeFromTopic(departmentKey);
+                                        LogHelper.d(TAG, "Unsubscribed from " + departmentKey);
+                                    }
+
                                     GoogleSignInOptions googleSignInOptions =
                                             new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                                                     .build();

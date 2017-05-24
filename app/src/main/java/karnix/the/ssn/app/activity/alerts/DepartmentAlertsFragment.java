@@ -70,7 +70,7 @@ public class DepartmentAlertsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_alerts_department, container, false);
         unbinder = ButterKnife.bind(this, rootView);
 
-        departmentKeys = new String[]{"biomed", "chem", "civil", "cse", "ece", "eee", "human", "it", "mech", "somca", "sace"};
+        departmentKeys = getResources().getStringArray(R.array.department_category_keys);
 
         spinnerDepartment.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

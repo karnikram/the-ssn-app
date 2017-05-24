@@ -51,6 +51,19 @@
         <item>busdept</item>
     </string-array>
 
+    <string-array name="department_category_keys">
+        <item>biomed</item>
+        <item>chem</item>
+        <item>civil</item>
+        <item>cse</item>
+        <item>ece</item>
+        <item>eee</item>
+        <item>human</item>
+        <item>it</item>
+        <item>mech</item>
+        <item>sace</item>
+        <item>somca</item>
+    </string-array>
     <string-array name="department_categories">
         <item>Bio-Medical Engineering</item>
         <item>Chemical Engineering</item>
