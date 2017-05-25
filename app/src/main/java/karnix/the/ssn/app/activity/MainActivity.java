@@ -1,13 +1,16 @@
 package karnix.the.ssn.app.activity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
@@ -23,6 +26,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.heinrichreimersoftware.androidissuereporter.IssueReporterLauncher;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
@@ -108,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
                         new PrimaryDrawerItem().withIdentifier(5).withName(getString(R.string.drawer_exam_cell)).withIcon(GoogleMaterial.Icon.gmd_assignment),
                         new DividerDrawerItem(),
                         new PrimaryDrawerItem().withIdentifier(8).withName(getString(R.string.drawer_settings)).withIcon(GoogleMaterial.Icon.gmd_settings),
+                        new PrimaryDrawerItem().withIdentifier(10).withName(getString(R.string.drawer_report_issue)).withIcon(GoogleMaterial.Icon.gmd_bug_report),
                         new PrimaryDrawerItem().withIdentifier(7).withName(getString(R.string.drawer_about)).withIcon(GoogleMaterial.Icon.gmd_info),
                         new PrimaryDrawerItem().withIdentifier(9).withName(R.string.drawer_sign_out).withIcon(GoogleMaterial.Icon.gmd_exit_to_app))
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
@@ -190,6 +195,12 @@ public class MainActivity extends AppCompatActivity {
                                     startActivity(new Intent(MainActivity.this, SplashActivity.class));
                                     finish();
                                     break;
+                                case 10:
+                                    IssueReporterLauncher.forTarget("Karnix", "The-SSN-App")
+                                            .theme(R.style.IssueReporterTheme)
+                                            .guestToken("908c992a10628cde72192b7953cc5d4b9a53528f")
+                                            .launch(MainActivity.this);
+                                    break;
                             }
                         }
                         return flag;
@@ -204,6 +215,21 @@ public class MainActivity extends AppCompatActivity {
                 .getDisplayMetrics());
         pager.setPageMargin(pageMargin);
         pager.setCurrentItem(1);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        if (!sharedPreferences.getBoolean("notification_popup_shown", false)) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(getString(R.string.popup_notification_message))
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                        }
+                    })
+                    .show();
+        }
+        editor.putBoolean("notification_popup_shown", true);
+        editor.apply();
     }
 
     @Override

@@ -14,12 +14,13 @@ public class IntroActivity extends AppIntro2 {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addSlide(SampleSlide.newInstance(R.layout.first_slide));
-        addSlide(SampleSlide.newInstance(R.layout.second_slide));
-        addSlide(SampleSlide.newInstance(R.layout.third_slide));
-        addSlide(SampleSlide.newInstance(R.layout.fourth_slide));
-        addSlide(SampleSlide.newInstance(R.layout.fifth_slide));
-        addSlide(SampleSlide.newInstance(R.layout.sixth_slide));
+        addSlide(SampleSlide.newInstance(R.layout.intro_first_slide));
+        addSlide(SampleSlide.newInstance(R.layout.intro_second_slide));
+        addSlide(SampleSlide.newInstance(R.layout.intro_third_slide));
+        addSlide(SampleSlide.newInstance(R.layout.intro_fourth_slide));
+        addSlide(SampleSlide.newInstance(R.layout.intro_fifth_slide));
+        addSlide(SampleSlide.newInstance(R.layout.intro_sixth_slide));
+        addSlide(SampleSlide.newInstance(R.layout.intro_seventh_slide));
 
         showSkipButton(false);
     }

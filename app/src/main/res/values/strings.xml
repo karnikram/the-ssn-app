@@ -13,6 +13,7 @@
     <string name="drawer_bus_announcements">Bus Alerts</string>
     <string name="drawer_message">Post Message</string>
     <string name="drawer_about">App Info</string>
+    <string name="drawer_report_issue">Report Issue</string>
     <string name="drawer_settings">Notification Settings</string>
     <string name="drawer_sign_out">Sign Out</string>
 
@@ -104,6 +105,9 @@
     <string name="slide4">To help you make wiser decisions when you are hungry.</string>
     <string name="slide5">Keep track of all the last minute bus route changes.</string>
     <string name="slide6">A social feed for everyone to share.</string>
+    <string name="slide7">So that you don\'t miss out on the news.</string>
+
+    <string name="popup_notification_message">All notifications are enabled by default. You can change them in settings.</string>
 
     <string name="about_libraries">About Libraries</string>
 </resources>
