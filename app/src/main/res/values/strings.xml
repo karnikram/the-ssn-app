@@ -107,7 +107,7 @@
     <string name="slide6">A social feed for everyone to share.</string>
     <string name="slide7">So that you don\'t miss out on the news.</string>
 
-    <string name="popup_notification_message">All notifications are enabled by default. You can change them in settings.</string>
+    <string name="popup_notification_message">All notifications are enabled by default. You can change them in the notification settings.</string>
 
     <string name="about_libraries">About Libraries</string>
 </resources>
