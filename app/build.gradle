@@ -9,6 +9,8 @@ android {
 
     defaultConfig {
         applicationId "se.par.amsen.experimentshopdesign"
+        versionCode 9
+        versionName "Octo S"
         minSdkVersion 15
         targetSdkVersion 25
     }
@@ -36,6 +38,7 @@ dependencies {
     compile('com.mikepenz:aboutlibraries:5.9.6@aar') {
         transitive = true
     }
+    compile 'com.github.paolorotolo:appintro:4.1.0'
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.mikepenz:google-material-typeface:3.0.1.0.original@aar'
@@ -63,9 +66,6 @@ dependencies {
     compile 'com.facebook.stetho:stetho:1.5.0'
 
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-
-    compile 'com.github.paolorotolo:appintro:4.1.0'
-
 }
 
 apply plugin: 'com.google.gms.google-services'

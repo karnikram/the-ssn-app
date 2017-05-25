@@ -253,7 +253,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="-Octo-"
+                        android:text="-Octo S-"
                         android:textColor="@color/secondaryTextColor"
                         android:textSize="14sp"
                         android:textStyle="italic" />

@@ -42,7 +42,7 @@
 
     <string name="description">SSN Notice Boards - now in your pocket.</string>
 
-    <string name="shout_outs">Shout outs to Seshadhri for the bus routes database, Krishna G for the seating arrangements section, Arun Prakash sir and Adarshana Rajagopal!</string>
+    <string name="shout_outs">Shout outs to Seshadhri for the bus routes database, Krishna G and Ashok for the seating arrangements section, Arun Prakash sir and Adarshana Rajagopal!</string>
 
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, his consul verear torquatos ne. Magna graecis eam no. Mel eu inani ludus, pro bonorum habemus no, ius copiosae convenire te. Usu at illud probatus, no pri fabulas pertinax. In putent voluptaria ius, vix augue noluisse verterem an. Cum inani persius theophrastus at, vel ad tempor cotidieque.</string>
 
@@ -62,7 +62,7 @@
         <item>it</item>
         <item>mech</item>
         <item>sace</item>
-        <item>somca</item>
+        <item>som</item>
     </string-array>
     <string-array name="department_categories">
         <item>Bio-Medical Engineering</item>
