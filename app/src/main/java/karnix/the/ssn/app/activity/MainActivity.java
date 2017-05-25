@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
                                 case 10:
                                     IssueReporterLauncher.forTarget("Karnix", "The-SSN-App")
                                             .theme(R.style.IssueReporterTheme)
-                                            .guestToken("908c992a10628cde72192b7953cc5d4b9a53528f")
+                                            .guestToken(getString(R.string.github_guest_token))
                                             .launch(MainActivity.this);
                                     break;
                             }
