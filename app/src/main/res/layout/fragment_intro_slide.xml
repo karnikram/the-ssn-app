@@ -1,37 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backColor"
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/intro_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="60dp"
         android:gravity="center"
-        android:text="Home Screen"
         android:textColor="@color/primary_dark"
         android:textSize="26sp"
-        android:textStyle="bold|italic" />
+        android:textStyle="bold|italic"
+        tools:text="@string/slide1_title" />
 
     <ImageView
+        android:id="@+id/intro_image"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:src="@drawable/slide2" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        tools:src="@drawable/entrance" />
 
     <TextView
+        android:id="@+id/intro_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="30dp"
         android:gravity="center"
-        android:text="@string/slide2"
         android:textColor="@color/primary_dark"
         android:textSize="18sp"
-        android:textStyle="italic" />
-
+        android:textStyle="italic"
+        tools:text="@string/slide1_description" />
 </LinearLayout>

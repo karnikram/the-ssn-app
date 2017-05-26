@@ -99,13 +99,21 @@
     <string name="connection_failed">Connection Failed</string>
     <string name="alerts_retry">Retry</string>
 
-    <string name="slide1">Keeping yourself up to date with all things SSN is now easier than ever.</string>
-    <string name="slide2">Three tabs - Admin, Clubs and Department - All the important information, right in the front.</string>
-    <string name="slide3">Everything AU. Including your seating arrangements.</string>
-    <string name="slide4">To help you make wiser decisions when you are hungry.</string>
-    <string name="slide5">Keep track of all the last minute bus route changes.</string>
-    <string name="slide6">A social feed for everyone to share.</string>
-    <string name="slide7">So that you don\'t miss out on the news.</string>
+    <string name="slide1_title">Welcome to the SSN App!</string>
+    <string name="slide2_title">Home Screen</string>
+    <string name="slide3_title">Exam Cell Section</string>
+    <string name="slide4_title">Dining Section</string>
+    <string name="slide5_title">Bus Section</string>
+    <string name="slide6_title">Social Feed</string>
+    <string name="slide7_title">Prompt Notifications</string>
+
+    <string name="slide1_description">Keeping yourself up to date with all things SSN is now easier than ever.</string>
+    <string name="slide2_description">Three tabs - Admin, Clubs and Department - All the important information, right in the front.</string>
+    <string name="slide3_description">Everything AU. Including your seating arrangements.</string>
+    <string name="slide4_description">To help you make wiser decisions when you are hungry.</string>
+    <string name="slide5_description">Keep track of all the last minute bus route changes.</string>
+    <string name="slide6_description">A social feed for everyone to share.</string>
+    <string name="slide7_description">So that you don\'t miss out on the news.</string>
 
     <string name="popup_notification_message">All notifications are enabled by default. You can change them in the notification settings.</string>
 
