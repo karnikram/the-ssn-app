@@ -1,0 +1,60 @@
+<!--
+  ~ MIT License
+  ~
+  ~ Copyright (c) 2017 Jan Heinrich Reimer
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  -->
+
+<resources>
+    <string name="air_title_report_issue">Fehler melden</string>
+
+    <string name="air_title_issue">Problem</string>
+    <string name="air_title_login">Login</string>
+
+    <string name="air_label_issue_title">Titel</string>
+    <string name="air_label_issue_description">Beschreibung</string>
+    <string name="air_label_device_info">Geräteinfo</string>
+
+    <string name="air_label_use_account">Mit GitHub-Account senden</string>
+    <string name="air_label_use_email">Mit E-Mail senden</string>
+    <string name="air_label_use_guest">Anonym senden</string>
+    <string name="air_label_username">Benutzername</string>
+    <string name="air_label_password">Passwort</string>
+    <string name="air_label_email">E-Mail</string>
+    <string name="air_label_email_optional">E-Mail (optional)</string>
+
+    <string name="air_error_no_title">Bitte gib einen Problemtitel ein</string>
+    <string name="air_error_no_description">Bitte gib eine Problembeschreibung ein</string>
+    <plurals name="air_error_short_description">
+        <item quantity="one">Die Beschreibung muss mindestens %d Zeichen haben</item>
+        <item quantity="other">Die Beschreibung muss mindestens %d Zeichen haben</item>
+    </plurals>
+    <string name="air_error_no_username">Bitte gib Deinen gültigen GitHub-Benutzernamen ein</string>
+    <string name="air_error_no_password">Bitte gib Dein gültiges GitHub-Passwort ein</string>
+    <string name="air_error_no_email">Bitte gib eine gültige E-mail Adresse ein</string>
+
+    <string name="air_dialog_title_loading">Bericht auf GitHub hochladen…</string>
+    <string name="air_dialog_title_failed">Senden des Berichts nicht möglich</string>
+    <string name="air_dialog_description_failed_wrong_credentials">Falscher Benutzername oder falsches Passwort</string>
+    <string name="air_dialog_description_failed_invalid_token">Ungültiges Access-Token. Bitte kontaktiere den App-Entwickler.</string>
+    <string name="air_dialog_description_failed_issues_not_available">Issues sind im ausgewählten Repository nicht aktiviert. Bitte kontaktiere den App-Entwickler.</string>
+    <string name="air_dialog_description_failed_unknown">Ein unerwarteter Fehler ist aufgetreten. Bitte kontaktiere den App-Entwickler.</string>
+    <string name="air_dialog_action_failed">Ok</string>
+</resources>
