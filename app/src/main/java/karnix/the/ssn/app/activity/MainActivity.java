@@ -147,9 +147,6 @@ public class MainActivity extends AppCompatActivity {
                                     startActivity(new Intent(MainActivity.this, AlertsActivity.class)
                                             .putExtra("type", "examcell"));
                                     break;
-                                case 6:
-                                    startActivity(new Intent(MainActivity.this, MessageActivity.class));
-                                    break;
                                 case 7:
                                     startActivity(new Intent(MainActivity.this, AboutActivity.class));
                                     break;

@@ -15,9 +15,7 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
     @Override
     public void onTokenRefresh() {
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-        Log.e(TAG, "Refreshed token: " + refreshedToken);
-
-        sendRegistrationToServer(refreshedToken);
+        Log.d(TAG, "Refreshed token: " + refreshedToken);
     }
 
     private void sendRegistrationToServer(String token) {
@@ -25,6 +23,6 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
                 .getReference("fcmTokens/" + token);
         FcmToken fcmToken = new FcmToken(token);
         databaseReference.setValue(fcmToken);
-        Log.e(TAG, "FCM Token Set");
+        Log.d(TAG, "FCM Token Set");
     }
 }

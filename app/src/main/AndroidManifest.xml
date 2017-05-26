@@ -55,14 +55,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name="karnix.the.ssn.app.activity.MessageActivity"
-            android:windowSoftInputMode="stateHidden">
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
         <activity android:name="karnix.the.ssn.app.activity.GoogleSignInActivity" />
 
         <activity android:name="karnix.the.ssn.app.activity.AboutActivity">
