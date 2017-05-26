@@ -41,6 +41,7 @@ public class ThemeUtils {
             throw new IllegalArgumentException("Argument attrs must be the same size as defaultColors");
         TypedValue typedValue = new TypedValue();
 
+        //noinspection ResourceType
         TypedArray a = context.obtainStyledAttributes(typedValue.data, attrs);
 
         for (int i = 0; i < attrs.length; i++) {
