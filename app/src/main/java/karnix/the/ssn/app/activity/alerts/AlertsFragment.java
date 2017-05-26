@@ -2,17 +2,18 @@ package karnix.the.ssn.app.activity.alerts;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.customtabs.CustomTabsIntent;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -38,17 +39,14 @@ import karnix.the.ssn.ssnmachan.R;
 public class AlertsFragment extends Fragment {
     private static final String TAG = LogHelper.makeLogTag(AlertsFragment.class);
 
+    @BindView(R.id.coordinator_layout)
+    CoordinatorLayout coordinatorLayout;
     @BindView(R.id.postsRecyclerView)
     RecyclerView postsRecyclerView;
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
-
     @BindView(R.id.fab)
     FloatingActionButton fab;
-    @BindView(R.id.button_retry_alerts)
-    Button buttonRetryAlerts;
-    @BindView(R.id.textView_connection_failed)
-    TextView textViewConnectionFailed;
 
     private Unbinder unbinder;
 
@@ -61,6 +59,12 @@ public class AlertsFragment extends Fragment {
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_alerts, container, false);
         unbinder = ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         type = getArguments().getString("type");
         if (type.equals("examcell")) {
@@ -92,35 +96,33 @@ public class AlertsFragment extends Fragment {
             }
         });
 
-        buttonRetryAlerts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkConnectionStatus();
-            }
-        });
-
         checkConnectionStatus();
-
-        return rootView;
     }
 
     private void checkConnectionStatus() {
         if (NetworkUtils.isConnectedToInternet(getActivity())) {
+            progressBar.setVisibility(View.VISIBLE);
+
             getPosts();
         } else {
             progressBar.setVisibility(View.GONE);
 
-            textViewConnectionFailed.setVisibility(View.VISIBLE);
-            buttonRetryAlerts.setVisibility(View.VISIBLE);
+            getPosts();
+
+            Snackbar.make(coordinatorLayout, R.string.connection_failed, Snackbar.LENGTH_INDEFINITE)
+                    .setAction(R.string.alerts_retry, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            checkConnectionStatus();
+                        }
+                    })
+                    .show();
         }
     }
 
     private void getPosts() {
-        progressBar.setVisibility(View.VISIBLE);
-
-        textViewConnectionFailed.setVisibility(View.GONE);
-        buttonRetryAlerts.setVisibility(View.GONE);
-
+        postList.clear();
+        postAdapter.notifyDataSetChanged();
         final ArrayList<Node> nodesList = new ArrayList<>();
         final HashMap<String, WebConsolePost> postHashMap = new HashMap<>();
 

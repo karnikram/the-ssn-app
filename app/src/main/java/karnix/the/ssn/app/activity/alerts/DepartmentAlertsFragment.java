@@ -3,6 +3,8 @@ package karnix.the.ssn.app.activity.alerts;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,10 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -41,16 +41,14 @@ import karnix.the.ssn.ssnmachan.R;
 public class DepartmentAlertsFragment extends Fragment {
     private static final String TAG = LogHelper.makeLogTag(DepartmentAlertsFragment.class);
 
+    @BindView(R.id.coordinator_layout)
+    CoordinatorLayout coordinatorLayout;
     @BindView(R.id.postsRecyclerView)
     RecyclerView postsRecyclerView;
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
     @BindView(R.id.spinner_department)
     Spinner spinnerDepartment;
-    @BindView(R.id.button_retry_alerts)
-    Button buttonRetryAlerts;
-    @BindView(R.id.textView_connection_failed)
-    TextView textViewConnectionFailed;
 
     private Unbinder unbinder;
 
@@ -119,13 +117,8 @@ public class DepartmentAlertsFragment extends Fragment {
         editor.putBoolean("notifications_department_" + departmentKeys[arrayAdapter.getPosition(department)], true);
         editor.apply();
 
-        buttonRetryAlerts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkConnectionStatus();
-            }
-        });
-
+        postList = new ArrayList<>();
+        postAdapter = new PostAdapter(getActivity(), postList);
         checkConnectionStatus();
 
         return rootView;
@@ -133,21 +126,28 @@ public class DepartmentAlertsFragment extends Fragment {
 
     private void checkConnectionStatus() {
         if (NetworkUtils.isConnectedToInternet(getActivity())) {
+            progressBar.setVisibility(View.VISIBLE);
+
             getPosts();
         } else {
             progressBar.setVisibility(View.GONE);
 
-            textViewConnectionFailed.setVisibility(View.VISIBLE);
-            buttonRetryAlerts.setVisibility(View.VISIBLE);
+            getPosts();
+
+            Snackbar.make(coordinatorLayout, R.string.connection_failed, Snackbar.LENGTH_INDEFINITE)
+                    .setAction(R.string.alerts_retry, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            checkConnectionStatus();
+                        }
+                    })
+                    .show();
         }
     }
 
     private void getPosts() {
-        progressBar.setVisibility(View.VISIBLE);
-
-        textViewConnectionFailed.setVisibility(View.GONE);
-        buttonRetryAlerts.setVisibility(View.GONE);
-
+        postList.clear();
+        postAdapter.notifyDataSetChanged();
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference nodesRef = database.getReference("categorywise_posts/" + departmentKey);
         final ValueEventListener valueEventListener = new ValueEventListener() {

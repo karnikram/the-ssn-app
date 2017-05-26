@@ -147,7 +147,7 @@ public class GoogleSignInActivity extends AppCompatActivity implements GoogleApi
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);
             } else {
-                Toast.makeText(this, "Sign In Failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Sign In Failed", Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -163,7 +163,7 @@ public class GoogleSignInActivity extends AppCompatActivity implements GoogleApi
                         Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
 
                         if (!task.isSuccessful()) {
-                            Log.w(TAG, "signInWithCredential", task.getException());
+                            Toast.makeText(GoogleSignInActivity.this, "Sign In Failed", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
@@ -176,7 +176,7 @@ public class GoogleSignInActivity extends AppCompatActivity implements GoogleApi
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Toast.makeText(this, "Connection Failed: " + connectionResult, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Connection Failed", Toast.LENGTH_LONG).show();
     }
 
     @Override
