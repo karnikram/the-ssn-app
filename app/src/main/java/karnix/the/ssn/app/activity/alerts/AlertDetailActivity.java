@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -256,16 +257,17 @@ public class AlertDetailActivity extends BaseActivity {
 
         @Override
         protected void onPostExecute(String fileName) {
-
             if (fileName.equals("Failure"))
                 Toast.makeText(AlertDetailActivity.this, "I/O Error!", Toast.LENGTH_LONG).show();
             else {
                 File pdfFile = new File(Environment.getExternalStorageDirectory() + "/TheSSNApp/" + fileName);
-                Uri path = Uri.fromFile(pdfFile);
+                Uri path = FileProvider.getUriForFile(AlertDetailActivity.this,
+                        getApplicationContext().getPackageName() + ".provider", pdfFile);
 
                 Intent pdfIntent = new Intent(Intent.ACTION_VIEW);
                 pdfIntent.setDataAndType(path, "application/pdf");
                 pdfIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                pdfIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
                 try {
                     startActivity(pdfIntent);
