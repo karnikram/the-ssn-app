@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "se.par.amsen.experimentshopdesign"
-        versionCode 12
+        versionCode 13
         versionName "Octo S"
         minSdkVersion 15
         targetSdkVersion 25

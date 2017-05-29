@@ -25,7 +25,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     ArrayList<HashMap<String, String>> mylistData1 = new ArrayList<>();
 
     public DatabaseHandler(Context context) {
-        super(context, "database", null, 1);
+        super(context, "database", null, 2);
         this.context = context;
         DB_PATH = context.getDatabasePath("database").toString();
         openDataBase();
@@ -96,6 +96,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     public void onUpgrade(SQLiteDatabase paramSQLiteDatabase, int paramInt1, int paramInt2) {
+        paramSQLiteDatabase.execSQL("DROP TABLE IF EXISTS 'database'");
     }
 
     public void openDataBase() throws SQLException {
@@ -219,4 +220,3 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return menuList;
     }
 }
-
