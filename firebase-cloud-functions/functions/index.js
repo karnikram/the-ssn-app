@@ -59,8 +59,8 @@ exports.sendWebConsoleNotification = functions.database.ref('/posts/{pushId}').o
       sound: "default"
     },
     data: {
-        title: `${category} : ${snapshot.val().title}`,
-        content: text ? (text.length <= 100 ? text : text.substring(0, 97) + '...') : '',
+        title: expanded,
+        content: snapshot.val().title,
         color: '#2196F3'
     }
   };
