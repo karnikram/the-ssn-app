@@ -2,6 +2,7 @@ package karnix.the.ssn.app.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,6 +27,16 @@ public class NewsFeedActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.postText)
+    EditText postText;
+    @BindView(R.id.postButton)
+    Button postButton;
+    @BindView(R.id.feedRecyclerView)
+    RecyclerView feedRecyclerView;
+    @BindView(R.id.swipeContainer)
+    SwipeRefreshLayout swipeContainer;
+
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,10 +48,44 @@ public class NewsFeedActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.feedRecyclerView);
-        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("user_posts");
+        databaseReference = FirebaseDatabase.getInstance().getReference("user_posts");
 
-        FirebaseRecyclerAdapter firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Post, PostViewHolder>(Post.class,
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setStackFromEnd(true);
+        layoutManager.setReverseLayout(true);
+        feedRecyclerView.setLayoutManager(layoutManager);
+
+        setFeedRecyclerViewAdapter();
+
+        postButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Long timeStamp = System.currentTimeMillis();
+                if (postText.getEditableText().toString().equals("")) return;
+                Post post = new Post("1", FirebaseAuth.getInstance().getCurrentUser().getDisplayName(),
+                        FirebaseAuth.getInstance().getCurrentUser().getUid(), timeStamp,
+                        FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl().toString(),
+                        postText.getEditableText().toString());
+                String key = databaseReference.push().getKey();
+                post.pid = key;
+                FirebaseDatabase.getInstance().getReference("user_posts/" + key).setValue(post);
+                postText.setText("");
+            }
+        });
+
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                setFeedRecyclerViewAdapter();
+            }
+        });
+        swipeContainer.setColorSchemeResources(R.color.primaryColor,
+                R.color.primaryColorDark,
+                R.color.accentColor);
+    }
+
+    private void setFeedRecyclerViewAdapter() {
+        final FirebaseRecyclerAdapter firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Post, PostViewHolder>(Post.class,
                 R.layout.post_text,
                 PostViewHolder.class, databaseReference.orderByChild("postedDate").getRef()) {
             @Override
@@ -51,27 +96,8 @@ public class NewsFeedActivity extends AppCompatActivity {
                 viewHolder.setPostUserImageURL(model.userProfileURL);
             }
         };
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setStackFromEnd(true);
-        layoutManager.setReverseLayout(true);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(firebaseRecyclerAdapter);
-
-        Button postButton = (Button) findViewById(R.id.postButton);
-        final EditText editText = (EditText) findViewById(R.id.postText);
-        postButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Long timeStamp = System.currentTimeMillis();
-                if (editText.getEditableText().toString().equals("")) return;
-                Post post = new Post("1", FirebaseAuth.getInstance().getCurrentUser().getDisplayName(), FirebaseAuth.getInstance().getCurrentUser().getUid(), timeStamp, FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl().toString(), editText.getEditableText().toString());
-                String key = databaseReference.push().getKey();
-                post.pid = key;
-                FirebaseDatabase.getInstance().getReference("user_posts/" + key).setValue(post);
-                editText.setText("");
-            }
-        });
+        feedRecyclerView.setAdapter(firebaseRecyclerAdapter);
+        swipeContainer.setRefreshing(false);
     }
 
     @Override

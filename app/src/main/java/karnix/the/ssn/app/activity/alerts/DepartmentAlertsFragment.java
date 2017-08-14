@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -49,6 +50,8 @@ public class DepartmentAlertsFragment extends Fragment {
     ProgressBar progressBar;
     @BindView(R.id.spinner_department)
     Spinner spinnerDepartment;
+    @BindView(R.id.swipeContainer)
+    SwipeRefreshLayout swipeContainer;
 
     private Unbinder unbinder;
 
@@ -121,6 +124,16 @@ public class DepartmentAlertsFragment extends Fragment {
         postAdapter = new PostAdapter(getActivity(), postList);
         checkConnectionStatus();
 
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getPosts();
+            }
+        });
+        swipeContainer.setColorSchemeResources(R.color.primaryColor,
+                R.color.primaryColorDark,
+                R.color.accentColor);
+
         return rootView;
     }
 
@@ -173,6 +186,7 @@ public class DepartmentAlertsFragment extends Fragment {
                 if (progressBar != null) {
                     progressBar.setVisibility(View.GONE);
                 }
+                swipeContainer.setRefreshing(false);
             }
 
             @Override
