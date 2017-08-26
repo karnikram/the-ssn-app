@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'com.google.firebase.firebase-crash'
 apply plugin: 'com.google.firebase.firebase-perf'
+apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 25
@@ -9,14 +9,34 @@ android {
 
     defaultConfig {
         applicationId "se.par.amsen.experimentshopdesign"
-        versionCode 14
+        versionCode 15
         versionName "Octo S"
         minSdkVersion 15
         targetSdkVersion 25
     }
 
-    buildTypes {
+    signingConfigs {
         release {
+            try {
+                storeFile file('../ssnapp.jks')
+                storePassword KEYSTORE_PASSWORD
+                keyAlias "karnix"
+                keyPassword KEY_PASSWORD
+            }
+            catch (ex) {
+                throw new InvalidUserDataException("You should define KEYSTORE_PASSWORD and KEY_PASSWORD in gradle.properties.")
+            }
+        }
+    }
+
+    buildTypes {
+        debug {
+            applicationIdSuffix '.debug'
+            versionNameSuffix '-DEBUG'
+        }
+
+        release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
@@ -56,18 +76,21 @@ dependencies {
 
     compile 'com.firebaseui:firebase-ui-database:1.2.0'
 
-    compile 'com.google.firebase:firebase-auth:10.2.6'
-    compile 'com.google.firebase:firebase-core:10.2.6'
-    compile 'com.google.firebase:firebase-crash:10.2.6'
-    compile 'com.google.firebase:firebase-database:10.2.6'
-    compile 'com.google.firebase:firebase-messaging:10.2.6'
-    compile 'com.google.firebase:firebase-perf:10.2.6'
+    compile 'com.google.firebase:firebase-auth:11.2.0'
+    compile 'com.google.firebase:firebase-core:11.2.0'
+    compile 'com.google.firebase:firebase-database:11.2.0'
+    compile 'com.google.firebase:firebase-messaging:11.2.0'
+    compile 'com.google.firebase:firebase-perf:11.2.0'
 
-    compile 'com.google.android.gms:play-services-auth:10.2.6'
+    compile 'com.google.android.gms:play-services-auth:11.2.0'
 
     compile 'com.facebook.stetho:stetho:1.5.0'
 
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
+        transitive = true;
+    }
 }
 
 apply plugin: 'com.google.gms.google-services'

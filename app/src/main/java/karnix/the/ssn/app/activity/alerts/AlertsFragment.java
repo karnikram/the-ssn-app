@@ -165,7 +165,9 @@ public class AlertsFragment extends Fragment {
                 if (progressBar != null) {
                     progressBar.setVisibility(View.GONE);
                 }
-                swipeContainer.setRefreshing(false);
+                if (swipeContainer != null) {
+                    swipeContainer.setRefreshing(false);
+                }
             }
 
             @Override

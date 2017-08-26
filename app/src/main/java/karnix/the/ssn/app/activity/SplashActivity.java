@@ -8,23 +8,25 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.firebase.auth.FirebaseAuth;
 
+import io.fabric.sdk.android.Fabric;
 import karnix.the.ssn.ssnmachan.R;
 
 public class SplashActivity extends Activity {
-    private ImageView tower, hand;
-    private Animation handAnim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Fabric.with(this, new Crashlytics());
+
         setContentView(R.layout.activity_splash);
 
-        tower = (ImageView) findViewById(R.id.splash_tower);
-        hand = (ImageView) findViewById(R.id.hand);
+        ImageView hand = (ImageView) findViewById(R.id.hand);
 
-        handAnim = AnimationUtils.loadAnimation(this, R.anim.rotate);
+        Animation handAnim = AnimationUtils.loadAnimation(this, R.anim.rotate);
         handAnim.setInterpolator(new AccelerateInterpolator());
         handAnim.setRepeatCount(Animation.INFINITE);
 

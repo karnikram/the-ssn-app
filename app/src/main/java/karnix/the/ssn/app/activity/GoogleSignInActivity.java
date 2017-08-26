@@ -98,23 +98,25 @@ public class GoogleSignInActivity extends AppCompatActivity implements GoogleApi
                         finish();
                     } else {
                         FirebaseAuth.getInstance().signOut();
-                        Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new ResultCallback<Status>() {
-                            @Override
-                            public void onResult(@NonNull Status status) {
-                                new AlertDialog.Builder(GoogleSignInActivity.this)
-                                        .setMessage(R.string.sign_in_email_error)
-                                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                startActivity(new Intent(GoogleSignInActivity.this,
-                                                        GoogleSignInActivity.class));
-                                                finish();
-                                            }
-                                        })
-                                        .setCancelable(false)
-                                        .show();
-                            }
-                        });
+                        if (googleApiClient.isConnected()) {
+                            Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new ResultCallback<Status>() {
+                                @Override
+                                public void onResult(@NonNull Status status) {
+                                    new AlertDialog.Builder(GoogleSignInActivity.this)
+                                            .setMessage(R.string.sign_in_email_error)
+                                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    startActivity(new Intent(GoogleSignInActivity.this,
+                                                            GoogleSignInActivity.class));
+                                                    finish();
+                                                }
+                                            })
+                                            .setCancelable(false)
+                                            .show();
+                                }
+                            });
+                        }
                     }
                 } else {
                     Log.d(TAG, "onAuthStateChanged:signed_out");

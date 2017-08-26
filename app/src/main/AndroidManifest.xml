@@ -95,5 +95,9 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="3fe7c48fe68fa320e507fa64510cd1a4504d712e" />
     </application>
 </manifest>
