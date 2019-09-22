@@ -1,6 +1,6 @@
 # The SSN App
 <h3 align='center'>SSN Notice Boards - Now in your pocket.</h3>                              
-<p align="center"><a href='https://goo.gl/9GXP2M'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' height="125" width="323"/></a></p>
+<p align="center"><a href='https://play.google.com/store/apps/details?id=in.edu.ssn.ssnapp'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' height="125" width="323"/></a></p>
 
 <table border="0" cellspacing="5" cellpadding="0">
   <tr>
